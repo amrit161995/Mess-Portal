@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  	
+  	$(function(){
+    $("#New_user_Link").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#Form_Container").attr('style',"visibility:hidden;");
+       $("#Form_Container2").attr('style',"visibility:visible;");
+         
+    });
+});
+  </script>
+<title>Mess Portal</title>
+</head>
+
+<body>
+<div id = "Container" >
+	<div id="Upper">
+		<img id="back" src="food.jpg">
+		<div id="Title">mess portal</div>
+		<div id="Description">Welcome to our amazing <br/>newly designed mess portal</div>
+		<div id="Form_Container" >
+		<form >
+				<input type="text" name="username" class="form-control" id="Text_Username" placeholder="Email Address" >
+		
+		<input type="password" name="password"  id="Text_Password" placeholder="Password" class="form-control" >
+		 <button type="button" class="btn btn-default" id="Login_Button">Login</button>
+		
+		</form>
+		<a href="#" id="New_user_Link">New User?...Get Registered</a>
+	</div>
+
+	<div id="Form_Container2" >
+		<form >
+				<input type="text" name="fullname" class="form-control" id="fullname" placeholder="Full Name" >
+				<input type="text" name="roll_no" class="form-control" id="roll_no" placeholder="Roll Number" >
+				<input type="text" name="username" class="form-control" id="Text_Username" placeholder="Email Address" >
+		
+		<input type="password" name="password"  id="Text_Password" placeholder="Password" class="form-control" >
+		<input type="password" name="password"  id="CText_Password" placeholder="Confirm Password" class="form-control" >
+		 <button type="button" class="btn btn-default" id="Get_Registered">Get Registered</button>
+		
+		</form>
+		
+	</div>
+		<div id="FootText">Developed By Team &#169; Pseudo 2018</div>
+	</div>
+	<div id="Lower"></div>
+</div>
+</body>
+
+</html>
