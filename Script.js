@@ -3,7 +3,7 @@ $( document ).ready(function() {
     $("#If").attr('src',"Home_Content.html");
         $("#li_Menu").attr('class',"");
          $("#li_Home").attr('class',"active");
-          $("#li_Contact").attr('class',"");
+          
            $("#li_Team").attr('class',"");
             $("#li_Logout").attr('class',"");
              $("#li_Bill").attr('class',"");
@@ -16,7 +16,7 @@ $( document ).ready(function() {
         $("#If").attr('src',"Menu.html");
         $("#li_Menu").attr('class',"active");
          $("#li_Home").attr('class',"");
-          $("#li_Contact").attr('class',"");
+         
            $("#li_Team").attr('class',"");
             $("#li_Logout").attr('class',"");
              $("#li_Bill").attr('class',"");
@@ -31,7 +31,7 @@ $(function(){
         $("#If").attr('src',"Team.html");
         $("#li_Menu").attr('class',"");
          $("#li_Home").attr('class',"");
-          $("#li_Contact").attr('class',"");
+         
            $("#li_Team").attr('class',"active");
             $("#li_Logout").attr('class',"");
              $("#li_Bill").attr('class',"");
@@ -45,7 +45,37 @@ $(function(){
         $("#If").attr('src',"Home_Content.html");
         $("#li_Menu").attr('class',"");
          $("#li_Home").attr('class',"active");
-          $("#li_Contact").attr('class',"");
+          
+           $("#li_Team").attr('class',"");
+            $("#li_Logout").attr('class',"");
+             $("#li_Bill").attr('class',"");
+    });
+});
+
+
+$(function(){
+    $("#aChange_Registration").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"Change_Registration.html");
+        $("#li_Menu").attr('class',"");
+         $("#li_Home").attr('class',"");
+         
+           $("#li_Team").attr('class',"");
+            $("#li_Logout").attr('class',"");
+             $("#li_Bill").attr('class',"");
+    });
+});
+
+
+$(function(){
+    $("#aFeedback").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"Feedback.html");
+        $("#li_Menu").attr('class',"");
+         $("#li_Home").attr('class',"");
+         
            $("#li_Team").attr('class',"");
             $("#li_Logout").attr('class',"");
              $("#li_Bill").attr('class',"");

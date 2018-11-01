@@ -18,6 +18,21 @@
          
     });
 });
+
+  	
+
+function validatePassword(){
+	password=document.getElementById("Text_Password1").value
+  	cpassword=document.getElementById("CText_Password1").value
+  	
+  if(password != confirm_password) {
+    document.getElementById("CText_Password1").setCustomValidity("Passwords Don't Match");
+    return false;
+  } else {
+    document.getElementById("CText_Password1").setCustomValidity('');
+  }
+}
+
   </script>
 <title>Mess Portal</title>
 </head>
@@ -30,10 +45,10 @@
 		<div id="Description">Welcome to our amazing <br/>newly designed mess portal</div>
 		<div id="Form_Container" >
 		<form >
-				<input type="text" name="username" class="form-control" id="Text_Username" placeholder="Email Address" >
+				<input type="email" name="username" class="form-control" id="Text_Username" placeholder="Email Address" required >
 		
-		<input type="password" name="password"  id="Text_Password" placeholder="Password" class="form-control" >
-		 <button type="button" class="btn btn-default" id="Login_Button">Login</button>
+		<input type="password" name="password"  id="Text_Password" placeholder="Password" class="form-control" required >
+		 <button type="submit" class="btn btn-default" id="Login_Button" >Login</button>
 		
 		</form>
 		<a href="#" id="New_user_Link">New User?...Get Registered</a>
@@ -41,13 +56,13 @@
 
 	<div id="Form_Container2" >
 		<form >
-				<input type="text" name="fullname" class="form-control" id="fullname" placeholder="Full Name" >
-				<input type="text" name="roll_no" class="form-control" id="roll_no" placeholder="Roll Number" >
-				<input type="text" name="username" class="form-control" id="Text_Username" placeholder="Email Address" >
+				<input type="text" name="fullname" class="form-control" id="fullname" placeholder="Full Name" required>
+				<input type="number" name="roll_no" class="form-control" id="roll_no" placeholder="Roll Number"  min="0" step="1" required >
+				<input type="email" name="username" class="form-control" id="Text_Username" placeholder="Email Address" required>
 		
-		<input type="password" name="password"  id="Text_Password" placeholder="Password" class="form-control" >
-		<input type="password" name="password"  id="CText_Password" placeholder="Confirm Password" class="form-control" >
-		 <button type="button" class="btn btn-default" id="Get_Registered">Get Registered</button>
+		<input type="password" name="password"  id="Text_Password1" placeholder="Password" class="form-control"  required>
+		<input type="password" name="cpassword"  id="CText_Password1" placeholder="Confirm Password" class="form-control" oninput="validatePassword()" required>
+		 <button onclick="validatePassword()" class="btn btn-default" id="Get_Registered" >Get Registered</button>
 		
 		</form>
 		

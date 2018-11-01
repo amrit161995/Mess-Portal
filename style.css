@@ -109,7 +109,7 @@ body{
 	width: 20%;
 }
 
-#Form_Container2 #Text_Password{
+#Form_Container2 #Text_Password1{
 	position: absolute;
 	top: 40%;
 	border:0px;
@@ -121,7 +121,7 @@ body{
 	width: 20%;
 }
 
-#Form_Container2 #CText_Password{
+#Form_Container2 #CText_Password1{
 	position: absolute;
 	top: 40%;
 	border:0px;

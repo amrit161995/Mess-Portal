@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Feedback</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+
+  body{
+  	background-color: #7f8c8d;
+  	color: white;
+  }
+
+  form{
+  	font-size: 1vw;
+
+  }
+
+#Mess_select{
+	position: absolute;
+	
+	top:12%;
+}
+
+#lab_m{
+	position: absolute;
+	top:7%;
+}
+
+  #Title{
+  	position: absolute;
+  	font-size: 3vw;
+  	top: 0%;
+  	font-family: sans-serif;
+  	font-weight: 100;
+  }
+
+  .lab{
+  	font-size: 2vw;
+  	font-family: sans-serif;
+  	font-weight: 100;
+  }
+
+
+  	#issue{
+	position: absolute;
+	top: 33.5%;
+	opacity: 0.9;
+	border:0px;
+	font-size: 1.2vw;
+	border-radius: 20px;
+	height: 6%;
+	width:20%;
+}
+#des{
+	position: absolute;
+	top: 42%;
+
+	width: 60%;
+	opacity: 0.9;
+}
+
+#lab_is{
+	position: absolute;
+	top:28%;
+}
+#Description{
+	border-radius: 20px;
+}
+
+
+#submit{
+	position: absolute;
+	top: 65%;	
+	
+	border:0px;
+	font-family: sans-serif;
+	font-weight: 100;
+	color: #2c3e50;
+	opacity: 0.9;
+	font-size: 1.2vw;
+	border-radius: 20px;
+	height: 6%;
+	width: 20%;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+ 
+		<div id="Title">Feedback Form</div>
+		
+		<form >
+				<div  class="lab" id="lab_m">Mess:</div>
+				<div id="Mess_select">
+				 <div class="radio">
+				 	
+  					<label><input type="radio" name="optradio">Kadamba Mess</label>
+				</div>
+				<div class="radio">
+ 					 <label><input type="radio" name="optradio">Yuktahar Mess</label>
+				</div>
+				<div class="radio">
+ 					 <label><input type="radio" name="optradio" >North Mess</label>
+				</div> 
+
+				<div class="radio">
+ 					 <label><input type="radio" name="optradio">South Mess</label>
+				</div>
+			</div>
+				<div>
+				<label class="lab" id="lab_is">Issue/Suggestion:</label>
+				<input type="text" name="username" class="form-control" id="issue" >
+				<br>
+
+				 <div id="des" class="form-group">
+		  			<label class="lab">Description:</label>
+		  			<textarea class="form-control" rows="5" id="Description"></textarea>
+				</div> 
+		 <button type="button" class="btn btn-default" id="submit">Submit</button>
+		
+		</form>
+		</div>
+</div>
+
+</body>
+</html>
