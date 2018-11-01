@@ -24,9 +24,10 @@
 function validatePassword(){
 	password=document.getElementById("Text_Password1").value
   	cpassword=document.getElementById("CText_Password1").value
-  	
-  if(password != confirm_password) {
+
+  if(password != cpassword) {
     document.getElementById("CText_Password1").setCustomValidity("Passwords Don't Match");
+    
     return false;
   } else {
     document.getElementById("CText_Password1").setCustomValidity('');
@@ -60,9 +61,9 @@ function validatePassword(){
 				<input type="number" name="roll_no" class="form-control" id="roll_no" placeholder="Roll Number"  min="0" step="1" required >
 				<input type="email" name="username" class="form-control" id="Text_Username" placeholder="Email Address" required>
 		
-		<input type="password" name="password"  id="Text_Password1" placeholder="Password" class="form-control"  required>
+		<input type="password" name="password"  id="Text_Password1" placeholder="Password" class="form-control"   required>
 		<input type="password" name="cpassword"  id="CText_Password1" placeholder="Confirm Password" class="form-control" oninput="validatePassword()" required>
-		 <button onclick="validatePassword()" class="btn btn-default" id="Get_Registered" >Get Registered</button>
+		 <button type="submit" onclick="validatePassword()" class="btn btn-default" id="Get_Registered" >Get Registered</button>
 		
 		</form>
 		
