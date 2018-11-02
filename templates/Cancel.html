@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Home Content</title>
+  <title>Cancel</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -63,6 +63,20 @@
 
     }
 
+    #meals{
+      position: absolute;
+      top:45%;
+      color: white;
+      font-size: 1vw;
+    }
+
+    #uncancel{
+      position: absolute;
+      top: 60%;
+      color: white;
+      font-size: 1vw;
+      font-weight: 100;
+    }
     /*#dfrom{
       background-color: #7f8c8d;
      
@@ -104,6 +118,20 @@ input #dfrom{
   width: 190px;
 }
 
+#Cancel_Button{
+position: absolute;
+  top: 70%;
+  
+  border:0px;
+  font-family: sans-serif;
+  font-weight: 100;
+  color: #2c3e50;
+  opacity: 0.9;
+  font-size: 1.2vw;
+  border-radius: 20px;
+  height: 7%;
+  width: 20%;
+}
   </style>
 </head>
 <body>
@@ -137,7 +165,7 @@ input #dfrom{
 
 
   </table>
-
+  <form>
   <div id="from">
     From :  <input style="background-color:#636e72; border-radius:20px;border:0px;" type="date" name="from" id="dfrom">
  
@@ -147,5 +175,25 @@ input #dfrom{
     To :  <input style="background-color:#636e72; border-radius:20px;border:0px;" type="date" name="to" id="dto">
  
 </div>
+
+<div id="meals">
+    <div class="checkbox">
+       <label><input type="checkbox" value="">Breakfast</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">Lunch</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="" >Dinner</label>
+    </div> 
+</div>
+  
+  <div id="uncancel">
+      <label><input type="checkbox" value="" > Uncancel Above Selected Meals</label>
+  </div> 
+
+  <button type="submit"  class="btn btn-default" id="Cancel_Button" >Submit</button>
+
+</form>
 </body>
 </html>

@@ -27,7 +27,7 @@
 
 
 $( document ).ready(function() {
-    $("#If").attr('src',"/Menu");
+    $("#If").attr('src',"/Home_Content");
         $("#li_Menu").attr('class',"");
          $("#li_Home").attr('class',"active");
           
@@ -42,7 +42,7 @@ $(function(){
     $("#aTeam").click(function(e){
         e.preventDefault(); //To prevent the default anchor tag behaviour
        
-        $("#If").attr('src',"Team.html");
+        $("#If").attr('src',"/Team");
         $("#li_Menu").attr('class',"");
          $("#li_Home").attr('class',"");
          
@@ -56,7 +56,7 @@ $(function(){
     $("#aHome").click(function(e){
         e.preventDefault(); //To prevent the default anchor tag behaviour
        
-        $("#If").attr('src',"templates/Home_Content.html");
+        $("#If").attr('src',"/Home_Content");
         $("#li_Menu").attr('class',"");
          $("#li_Home").attr('class',"active");
           
@@ -71,7 +71,7 @@ $(function(){
     $("#aChange_Registration").click(function(e){
         e.preventDefault(); //To prevent the default anchor tag behaviour
        
-        $("#If").attr('src',"Change_Registration.html");
+        $("#If").attr('src',"/Change_Registration");
         $("#li_Menu").attr('class',"");
          $("#li_Home").attr('class',"");
          
@@ -86,7 +86,21 @@ $(function(){
     $("#aFeedback").click(function(e){
         e.preventDefault(); //To prevent the default anchor tag behaviour
        
-        $("#If").attr('src',"Feedback.html");
+        $("#If").attr('src',"/Feedback");
+        $("#li_Menu").attr('class',"");
+         $("#li_Home").attr('class',"");
+         
+           $("#li_Team").attr('class',"");
+            $("#li_Logout").attr('class',"");
+             $("#li_Bill").attr('class',"");
+    });
+});
+
+$(function(){
+    $("#aCancel").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"/Cancel");
         $("#li_Menu").attr('class',"");
          $("#li_Home").attr('class',"");
          
@@ -105,7 +119,7 @@ $(function(){
 
 <body>
 <div id = "Container" >
-	<img id="back" src="food.jpg">
+	<img id="back" src="/static/food.jpg">
 	<div id="Top_Navigation">
 		<nav class="navbar navbar-default">
   			<div class="container-fluid">
@@ -118,7 +132,7 @@ $(function(){
       		<li id="li_Menu"><a href="#" id="aMenu">Menu</a></li>
       		<li id="li_Bill"><a href="#" id="aBill">Billing Rates</a></li>
       		<li id="li_Team"><a href="#" id="aTeam">The Team</a></li>
-      		<li id="li_Logout"><a href="index.html" id="aLogout">Logout</a></li>
+      		<li id="li_Logout"><a href="/" id="aLogout">Logout</a></li>
     </ul>
     
 
@@ -133,7 +147,7 @@ $(function(){
 
 <div class="sidenav">
   <a href="#">View Default Mess</a>
-  <a href="#">Cancel Meals</a>
+  <a href="#" id="aCancel">Cancel Meals</a>
   <a href="#" id="aChange_Registration">Change Registration</a>
   <a href="#">View Registration</a>
   <a href="#">View Mess Bill</a>
