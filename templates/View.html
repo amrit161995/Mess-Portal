@@ -1,378 +1,492 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript">
-	$(function () {
-	$('[data-toggle="calendar"] > .row > .calendar-day > .events > .event').popover({
-		container: 'body',
-		content: 'Hello World',
-		html: true,
-		placement: 'bottom',
-		template: '<div class="popover calendar-event-popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-	});
-
-	$('[data-toggle="calendar"] > .row > .calendar-day > .events > .event').on('show.bs.popover', function () {
-		var attending = parseInt($(this).find('div.progress>.progress-bar').attr('aria-valuenow')),
-			total = parseInt($(this).find('div.progress>.progress-bar').attr('aria-valuemax')),
-			remaining = total - attending,
-			displayAttending = attending - $(this).find('div.attending').children().length,
-			html = [
-				'<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>',
-				'<h4>'+$(this).find('h4').text()+'</h4>',
-				'<div class="desc">'+$(this).find('div.desc').html()+'</div>',
-				'<div class="location">'+$(this).find('div.location').html()+'</div>',
-				'<div class="datetime">'+$(this).find('div.datetime').html()+'</div>',
-				'<div class="space">Attending <span class="pull-right">Available spots</span></div>',
-				'<div class="attending">',
-					$(this).find('div.attending').html(),
-					'<span class="attending-overflow">+'+displayAttending+'</span>', 
-					'<span class="pull-right">'+remaining+'</span>',
-				'</div>',
-				'<a href="#signup" class="btn btn-success" role="button">Sign up</a>'
-			].join('\n');
-
-		$(this).attr('title', $(this).find('h4').text());
-		$(this).attr('data-content', html);
-	});
-
-	$('[data-toggle="calendar"] > .row > .calendar-day > .events > .event').on('shown.bs.popover', function () {
-		var $popup = $(this);
-		$('.popover:last-child').find('.close').on('click', function(event) {
-			$popup.popover('hide');
-		});
-	});
-});
+<!DOCTYPE html>
+<!--[if IE 9]><html class="no-js ie9"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js"><!--<![endif]-->
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Flexible Calendar</title>
+		<meta name="description" content="Flexible Calendar with jQuery and CSS3" />
+		<meta name="keywords" content="responsive, calendar, jquery, plugin, full page, flexible, javascript, css3, media queries" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico"> 
+		<link rel="stylesheet" type="text/css" href="/static/calendar.css" />
+		<link rel="stylesheet" type="text/css" href="/static/custom_1.css" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script type="text/javascript" >
+			/**
+ * jquery.calendario.js v1.0.0
+ * http://www.codrops.com
+ *
+ * Licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * 
+ * Copyright 2012, Codrops
+ * http://www.codrops.com
+ */
+;( function( $, window, undefined ) {
 	
-</script>
-<style type="text/css">
-	    body {
-		padding: 20px 0px 200px;
-	}
-	h1.title {
-		font-family: 'Roboto', sans-serif;
-		font-weight: 900;
-	}
-	.calendar {
-		margin: 0px 40px;
-	}
-	.popover.calendar-event-popover {
-		font-family: 'Roboto', sans-serif;
-		font-size: 12px;
-		color: rgb(120, 120, 120);
-		border-radius: 2px;
-		max-width: 300px;
-	}
-	.popover.calendar-event-popover h4 {
-		font-size: 14px;
-		font-weight: 900;
-	}
-	.popover.calendar-event-popover .location,
-	.popover.calendar-event-popover .datetime {
-		font-size: 14px;
-		font-weight: 700;
-		margin-bottom: 5px;
-	}
-	.popover.calendar-event-popover .location > span,
-	.popover.calendar-event-popover .datetime > span {
-		margin-right: 10px;
-	}
-	.popover.calendar-event-popover .space,
-	.popover.calendar-event-popover .attending {
-		margin-top: 10px;
-		padding-bottom: 5px;
-		border-bottom: 1px solid rgb(160, 160, 160);
-		font-weight: 700;
-	}
-	.popover.calendar-event-popover .space > .pull-right,
-	.popover.calendar-event-popover .attending > .pull-right {
-		font-weight: 400;
-	}
-	.popover.calendar-event-popover .attending {
-		margin-top: 5px;
-		font-size: 18px;
-		padding: 0px 10px 5px;
-	}
-	.popover.calendar-event-popover .attending img {
-		border-radius: 50%;
-		width: 40px;
-	}
-	.popover.calendar-event-popover .attending span.attending-overflow {
-		display: inline-block;
-		width: 40px;
-		background-color: rgb(200, 200, 200);
-		border-radius: 50%;
-		padding: 8px 0px 7px;
-		text-align: center;
-	}
-	.popover.calendar-event-popover .attending > .pull-right {
-		font-size: 28px;
-	}
-	.popover.calendar-event-popover a.btn {
-		margin-top: 10px;
-		width: 100%;
-		border-radius: 3px;
-	}
-	[data-toggle="calendar"] > .row > .calendar-day {
-		font-family: 'Roboto', sans-serif;
-		width: 14.28571428571429%;
-		border: 1px solid rgb(235, 235, 235);
-		border-right-width: 0px;
-		border-bottom-width: 0px;
-		min-height: 120px;
-	}
-	[data-toggle="calendar"] > .row > .calendar-day.calendar-no-current-month {
-		color: rgb(200, 200, 200);
-	}
-	[data-toggle="calendar"] > .row > .calendar-day:last-child {
-		border-right-width: 1px;
-	}
+	'use strict';
 
-	[data-toggle="calendar"] > .row:last-child > .calendar-day {
-		border-bottom-width: 1px;
-	}
+	$.Calendario = function( options, element ) {
+		
+		this.$el = $( element );
+		this._init( options );
+		
+	};
 
-	.calendar-day > time {
-		position: absolute;
-		display: block;
-		bottom: 0px;
-		left: 0px;
-		font-size: 12px;
-		font-weight: 300;
-		width: 100%;
-		padding: 10px 10px 3px 0px;
-		text-align: right;
-	}
-	.calendar-day > .events {
-		cursor: pointer;
-	}
-	.calendar-day > .events > .event h4 {
-		font-size: 12px;
-		font-weight: 700;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		margin-bottom: 3px;
-	}
-	.calendar-day > .events > .event > .desc,
-	.calendar-day > .events > .event > .location,
-	.calendar-day > .events > .event > .datetime,
-	.calendar-day > .events > .event > .attending {
-		display: none;
-	}
-	.calendar-day > .events > .event > .progress {
-		height: 10px;
-	}
+	// the options
+	$.Calendario.defaults = {
+		/*
+		you can also pass:
+		month : initialize calendar with this month (1-12). Default is today.
+		year : initialize calendar with this year. Default is today.
+		caldata : initial data/content for the calendar.
+		caldata format:
+		{
+			'MM-DD-YYYY' : 'HTML Content',
+			'MM-DD-YYYY' : 'HTML Content',
+			'MM-DD-YYYY' : 'HTML Content'
+			...
+		}
+		*/
+		weeks : [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
+		weekabbrs : [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
+		months : [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
+		monthabbrs : [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+		// choose between values in options.weeks or options.weekabbrs
+		displayWeekAbbr : false,
+		// choose between values in options.months or options.monthabbrs
+		displayMonthAbbr : false,
+		// left most day in the calendar
+		// 0 - Sunday, 1 - Monday, ... , 6 - Saturday
+		startIn : 1,
+		onDayClick : function( $el, $content, dateProperties ) { return false; }
+	};
 
-</style>
-<!------ Include the above in your HEAD tag ---------->
+	$.Calendario.prototype = {
 
-    <h1 class="title text-center"> July 2014 </h1>
-	<div class="calendar" data-toggle="calendar">
-		<div class="row">
-			<div class="col-xs-12 calendar-day calendar-no-current-month">
-				<time datetime="2014-06-29">29</time>
-			</div>
-			<div class="col-xs-12 calendar-day calendar-no-current-month">
-				<time datetime="2014-06-30">30</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-01">01</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-02">02</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-03">03</time>
-				<div class="events">
-					<div class="event">
-						<h4>Mid Day Dance Break - SELF CARE</h4>
-						<div class="desc">
-							<p>Take a Break and enjoy Live dance and Art from Eries own local Talent</p>
-							<p>Support for this program is provided in part from an Erie Arts & Culture Project Grant, made possible by community contributions to the Combined Arts & Cultural Campaign and the Erie Arts Endowment.</p>
-						</div>
-						<div class="location"> <span class="glyphicon glyphicon-map-marker"></span> State St and Rt 5, Erie, Pa.</div>
-						<div class="datetime"> <span class="glyphicon glyphicon-time"></span> 12:00am - 1:00pm</div>
-						<div class="attending">
-							<img src="http://api.randomuser.me/portraits/women/54.jpg" />
-							<img src="http://api.randomuser.me/portraits/men/27.jpg" />
-							<img src="http://api.randomuser.me/portraits/men/61.jpg" />
-						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="134" style="width: 4.477%;">
-								<span class="sr-only">4.477% Filled</span>
-							</div>
-						</div>
-					</div>
+		_init : function( options ) {
+			
+			// options
+			this.options = $.extend( true, {}, $.Calendario.defaults, options );
+
+			this.today = new Date();
+			this.month = ( isNaN( this.options.month ) || this.options.month == null) ? this.today.getMonth() : this.options.month - 1;
+			this.year = ( isNaN( this.options.year ) || this.options.year == null) ? this.today.getFullYear() : this.options.year;
+			this.caldata = this.options.caldata || {};
+			this._generateTemplate();
+			this._initEvents();
+
+		},
+		_initEvents : function() {
+
+			var self = this;
+
+			this.$el.on( 'click.calendario', 'div.fc-row > div', function() {
+
+				var $cell = $( this ),
+					idx = $cell.index(),
+					$content = $cell.children( 'div' ),
+					dateProp = {
+						day : $cell.children( 'span.fc-date' ).text(),
+						month : self.month + 1,
+						monthname : self.options.displayMonthAbbr ? self.options.monthabbrs[ self.month ] : self.options.months[ self.month ],
+						year : self.year,
+						weekday : idx + self.options.startIn,
+						weekdayname : self.options.weeks[ idx + self.options.startIn ]
+					};
+
+				if( dateProp.day ) {
+					self.options.onDayClick( $cell, $content, dateProp );
+				}
+
+			} );
+
+		},
+		// Calendar logic based on http://jszen.blogspot.pt/2007/03/how-to-build-simple-calendar-with.html
+		_generateTemplate : function( callback ) {
+
+			var head = this._getHead(),
+				body = this._getBody(),
+				rowClass;
+
+			switch( this.rowTotal ) {
+				case 4 : rowClass = 'fc-four-rows'; break;
+				case 5 : rowClass = 'fc-five-rows'; break;
+				case 6 : rowClass = 'fc-six-rows'; break;
+			}
+
+			this.$cal = $( '<div class="fc-calendar ' + rowClass + '">' ).append( head, body );
+
+			this.$el.find( 'div.fc-calendar' ).remove().end().append( this.$cal );
+
+			if( callback ) { callback.call(); }
+
+		},
+		_getHead : function() {
+
+			var html = '<div class="fc-head">';
+		
+			for ( var i = 0; i <= 6; i++ ) {
+
+				var pos = i + this.options.startIn,
+					j = pos > 6 ? pos - 6 - 1 : pos;
+
+				html += '<div>';
+				html += this.options.displayWeekAbbr ? this.options.weekabbrs[ j ] : this.options.weeks[ j ];
+				html += '</div>';
+
+			}
+
+			html += '</div>';
+
+			return html;
+
+		},
+		_getBody : function() {
+
+			var d = new Date( this.year, this.month + 1, 0 ),
+				// number of days in the month
+				monthLength = d.getDate(),
+				firstDay = new Date( this.year, this.month, 1 );
+
+			// day of the week
+			this.startingDay = firstDay.getDay();
+
+			var html = '<div class="fc-body"><div class="fc-row">',
+				// fill in the days
+				day = 1;
+
+			// this loop is for weeks (rows)
+			for ( var i = 0; i < 7; i++ ) {
+
+				// this loop is for weekdays (cells)
+				for ( var j = 0; j <= 6; j++ ) {
+
+					var pos = this.startingDay - this.options.startIn,
+						p = pos < 0 ? 6 + pos + 1 : pos,
+						inner = '',
+						today = this.month === this.today.getMonth() && this.year === this.today.getFullYear() && day === this.today.getDate(),
+						content = '';
+					
+					if ( day <= monthLength && ( i > 0 || j >= p ) ) {
+
+						inner += '<span class="fc-date">' + day + '</span><span class="fc-weekday">' + this.options.weekabbrs[ j + this.options.startIn > 6 ? j + this.options.startIn - 6 - 1 : j + this.options.startIn ] + '</span>';
+
+						// this day is:
+						var strdate = ( this.month + 1 < 10 ? '0' + ( this.month + 1 ) : this.month + 1 ) + '-' + ( day < 10 ? '0' + day : day ) + '-' + this.year,
+							dayData = this.caldata[ strdate ];
+
+						if( dayData ) {
+							content = dayData;
+						}
+
+						if( content !== '' ) {
+							inner += '<div>' + content + '</div>';
+						}
+
+						++day;
+
+					}
+					else {
+						today = false;
+					}
+
+					var cellClasses = today ? 'fc-today ' : '';
+					if( content !== '' ) {
+						cellClasses += 'fc-content';
+					}
+
+					html += cellClasses !== '' ? '<div class="' + cellClasses + '">' : '<div>';
+					html += inner;
+					html += '</div>';
+
+				}
+
+				// stop making rows if we've run out of days
+				if (day > monthLength) {
+					this.rowTotal = i + 1;
+					break;
+				} 
+				else {
+					html += '</div><div class="fc-row">';
+				}
+
+			}
+			html += '</div></div>';
+
+			return html;
+
+		},
+		// based on http://stackoverflow.com/a/8390325/989439
+		_isValidDate : function( date ) {
+
+			date = date.replace(/-/gi,'');
+			var month = parseInt( date.substring( 0, 2 ), 10 ),
+				day = parseInt( date.substring( 2, 4 ), 10 ),
+				year = parseInt( date.substring( 4, 8 ), 10 );
+
+			if( ( month < 1 ) || ( month > 12 ) ) {
+				return false;
+			}
+			else if( ( day < 1 ) || ( day > 31 ) )  {
+				return false;
+			}
+			else if( ( ( month == 4 ) || ( month == 6 ) || ( month == 9 ) || ( month == 11 ) ) && ( day > 30 ) )  {
+				return false;
+			}
+			else if( ( month == 2 ) && ( ( ( year % 400 ) == 0) || ( ( year % 4 ) == 0 ) ) && ( ( year % 100 ) != 0 ) && ( day > 29 ) )  {
+				return false;
+			}
+			else if( ( month == 2 ) && ( ( year % 100 ) == 0 ) && ( day > 29 ) )  {
+				return false;
+			}
+
+			return {
+				day : day,
+				month : month,
+				year : year
+			};
+
+		},
+		_move : function( period, dir, callback ) {
+
+			if( dir === 'previous' ) {
+				
+				if( period === 'month' ) {
+					this.year = this.month > 0 ? this.year : --this.year;
+					this.month = this.month > 0 ? --this.month : 11;
+				}
+				else if( period === 'year' ) {
+					this.year = --this.year;
+				}
+
+			}
+			else if( dir === 'next' ) {
+
+				if( period === 'month' ) {
+					this.year = this.month < 11 ? this.year : ++this.year;
+					this.month = this.month < 11 ? ++this.month : 0;
+				}
+				else if( period === 'year' ) {
+					this.year = ++this.year;
+				}
+
+			}
+
+			this._generateTemplate( callback );
+
+		},
+		/************************* 
+		******PUBLIC METHODS *****
+		**************************/
+		getYear : function() {
+			return this.year;
+		},
+		getMonth : function() {
+			return this.month + 1;
+		},
+		getMonthName : function() {
+			return this.options.displayMonthAbbr ? this.options.monthabbrs[ this.month ] : this.options.months[ this.month ];
+		},
+		// gets the cell's content div associated to a day of the current displayed month
+		// day : 1 - [28||29||30||31]
+		getCell : function( day ) {
+
+			var row = Math.floor( ( day + this.startingDay - this.options.startIn ) / 7 ),
+				pos = day + this.startingDay - this.options.startIn - ( row * 7 ) - 1;
+
+			return this.$cal.find( 'div.fc-body' ).children( 'div.fc-row' ).eq( row ).children( 'div' ).eq( pos ).children( 'div' );
+
+		},
+		setData : function( caldata ) {
+
+			caldata = caldata || {};
+			$.extend( this.caldata, caldata );
+			this._generateTemplate();
+
+		},
+		// goes to today's month/year
+		gotoNow : function( callback ) {
+
+			this.month = this.today.getMonth();
+			this.year = this.today.getFullYear();
+			this._generateTemplate( callback );
+
+		},
+		// goes to month/year
+		goto : function( month, year, callback ) {
+
+			this.month = month;
+			this.year = year;
+			this._generateTemplate( callback );
+
+		},
+		gotoPreviousMonth : function( callback ) {
+			this._move( 'month', 'previous', callback );
+		},
+		gotoPreviousYear : function( callback ) {
+			this._move( 'year', 'previous', callback );
+		},
+		gotoNextMonth : function( callback ) {
+			this._move( 'month', 'next', callback );
+		},
+		gotoNextYear : function( callback ) {
+			this._move( 'year', 'next', callback );
+		}
+
+	};
+	
+	var logError = function( message ) {
+
+		if ( window.console ) {
+
+			window.console.error( message );
+		
+		}
+
+	};
+	
+	$.fn.calendario = function( options ) {
+
+		var instance = $.data( this, 'calendario' );
+		
+		if ( typeof options === 'string' ) {
+			
+			var args = Array.prototype.slice.call( arguments, 1 );
+			
+			this.each(function() {
+			
+				if ( !instance ) {
+
+					logError( "cannot call methods on calendario prior to initialization; " +
+					"attempted to call method '" + options + "'" );
+					return;
+				
+				}
+				
+				if ( !$.isFunction( instance[options] ) || options.charAt(0) === "_" ) {
+
+					logError( "no such method '" + options + "' for calendario instance" );
+					return;
+				
+				}
+				
+				instance[ options ].apply( instance, args );
+			
+			});
+		
+		} 
+		else {
+		
+			this.each(function() {
+				
+				if ( instance ) {
+
+					instance._init();
+				
+				}
+				else {
+
+					instance = $.data( this, 'calendario', new $.Calendario( options, this ) );
+				
+				}
+
+			});
+		
+		}
+		
+		return instance;
+		
+	};
+	
+} )( jQuery, window );
+
+
+		</script>
+		<script type="text/javascript" >
+				var codropsEvents = {
+					'11-23-2018' : '<a>Breakfast: North </a><br><a>Lunch: North </a><br><a>Dinner: North </a>',
+
+	
+				};
+		</script>
+		
+	</head>
+	<body>
+		<div class="container" style="background-color:#535c68;">	
+			
+			<!-- Codrops top bar -->
+			<div class="codrops-top clearfix">
+				
+				
+			</div><!--/ Codrops top bar -->
+			<div class="custom-calendar-wrap custom-calendar-full">
+
+				<div class="custom-header clearfix">
+					
+					<h3 class="custom-month-year">
+						<span id="custom-month" class="custom-month"></span>
+						<span id="custom-year" class="custom-year"></span>
+						<nav>
+							<span id="custom-prev" class="custom-prev"></span>
+							<span id="custom-next" class="custom-next"></span>
+							<span id="custom-current" class="custom-current" title="Got to current date"></span>
+						</nav>
+					</h3>
 				</div>
+				<div id="calendar" class="fc-calendar-container"></div>
 			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-04">04</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-05">05</time>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-06">06</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-07">07</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-08">08</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-09">09</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-10">10</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-11">11</time>
-				<div class="events">
-					<div class="event">
-						<h4>Local artist showing, meet and greet and feature film</h4>
-						<div class="desc">
-							<p>We will be showing local artists films on our new 16 foot movie screen with feature film last "Carnival Of Souls", come see the new BT, hang out and socialize while enjoying some local talent. FREE event, suggested $2 or $3 donation. Concessions, popcorn, soda etc available so come hungry!!</p>
-							<p>*This event is all ages welcomed and also handicapped accessible (side entrance ramp)</p>
-							<p>Featuring :</p>
-							<ul>
-								<li><a href="https://www.youtube.com/user/walrys11/videos">Jack Rys</a></li>
-								<li><a href="http://society6.com/wombglow">Alex Wilson</a></li>
-								<li><a href="http://www.erieartcompany.com/">Brad Ford</a></li>
-								<li><a href="http://www.youtube.com/watch?v=dkTz0EvfEiY">Carnival of Souls</a> (Trailer)</li>
-							</ul>
-						</div>
-						<div class="location"> <span class="glyphicon glyphicon-map-marker"></span> 145 West 11th Street, Erie, Pa.</div>
-						<div class="datetime"> <span class="glyphicon glyphicon-time"></span> 7:00pm - ?</div>
-						<div class="attending">
-							<img src="http://api.randomuser.me/portraits/women/31.jpg" />
-							<img src="http://api.randomuser.me/portraits/women/47.jpg" />
-							<img src="http://api.randomuser.me/portraits/women/93.jpg" />
-						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="368" style="width: 11.68%;">
-								<span class="sr-only">11.68% Filled</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-12">12</time>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-13">13</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-14">14</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-15">15</time>
-				<div class="events">
-					<div class="event">
-						<h4>Erie Art Museum 91st Annual Spring Show</h4>
-						<div class="desc">
-							<p>This juried, regional multi-media exhibition, open to all artists living within a 250-mile radius of Erie represents all media and showcases the most current and finest artwork created in the area.</p>
-						</div>
-						<div class="location"> <span class="glyphicon glyphicon-map-marker"></span> Presque Isle State Park </div>
-						<div class="datetime"> <span class="glyphicon glyphicon-time"></span> ALL DAY</div>
-						<div class="attending">
-							<img src="http://api.randomuser.me/portraits/men/10.jpg" />
-							<img src="http://api.randomuser.me/portraits/men/23.jpg" />
-							<img src="http://api.randomuser.me/portraits/men/66.jpg" />
-						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="69" aria-valuemin="0" aria-valuemax="320" style="width: 21.56%;">
-								<span class="sr-only">21.56% Filled</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-16">16</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-17">17</time>>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-18">18</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-19">19</time>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-20">20</time>
-				<div class="events">
-					<div class="event">
-						<h4>Mouse0270's 24th Birthday</h4>
-						<div class="desc">
-							<p style="text-align:center;">Friendships are one of the few things that improve with age<br/>
-							The family and friends of <br/>
-							Mouse0270 <br/>
-							invite you to celebrate his <br/>
-							24th Birthday and a lifetime of good friendship</p>
-						</div>
-						<div class="location"> <span class="glyphicon glyphicon-map-marker"></span> Erie, Pa </div>
-						<div class="datetime"> <span class="glyphicon glyphicon-time"></span> 10:00pm - 2:00am </div>
-						<div class="attending">
-							<img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfa1/t1.0-9/417157_4897339837183_626079670_n.jpg" />
-						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="336" style="width: 0.29%;">
-								<span class="sr-only">0.29% Filled</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-21">21</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-22">22</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-23">23</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-24">24</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-25">25</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-26">26</time>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-27">27</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-28">28</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-29">29</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-30">30</time>
-			</div>
-			<div class="col-xs-12 calendar-day">
-				<time datetime="2014-07-31">31</time>
-			</div>
-			<div class="col-xs-12 calendar-day calendar-no-current-month">
-				<time datetime="2014-08-01">01</time>
-			</div>
-			<div class="col-xs-12 calendar-day calendar-no-current-month">
-				<time datetime="2014-08-02">02</time>
-			</div>
-		</div>
-	</div>
-	<p class="text-center">No this is not a working calendar. It is purely for design. You are more than welcome to make it work, I sure am!</p>
+		</div><!-- /container -->
+		
+		<script type="text/javascript">	
+			$(function() {
+			
+				var cal = $( '#calendar' ).calendario( {
+						onDayClick : function( $el, $contentEl, dateProperties ) {
+
+							for( var key in dateProperties ) {
+								console.log( key + ' = ' + dateProperties[ key ] );
+							}
+
+						},
+						caldata : codropsEvents
+					} ),
+					$month = $( '#custom-month' ).html( cal.getMonthName() ),
+					$year = $( '#custom-year' ).html( cal.getYear() );
+
+				$( '#custom-next' ).on( 'click', function() {
+					cal.gotoNextMonth( updateMonthYear );
+				} );
+				$( '#custom-prev' ).on( 'click', function() {
+					cal.gotoPreviousMonth( updateMonthYear );
+				} );
+				$( '#custom-current' ).on( 'click', function() {
+					cal.gotoNow( updateMonthYear );
+				} );
+
+				function updateMonthYear() {				
+					$month.html( cal.getMonthName() );
+					$year.html( cal.getYear() );
+				}
+
+				// you can also add more data later on. As an example:
+				/*
+				someElement.on( 'click', function() {
+					
+					cal.setData( {
+						'03-01-2013' : '<a href="#">testing</a>',
+						'03-10-2013' : '<a href="#">testing</a>',
+						'03-12-2013' : '<a href="#">testing</a>'
+					} );
+					// goes to a specific month/year
+					cal.goto( 3, 2013, updateMonthYear );
+
+				} );
+				*/
+			
+			});
+		</script>
+	</body>
+</html>

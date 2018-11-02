@@ -56,5 +56,9 @@ def feedback():
 def cancel():
    return render_template('Cancel.html')
 
+@app.route('/View')
+def view():
+   return render_template('View.html')
+
 if __name__ == '__main__':
    app.run(debug = True)
