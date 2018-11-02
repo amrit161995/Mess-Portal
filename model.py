@@ -43,7 +43,7 @@ def login(user):
   
 def register(user):
   try:
-   msg = "1"
+   msg = "Registration successful"
    with sql.connect("mess") as con:
       cur = con.cursor()
       print "start"
@@ -52,8 +52,8 @@ def register(user):
       print "select"
       row = cur.fetchone()
       if row:
-         print "User with id %s is already present, regestration failed!"%(user['user_email'])
-         msg="0"
+         msg="User with id %s is already present, regestration failed!"%(user['user_email'])
+         print  msg
       else:
          cur.execute("INSERT INTO user_credentials (email,password) VALUES (?,?)",(user['user_email'],user['password']))
          print "insert 1"
@@ -63,8 +63,8 @@ def register(user):
          print "Record successfully added"
       return  (user, msg)
   except:
-      msg = "-1"
-      print "Unexpected Error in insert operation"
+      msg = "Unexpected Error in insert operation"
+      print msg
       return ({}, msg)
 
 def deleteUser(user):
