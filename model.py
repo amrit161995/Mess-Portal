@@ -43,31 +43,28 @@ def login(user):
   
 def register(user):
   try:
-
-   msg = "Record successfully added"
-  
-   with sql.connect("database.db") as con:
+   msg = "1"
+   with sql.connect("mess") as con:
       cur = con.cursor()
-      
-      # check to see if this user already exists in the system.
-      
-      cur.execute("SELECT * FROM users  WHERE id = ? or name = ?", (user['id'], user['name']))
- 
-     #print "after executing sql query"
+      print "start"
+      print user['user_email']
+      cur.execute("SELECT * FROM user_credentials  WHERE email = ? and mode = ?", (user['user_email'],0))
+      print "select"
       row = cur.fetchone()
-     #print row, user
-         
       if row:
-         msg = "User with name %s or id %s is already present, insertion failed!"%(user['name'], user['id'])
+         print "User with id %s is already present, regestration failed!"%(user['user_email'])
+         msg="0"
       else:
-         cur.execute("INSERT INTO users (name, phone,interests,id,marks)  VALUES (?,?,?,?,?)",(user['name'],user['phone'],user['interests'],user['id'],user['marks']))            
+         cur.execute("INSERT INTO user_credentials (email,password) VALUES (?,?)",(user['user_email'],user['password']))
+         print "insert 1"
+         cur.execute("INSERT INTO user_details (email,full_name,roll_no)  VALUES (?,?,?)",(user['user_email'],user['fullname'],user['roll_no']))            
+         print "insert 2"
          con.commit()
-      
-      #print msg, '---', dict
+         print "Record successfully added"
       return  (user, msg)
   except:
-      msg = "Unexpected Error in insert operation"
-      print msg
+      msg = "-1"
+      print "Unexpected Error in insert operation"
       return ({}, msg)
 
 def deleteUser(user):
