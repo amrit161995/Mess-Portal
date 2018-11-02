@@ -27,5 +27,13 @@ def login():
          msg = "Unexpected error in login operation"
          return render_template("index.html",message=msg)
 
+@app.route('/Home')
+def home():
+   return render_template('home.html')
+
+@app.route('/Menu')
+def menu():
+   return render_template('Menu.html')
+
 if __name__ == '__main__':
    app.run(debug = True)
