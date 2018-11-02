@@ -44,5 +44,30 @@ def home():
 def menu():
    return render_template('Menu.html')
 
+@app.route('/Team')
+def team():
+   return render_template('Team.html')
+
+@app.route('/Home_Content')
+def home_content():
+   return render_template('Home_Content.html')
+
+@app.route('/Change_Registration')
+def change_registration():
+   return render_template('Change_Registration.html')
+
+
+@app.route('/Feedback')
+def feedback():
+   return render_template('Feedback.html')
+
+@app.route('/Cancel')
+def cancel():
+   return render_template('Cancel.html')
+
+@app.route('/View')
+def view():
+   return render_template('View.html')
+
 if __name__ == '__main__':
    app.run(debug = True)
