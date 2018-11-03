@@ -207,22 +207,6 @@ new StickyNavigation();
       font-size: 1.5vw;
     }
 
-#daywise #meals{
-      position: absolute;
-      top:28%;
-      text-align: left;
-      left:30%;
-      font-size: 1.5vw;
-    }
-#unregister{
-      position: absolute;
-      top:29%;
-      text-align: left;
-      left:31%;
-      font-size: 1.5vw;
-    }
-
-
   [type="date"] {
   background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
 }
@@ -239,7 +223,7 @@ label {
   display: block;
 }
 
- input #dfrom{
+#datewise input #dfrom{
 
   border: 1px solid #c4c4c4;
   border-radius: 5px;
@@ -249,7 +233,7 @@ label {
   width: 190px;
 }
 
-#datewise #RegisterButton{
+#datewise #Cancel_Button{
 position: absolute;
   top: 57%;
   left: 24%;
@@ -263,21 +247,7 @@ position: absolute;
   width: 20%;
 }
 
-#daywise #RegisterButton{
-position: absolute;
-  top: 43%;
-  left: 30%;
-  border:0px;
-  font-family: sans-serif;
-  font-weight: 100;
-  background-color:#b2bec3;
-  font-size: 1.2vw;
-  border-radius: 20px;
-  height: 7%;
-  width: 20%;
-}
-
- #datewise #mess_select{
+#datewise #mess_select{
     position: absolute;
     top: 45%;
     left: 24%;
@@ -287,69 +257,6 @@ position: absolute;
     border-radius: 15px;
     border:0px;
 
-}
-
-#daywise #mess_select{
-    position: absolute;
-    top: 20%;
-    left:56%;
-    height: 6%;
-    font-size: 1.5vw;
-    background-color:#b2bec3;
-    border-radius: 15px;
-    border:0px;
-
-}
-
-#daywise #day_select{
-    position: absolute;
-    top: 20%;
-    left: 30%;
-    height: 6%;
-    font-size: 1.5vw;
-    background-color:#b2bec3;
-    border-radius: 15px;
-    border:0px;
-
-}
-
-#monthwise #mess_select{
-    position: absolute;
-    top: 20%;
-    left:56%;
-    height: 6%;
-    font-size: 1.5vw;
-    background-color:#b2bec3;
-    border-radius: 15px;
-    border:0px;
-
-}
-
-#monthwise #month_select{
-    position: absolute;
-    top: 20%;
-    left: 30%;
-    height: 6%;
-    font-size: 1.5vw;
-    background-color:#b2bec3;
-    border-radius: 15px;
-    border:0px;
-
-}
-
-
-#monthwise #RegisterButton{
-position: absolute;
-  top: 41%;
-  left: 30%;
-  border:0px;
-  font-family: sans-serif;
-  font-weight: 100;
-  background-color:#b2bec3;
-  font-size: 1.2vw;
-  border-radius: 20px;
-  height: 7%;
-  width: 20%;
 }
 
 .et-slide h1{
@@ -409,84 +316,18 @@ position: absolute;
                     </select>
 
                <!--  </div> -->
-              <button type="submit"  class="btn btn-default" id="RegisterButton" >Register</button>
+              <button type="submit"  class="btn btn-default" id="Cancel_Button" >Submit</button>
 
         </form>
     </div> 
     </section>
     <section class="et-slide" id="tab-day">
       <h1>Daywise Registraion</h1>
-        
-         <div id="daywise" style="height: 90%;width: 100%;">
-       <form>
-              
-                 <select id="day_select">
-                      <option value="monday">Monday</option>
-                      <option value="tuesday">Tuesday</option>
-                      <option value="wednesday">Wednesday</option>
-                      <option value="thursday">Thurday</option>
-                      <option value="friday">Friday</option>
-                       <option value="saturday">Saturday</option>
-                        <option value="sunday">Sunday</option>
-                    </select>
-
-
-                <div id="meals">
-                    <div class="checkbox"><label><input type="checkbox" value="">Breakfast</label>
-                    </div>
-                    <div class="checkbox"><label><input type="checkbox" value="">Lunch</label>
-                    </div>
-                    <div class="checkbox"><label><input type="checkbox" value="" >Dinner</label>
-                    </div> 
-                </div>
-              
-               <!--  <div id="mess_select"> -->
-                    <select id="mess_select">
-                      <option value="yuktahar">Yuktahar Mess</option>
-                      <option value="kadamb-veg">Kadamb Veg</option>
-                      <option value="kadamba-nonveg">Kadamb Nonveg</option>
-                      <option value="north">North Mess</option>
-                      <option value="south">South Mess</option>
-                    </select>
-
-               <!--  </div> -->
-              <button type="submit"  class="btn btn-default" id="RegisterButton" >Register</button>
-
-        </form>
-    </div> 
+     
     </section>
     <section class="et-slide" id="tab-month">
       <h1>Monthwise Registration</h1>
-            <div id="monthwise" style="height: 90%;width: 100%;">
-       <form>
-              
-                 <select id="month_select">
-                      <option value="january">January</option>
-                      <option value="february">February</option>
-                      
-                    </select>
-
-
-                <div id="unregister">
-                    <div class="checkbox"><label><input type="checkbox" value="">Unregister Monthly Mess</label>
-                    </div>
-                    
-                </div>
-              
-               <!--  <div id="mess_select"> -->
-                    <select id="mess_select">
-                      <option value="yuktahar">Yuktahar Mess</option>
-                      <option value="kadamb-veg">Kadamb Veg</option>
-                      <option value="kadamba-nonveg">Kadamb Nonveg</option>
-                      <option value="north">North Mess</option>
-                      <option value="south">South Mess</option>
-                    </select>
-
-               <!--  </div> -->
-              <button type="submit"  class="btn btn-default" id="RegisterButton" >Submit</button>
-
-        </form>
-    </div> 
+      
     </section>
     <section class="et-slide" id="tab-part">
       <h1>Particular Day Registration</h1>
