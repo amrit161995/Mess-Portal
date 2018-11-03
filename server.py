@@ -64,5 +64,13 @@ def view():
 def bill():
    return render_template('Bill.html')
 
+@app.route('/Billing_Rates')
+def billing_rates():
+   return render_template('Billing_Rates.html')
+
+@app.route('/Mess_Rules')
+def mess_rules():
+   return render_template('Mess_Rules.html')
+
 if __name__ == '__main__':
    app.run(debug = True)
