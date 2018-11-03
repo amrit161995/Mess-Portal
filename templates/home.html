@@ -124,6 +124,20 @@ $(function(){
     });
 });
 
+$(function(){
+    $("#aView_Bill").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"/Bill");
+        $("#li_Menu").attr('class',"");
+         $("#li_Home").attr('class',"");
+         
+           $("#li_Team").attr('class',"");
+            $("#li_Logout").attr('class',"");
+             $("#li_Bill").attr('class',"");
+    });
+});
+
 
   </script>
 <title>Mess Portal</title>
@@ -144,7 +158,8 @@ $(function(){
     		<li><a href="#"> </a></li>
       		<li id="li_Home" class="active"><a href="#" id="aHome">Home</a></li>
       		<li id="li_Menu"><a href="#" id="aMenu">Menu</a></li>
-      		<li id="li_Bill"><a href="#" id="aBill">Billing Rates</a></li>
+          <li id="li_Rules"><a href="https://mess.iiit.ac.in/mess/web/uploads/MessRules.pdf" id="aMenu">Mess Rules</a></li>
+      		<li id="li_Bill"><a href="https://mess.iiit.ac.in/mess/web/uploads/BillingRates.pdf" id="aBill">Billing Rates</a></li>
       		<li id="li_Team"><a href="#" id="aTeam">The Team</a></li>
       		<li id="li_Logout"><a href="/" id="aLogout">Logout</a></li>
     </ul>
@@ -160,11 +175,10 @@ $(function(){
 
 
 <div class="sidenav">
-  <a href="#">View Default Mess</a>
   <a href="#" id="aCancel">Cancel Meals</a>
   <a href="#" id="aChange_Registration">Change Registration</a>
   <a href="#" id="aView_Registration">View Registration</a>
-  <a href="#">View Mess Bill</a>
+  <a href="#" id="aView_Bill">View Mess Bill</a>
   <a href="#" id="aFeedback" >Feedback</a>
  
 </div>

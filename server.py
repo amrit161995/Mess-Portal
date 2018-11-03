@@ -16,9 +16,9 @@ def login():
       if msg == "1":
          return render_template("home.html",result=res)
       elif msg == "0":
-         msg = "Invalid Credentials, Please Try Again :("
+         msg = "Invalid Credentials! Try Again"
       elif msg == "-1":
-         msg = "Unexpected error in login operation"
+         msg = "Unexpected Error in login operation"
       return render_template("index.html",message=msg)
 
 @app.route('/register',methods = ['POST'])
@@ -59,6 +59,10 @@ def cancel():
 @app.route('/View')
 def view():
    return render_template('View.html')
+
+@app.route('/Bill')
+def bill():
+   return render_template('Bill.html')
 
 if __name__ == '__main__':
    app.run(debug = True)
