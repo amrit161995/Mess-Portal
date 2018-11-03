@@ -43,7 +43,7 @@ def login(user):
   
 def register(user):
   try:
-   msg = "Registration successful"
+   msg = "Registration Successful!"
    with sql.connect("mess") as con:
       cur = con.cursor()
       print "start"
@@ -81,4 +81,3 @@ def deleteUser(user):
       msg = "error in delete operation"
       print "in delete - exception handler"
       return ({}, msg)
- 

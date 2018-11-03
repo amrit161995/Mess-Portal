@@ -36,6 +36,20 @@ function validatePassword(){
 }
 
   </script>
+  <style type="text/css">
+  	#return_message{
+  		position: absolute;
+  		top:60%;
+  		left: 21%;
+  		font-size: 1.5vw;
+  		font-family: sans-serif;
+  		font-weight: lighter;
+  		color: white;
+
+  	}
+
+
+  </style>
 <title>Mess Portal</title>
 </head>
 
@@ -53,8 +67,9 @@ function validatePassword(){
 		 <button type="submit" class="btn btn-default" id="Login_Button" >Login</button>
 		
 		</form>
-		{{ message }}
+		
 		<a href="#" id="New_user_Link">New User?...Get Registered</a>
+		<div id="return_message">{{ message }}</div>
 	</div>
 
 	<div id="Form_Container2" >
