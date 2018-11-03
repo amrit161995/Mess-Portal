@@ -84,6 +84,26 @@ def getUserNamePassword(user_email):
       print "got roll no"
   return (name,rollno)
 
+def getRegisteredMess(user_email):
+  breakfast=""
+  lunch=""
+  dinner=""
+  with sql.connect("mess") as con:
+      con.row_factory = sql.Row
+      cur = con.cursor()
+      print "start"
+      print user_email
+      cur.execute("SELECT * FROM mess_registration  WHERE email = ?",[user_email])
+      print "got it"
+      row = cur.fetchone()
+      breakfast=row["breakfast"]
+      print "got breakfast"
+      lunch=row["lunch"]
+      print "got lunch"
+      dinner=row["dinner"]
+      print "got dinner"      
+  return (breakfast,lunch,dinner)
+
 def deleteUser(user):
  try:
    print "inside deleteuser"

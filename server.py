@@ -98,7 +98,9 @@ def cancel():
 @app.route('/View')
 def view():
    if 'user_email' in session:
-      return render_template('View.html')
+      breakfast,lunch,dinner = model.getRegisteredMess(session['user_email'])
+      print breakfast
+      return render_template('View.html',b_mess=breakfast,l_mess=lunch,d_mess=dinner)
    else:
       return redirect('localhost:5000/')
 
