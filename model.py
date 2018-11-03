@@ -67,6 +67,23 @@ def register(user):
       print msg
       return ({}, msg)
 
+def getUserNamePassword(user_email):
+  name=""
+  rollno=0
+  with sql.connect("mess") as con:
+      con.row_factory = sql.Row
+      cur = con.cursor()
+      print "start"
+      print user_email
+      cur.execute("SELECT * FROM user_details  WHERE email = ?",[user_email])
+      print "got it"
+      row = cur.fetchone()
+      name=row["full_name"]
+      print "got name"
+      rollno=row["roll_no"]
+      print "got roll no"
+  return (name,rollno)
+
 def deleteUser(user):
  try:
    print "inside deleteuser"
