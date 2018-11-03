@@ -44,7 +44,7 @@ def register():
 @app.route('/Home')
 def home():
    if 'user_email' in session:
-      name,roll_no = model.getUserNamePassword(rsession['user_email'])
+      name,roll_no = model.getUserNamePassword(session['user_email'])
       return render_template('home.html',username=name,rollNo=roll_no)
    else:
       msg = "please login before you access the webApp"
@@ -107,7 +107,7 @@ def bill():
    if 'user_email' in session:
       return render_template('Bill.html')
    else:
-      return redirect('localhost:50000/')
+      return redirect('localhost:5000/')
 
 @app.route('/logout')
 def logout():
@@ -126,6 +126,20 @@ def billing_rates():
 @app.route('/Mess_Rules')
 def mess_rules():
    return render_template('Mess_Rules.html')
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    # redirect("index.html")
+    return response
+
+# @app.route('/logout')
+# def logout():
+#    # remove the username from the session if it is there
+#    session.pop('user_email', None)
+#    return redirect(url_for('/'))
 
 if __name__ == '__main__':
    app.run(debug = True)
