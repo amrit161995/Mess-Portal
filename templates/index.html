@@ -19,6 +19,16 @@
     });
 });
 
+  	$(function(){
+    $("#Back_Link").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#Form_Container").attr('style',"visibility:visible;");
+       $("#Form_Container2").attr('style',"visibility:hidden;");
+         
+    });
+});
+
   	
 
 function validatePassword(){
@@ -41,6 +51,17 @@ function validatePassword(){
   		position: absolute;
   		top:60%;
   		left: 21%;
+  		font-size: 1.5vw;
+  		font-family: sans-serif;
+  		font-weight: lighter;
+  		color: white;
+
+  	}
+
+  	#Back_Link{
+  		position: absolute;
+  		top:69%;
+  		left: 45%;
   		font-size: 1.5vw;
   		font-family: sans-serif;
   		font-weight: lighter;
@@ -83,7 +104,7 @@ function validatePassword(){
 		 <button type="submit" onclick="validatePassword()" class="btn btn-default" id="Get_Registered" >Get Registered</button>
 		
 		</form>
-		
+		<a href="#" id="Back_Link">Go back to login page</a>
 	</div>
 		<div id="FootText">Developed By Team &#169; Pseudo 2018</div>
 	</div>
