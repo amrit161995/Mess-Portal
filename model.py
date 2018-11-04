@@ -1,4 +1,5 @@
 import sqlite3 as sql
+from datetime import date, timedelta
 
 # A model that supports following interface:
 # create() : creates a users table in database if not already there
@@ -40,6 +41,21 @@ def login(user):
       print msg
       return ({}, msg)
 
+def changeRegistration(user,email):
+  with sql.connect("mess") as con:
+    cur = con.cursor()
+    f = user['from'].split('-')
+    t = user['to'].split('-')
+    start = date(int(f[0]),int(f[1]),int(f[2]))
+    end = date(int(t[0]),int(t[1]),int(t[2]))
+    delta = end-start
+    for i in range(delta.days+1):
+      if user['meal']=='breakfast':
+        cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+      if user['meal']=='lunch':
+        cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+      if user['meal']=='dinner':
+        cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
   
 def register(user):
   try:
@@ -95,13 +111,21 @@ def getRegisteredMess(user_email):
       print user_email
       cur.execute("SELECT * FROM mess_registration  WHERE email = ?",[user_email])
       print "got it"
-      row = cur.fetchone()
-      breakfast=row["breakfast"]
-      print "got breakfast"
-      lunch=row["lunch"]
-      print "got lunch"
-      dinner=row["dinner"]
-      print "got dinner"      
+      row = cur.fetchall()
+      breakfast={}
+      lunch = {}
+      dinner = {}
+      for i in range(len(row)):
+        print row[i]["date"]
+        breakfast[row[i]["date"]] = row[i]["breakfast"]
+        lunch[row[i]["date"]] = row[i]["lunch"]
+        dinner[row[i]["date"]] = row[i]["dinner"]
+      # print breakfast
+      # print "got breakfast"
+      # lunch=row[3]
+      # print "got lunch"
+      # dinner=row[4]
+      # print "got dinner"      
   return (breakfast,lunch,dinner)
 
 def deleteUser(user):

@@ -286,7 +286,7 @@ position: absolute;
     <section class="et-slide" id="tab-date">
       <h1>Datewise Registration</h1>
       <div id="datewise" style="height: 90%;width: 100%;">
-       <form>
+       <form method="post" action="/registration_change">
               <div id="from">
                 From :  <input style="background-color:#b2bec3; border-radius:20px;border:0px;" type="date" name="from" id="dfrom">
              
@@ -298,16 +298,16 @@ position: absolute;
                 </div>
 
                 <div id="meals">
-                    <div class="checkbox"><label><input type="checkbox" value="">Breakfast</label>
+                    <div class="checkbox"><label><input name="meal" type="checkbox" value="breakfast">Breakfast</label>
                     </div>
-                    <div class="checkbox"><label><input type="checkbox" value="">Lunch</label>
+                    <div class="checkbox"><label><input name="meal" type="checkbox" value="lunch">Lunch</label>
                     </div>
-                    <div class="checkbox"><label><input type="checkbox" value="" >Dinner</label>
+                    <div class="checkbox"><label><input name="meal" type="checkbox" value="dinner" >Dinner</label>
                     </div> 
                 </div>
               
                <!--  <div id="mess_select"> -->
-                    <select id="mess_select">
+                    <select id="mess_select" name="mess">
                       <option value="yuktahar">Yuktahar Mess</option>
                       <option value="kadamb-veg">Kadamb Veg</option>
                       <option value="kadamba-nonveg">Kadamb Nonveg</option>

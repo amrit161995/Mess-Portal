@@ -405,74 +405,42 @@
 
 
 		</script>
-		<!-- <script type="text/javascript" >
-				function myFunc(vars) {
-				    return vars
-				}
-
-				var end = new Date("01/08/2018");
-				var loop = new Date("31/07/2018");
-
-				br_mess = myFunc({{b_mess|tojson}})
-				lu_mess = myFunc({{l_mess|tojson}})
-				di_mess = myFunc({{d_mess|tojson}})
-
-				var codropsEvents = []
-
-				// var codropsEvents = {
-				// 	'11-23-2018' : '<a style="font-size:1vw; font-weight:400;"> Breakfast : '+br_mess+' <br> Lunch : '+lu_mess+' <br> Dinner : '+di_mess+' </a>'	
-				// };
-
-				while(loop <= end){
-				   var newDate = loop.setDate(loop.getDate() + 1);
-				   var key = loop.getMonth()+'-'+loop.getDate()+'-'+loop.getFullYear();
-				   console.log(key)
-				   codropsEvents.push({ key : '<a style="font-size:1vw; font-weight:400;"> Breakfast : '+br_mess+' <br> Lunch : '+lu_mess+' <br> Dinner : '+di_mess+' </a>'});
-				   loop = new Date(newDate);
-				}
-				// alert(myVar)
-				
-		</script> -->
 		
 	</head>
 	<body>
 
-<script type="text/javascript" >
-				function myFunc(vars) {
-				    return vars
-				}
+		<script type="text/javascript" >
+			function myFunc(vars) {
+			    return vars
+			}
 
-				var end = new Date("07/31/2019");
-				var loop = new Date("08/01/2018");
+			var end = new Date("07/31/2019");
+			var loop = new Date("08/01/2018");
 
-				// console.log(loop)
-				// console.log(end)
+			br_mess = myFunc({{b_mess|tojson}})
+			lu_mess = myFunc({{l_mess|tojson}})
+			di_mess = myFunc({{d_mess|tojson}})
 
-				br_mess = myFunc({{b_mess|tojson}})
-				lu_mess = myFunc({{l_mess|tojson}})
-				di_mess = myFunc({{d_mess|tojson}})
+			var codropsEvents = []
 
-				var codropsEvents = []
+			// var codropsEvents = {
+			// 	'01-01-2019' : '<a style="font-size:1vw; font-weight:400;"> Breakfast : north <br> Lunch : north <br> Dinner : north </a>'
+			// };
 
-				// var codropsEvents = {
-				// 	'01-01-2019' : '<a style="font-size:1vw; font-weight:400;"> Breakfast : north <br> Lunch : north <br> Dinner : north </a>'
-				// };
+			cnt=0
 
-				while(loop <= end){				   
-				   var mn = loop.getMonth()+1;
-				   var dt = loop.getDate();
-				   if(mn<10) mn = '0' + mn;
-				   if(dt<10) dt = '0' + dt;
-				   var key = mn+'-'+dt+'-'+loop.getFullYear();
-				   // console.log(key)
-				   // codropsEvents.push({ key : '<a style="font-size:1vw; font-weight:400;"> Breakfast : '+br_mess+' <br> Lunch : '+lu_mess+' <br> Dinner : '+di_mess+' </a>'});
-				   codropsEvents[key] = '<a style="font-size:1vw; font-weight:400;"> Breakfast : '+br_mess+' <br> Lunch : '+lu_mess+' <br> Dinner : '+di_mess+' </a>';
-				   var newDate = loop.setDate(loop.getDate() + 1);
-				   loop = new Date(newDate);
-				}
-				console.log(codropsEvents)
-				// alert(myVar)
-				
+			while(loop <= end){				   
+			   var mn = loop.getMonth()+1;
+			   var dt = loop.getDate();
+			   if(mn<10) mn = '0' + mn;
+			   if(dt<10) dt = '0' + dt;
+			   var key = mn+'-'+dt+'-'+loop.getFullYear();
+			   var key2 = loop.getFullYear()+'-'+mn+'-'+dt;
+			   codropsEvents[key] = '<a style="font-size:1vw; font-weight:400;"> Breakfast : '+br_mess[key2]+' <br> Lunch : '+lu_mess[key2]+' <br> Dinner : '+di_mess[key2]+' </a>';
+			   var newDate = loop.setDate(loop.getDate() + 1);
+			   loop = new Date(newDate);
+			}
+			console.log(codropsEvents)				
 		</script>
 
 		<div class="container" style="background-color:#535c68;">	
