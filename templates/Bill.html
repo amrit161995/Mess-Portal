@@ -168,6 +168,22 @@ new StickyNavigation();
         font-size: 1.5rem;
     }
 }
+h1{
+    position: absolute;
+    top: 2%;
+}
+
+h3{
+    position: absolute;
+    top: 25%;
+    left: 44%;
+}
+
+#rates{
+    position: absolute;
+    top: 35%;
+    left: 7%;
+}
 </style>
 <title>Mess Bill</title>
 </head>
@@ -175,6 +191,57 @@ new StickyNavigation();
   <section class="et-hero-tabs">
     <h1>Mess Bill</h1>
     
+    <div class="container">
+      <h3>Mess Rates</h3>
+      <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
+      <table class="table" id="rates" style="text-align: left; font-size: 1.5vw;">
+        <thead>
+          <tr >
+            <th>Mess Name</th>
+            <th>Breafast Rate</th>
+            <th>Lunch Rate</th>
+            <th>Dinner Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>Doe</td>
+            <td>Doe</td>
+          </tr>
+          <tr>
+             <td>John</td>
+            <td>Doe</td>
+            <td>Doe</td>
+            <td>Doe</td>
+          </tr>
+          <tr>
+             <td>John</td>
+            <td>Doe</td>
+            <td>Doe</td>
+            <td>Doe</td>
+          </tr>
+
+          <tr>
+             <td>John</td>
+            <td>Doe</td>
+            <td>Doe</td>
+            <td>Doe</td>
+          </tr>
+
+          <tr>
+             <td>John</td>
+            <td>Doe</td>
+            <td>Doe</td>
+            <td>Doe</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="cancellation_text" style="position: absolute; top:80%; font-size:1.5vw"><b>Cancellations Allowed</b> | Breakfast : 15 | Lunch : 15 | Dinner :15</div>
+
     <div class="et-hero-tabs-container">
       <a class="et-hero-tab" href="#tab-pw">Past Week</a>
       <a class="et-hero-tab" href="#tab-pm">Past Month</a>
@@ -189,15 +256,169 @@ new StickyNavigation();
     
     <section class="et-slide" id="tab-pw">
       <h1>Past Week</h1>
-     
+
+       <div class="container">
+      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for last week</p>
+      <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
+      <table class="table" is="past_week" style="text-align: left; font-size: 1.5vw;position: left:2%;top:35%;">
+        <thead>
+          <tr >
+            <th></th>
+            <th>South</th>
+            <th>North</th>
+            <th>Yuktahar</th>
+            <th>Kadamb-Veg</th>
+            <th>Kadamb-Nonveg</th>
+            <th>Cancelled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Breakfast</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+            
+          </tr>
+          <tr>
+            <th>Lunch</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Dinner</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>
+
+          
+          
+        </tbody>
+      </table>
+    </div>
+      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Week</b> | Rs.450</div>
+
     </section>
     <section class="et-slide" id="tab-pm">
       <h1>Past Month</h1>
-      
+          <div class="container">
+      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for last month</p>
+      <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
+      <table class="table" is="past_week" style="text-align: left; font-size: 1.5vw;position: left:2%;top:35%;">
+        <thead>
+          <tr >
+            <th></th>
+            <th>South</th>
+            <th>North</th>
+            <th>Yuktahar</th>
+            <th>Kadamb-Veg</th>
+            <th>Kadamb-Nonveg</th>
+            <th>Cancelled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Breakfast</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+            
+          </tr>
+          <tr>
+            <th>Lunch</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Dinner</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>
+
+          
+          
+        </tbody>
+      </table>
+    </div>
+      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Month</b> | Rs.3600</div>
+
     </section>
     <section class="et-slide" id="tab-ps">
       <h1>Past Semester</h1>
-     
+          <div class="container">
+      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for Past Semester</p>
+      <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
+      <table class="table" is="past_week" style="text-align: left; font-size: 1.5vw;position: left:2%;top:35%;">
+        <thead>
+          <tr >
+            <th></th>
+            <th>South</th>
+            <th>North</th>
+            <th>Yuktahar</th>
+            <th>Kadamb-Veg</th>
+            <th>Kadamb-Nonveg</th>
+            <th>Cancelled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Breakfast</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+            
+          </tr>
+          <tr>
+            <th>Lunch</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Dinner</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>
+
+          
+          
+        </tbody>
+      </table>
+    </div>
+      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Semester</b> | Rs.14500</div>
+
     </section>
     
   </main>
