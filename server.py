@@ -81,6 +81,14 @@ def change_registration():
    else:
       return redirect('localhost:5000/')
 
+@app.route('/registration_change',methods = ['POST'])
+def registration_change():
+   if 'user_email' in session:
+      res = model.changeRegistration(request.form,session['user_email'])
+      return render_template('Change_Registration.html')
+   else:
+      return redirect('localhost:5000/')
+
 @app.route('/Feedback')
 def feedback():
    if 'user_email' in session:
@@ -99,7 +107,6 @@ def cancel():
 def view():
    if 'user_email' in session:
       breakfast,lunch,dinner = model.getRegisteredMess(session['user_email'])
-      print breakfast
       return render_template('View.html',b_mess=breakfast,l_mess=lunch,d_mess=dinner)
    else:
       return redirect('localhost:5000/')
