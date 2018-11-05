@@ -4,8 +4,8 @@
   <title>Feedback</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style type="text/css">
 
@@ -22,18 +22,15 @@
 #Mess_select{
 	position: absolute;
 	
-	top:15%;
+	top:20%;
 }
 
-#lab_m{
-	position: absolute;
-	top:10%;
-}
+
 
   #Title{
   	position: absolute;
   	font-size: 3vw;
-  	top: 0%;
+  	top: 2%;
   	font-family: sans-serif;
   	font-weight: 100;
   }
@@ -44,39 +41,15 @@
   	font-weight: 100;
   }
 
-
-  	#issue{
+#file_upload{
 	position: absolute;
-	top: 36.5%;
-	opacity: 0.9;
-	border:0px;
-	font-size: 1.2vw;
-	border-radius: 20px;
-	height: 6%;
-	background-color: #f1f2f6;
-	width:20%;
+	top:39%;
+	width: 40%;
 }
-#des{
-	position: absolute;
-	top: 45%;
-
-	width: 60%;
-	opacity: 0.9;
-}
-
-#lab_is{
-	position: absolute;
-	top:31%;
-}
-#Description{
-	border-radius: 20px;
-	background-color: #f1f2f6;
-}
-
 
 #submit{
 	position: absolute;
-	top: 73%;	
+	top: 50%;	
 	background-color: #f1f2f6;
 	border:0px;
 	font-family: sans-serif;
@@ -84,7 +57,7 @@
 	color:#2d3436;
 	opacity: 0.9;
 	font-size: 1.2vw;
-	border-radius: 20px;
+	/*border-radius: 20px;*/
 	height: 6%;
 	width: 20%;
 }
@@ -96,10 +69,10 @@
 <div class="container">
   
  
-		<div id="Title">Feedback Form</div>
+		<div id="Title">Update Menu</div>
 		
 		<form method="post" action="/feedback">
-				<div  class="lab" id="lab_m">Mess:</div>
+				<div  class="lab" id="lab_m" style="position: absolute;top:13%;">Mess:</div>
 				<div id="Mess_select">
 				 <div class="radio">
 				 	
@@ -119,16 +92,15 @@
 				<div class="radio">
  					 <label><input type="radio" name="optradio" value="south">South Mess</label>
 				</div>
-			</div>
-				<div>
-				<label class="lab" id="lab_is">Issue/Suggestion:</label>
-				<input type="text" name="suggestion" class="form-control" id="issue" >
-				<br>
 
-				 <div id="des" class="form-group">
-		  			<label class="lab">Description:</label>
-		  			<textarea class="form-control" rows="5" name="description" id="Description"></textarea>
-				</div> 
+			</div>
+				<div class="input-group mb-3" id="file_upload">
+				  <div class="custom-file">
+				    <input type="file" class="custom-file-input" id="inputGroupFile02">
+				    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+				  </div>
+				 
+				</div>
 		 <button type="submit" class="btn btn-default" id="submit">Submit</button>
 		
 		</form>

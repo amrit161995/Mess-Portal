@@ -196,6 +196,10 @@ def update_billing_rules():
 def update_meal_rates():
    return render_template('Update_Meal_Rates.html')
 
+@app.route('/Update_Menu')
+def update_menu():
+   return render_template('Update_Menu.html')
+
 # @app.route('/logout')
 # def logout():
 #    # remove the username from the session if it is there
