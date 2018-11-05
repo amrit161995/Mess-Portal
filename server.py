@@ -81,10 +81,42 @@ def change_registration():
    else:
       return redirect('localhost:5000/')
 
-@app.route('/registration_change',methods = ['POST'])
-def registration_change():
+@app.route('/feedback',methods = ['POST'])
+def fback():
    if 'user_email' in session:
-      res = model.changeRegistration(request.form,session['user_email'])
+      res = model.fback(request.form,session['user_email'])
+      return render_template('Feedback.html')
+   else:
+      return redirect('localhost:5000/')
+
+@app.route('/registration_change_date',methods = ['POST'])
+def registration_change_date():
+   if 'user_email' in session:
+      res = model.changeRegistrationDate(request.form,session['user_email'])
+      return render_template('Change_Registration.html')
+   else:
+      return redirect('localhost:5000/')
+
+@app.route('/registration_change_day',methods = ['POST'])
+def registration_change_day():
+   if 'user_email' in session:
+      res = model.changeRegistrationDay(request.form,session['user_email'])
+      return render_template('Change_Registration.html')
+   else:
+      return redirect('localhost:5000/')
+
+@app.route('/registration_change_month',methods = ['POST'])
+def registration_change_month():
+   if 'user_email' in session:
+      res = model.changeRegistrationMonth(request.form,session['user_email'])
+      return render_template('Change_Registration.html')
+   else:
+      return redirect('localhost:5000/')
+
+@app.route('/cancel_meal',methods = ['POST'])
+def cancel_meal():
+   if 'user_email' in session:
+      res = model.cancelMeal(request.form,session['user_email'])
       return render_template('Change_Registration.html')
    else:
       return redirect('localhost:5000/')

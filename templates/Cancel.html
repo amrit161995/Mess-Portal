@@ -165,7 +165,7 @@ position: absolute;
 
 
   </table>
-  <form>
+  <form method="post" action="/cancel_meal">
   <div id="from">
     From :  <input style="background-color:#636e72; border-radius:20px;border:0px;" type="date" name="from" id="dfrom">
  
@@ -178,18 +178,18 @@ position: absolute;
 
 <div id="meals">
     <div class="checkbox">
-       <label><input type="checkbox" value="">Breakfast</label>
+       <label><input type="checkbox" name="meal_b" value="breakfast">Breakfast</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="">Lunch</label>
+      <label><input type="checkbox" name="meal_l" value="lunch">Lunch</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="" >Dinner</label>
+      <label><input type="checkbox" name="meal_d" value="dinner" >Dinner</label>
     </div> 
 </div>
   
   <div id="uncancel">
-      <label><input type="checkbox" value="" > Uncancel Above Selected Meals</label>
+      <label><input type="checkbox" name="uncancel" value="uncancel" > Uncancel Above Selected Meals</label>
   </div> 
 
   <button type="submit"  class="btn btn-default" id="Cancel_Button" >Submit</button>

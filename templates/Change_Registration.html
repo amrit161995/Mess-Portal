@@ -399,7 +399,7 @@ position: absolute;
     <section class="et-slide" id="tab-date">
       <h1>Datewise Registration</h1>
       <div id="datewise" style="height: 90%;width: 100%;">
-       <form method="post" action="/registration_change">
+       <form method="post" action="/registration_change_date">
               <div id="from">
                 From :  <input style="background-color:#b2bec3; border-radius:20px;border:0px;" type="date" name="from" id="dfrom">
              
@@ -411,11 +411,11 @@ position: absolute;
                 </div>
 
                 <div id="meals">
-                    <div class="checkbox"><label><input name="meal" type="checkbox" value="breakfast">Breakfast</label>
+                    <div class="checkbox"><label><input name="meal_b" type="checkbox" value="breakfast">Breakfast</label>
                     </div>
-                    <div class="checkbox"><label><input name="meal" type="checkbox" value="lunch">Lunch</label>
+                    <div class="checkbox"><label><input name="meal_l" type="checkbox" value="lunch">Lunch</label>
                     </div>
-                    <div class="checkbox"><label><input name="meal" type="checkbox" value="dinner" >Dinner</label>
+                    <div class="checkbox"><label><input name="meal_d" type="checkbox" value="dinner" >Dinner</label>
                     </div> 
                 </div>
               
@@ -438,30 +438,30 @@ position: absolute;
       <h1>Daywise Registraion</h1>
         
          <div id="daywise" style="height: 90%;width: 100%;">
-       <form>
+       <form method="post" action="/registration_change_day">
               
-                 <select id="day_select">
-                      <option value="monday">Monday</option>
-                      <option value="tuesday">Tuesday</option>
-                      <option value="wednesday">Wednesday</option>
-                      <option value="thursday">Thurday</option>
-                      <option value="friday">Friday</option>
-                       <option value="saturday">Saturday</option>
-                        <option value="sunday">Sunday</option>
+                 <select id="day_select" name="day">
+                      <option value="0">Monday</option>
+                      <option value="1">Tuesday</option>
+                      <option value="2">Wednesday</option>
+                      <option value="3">Thurday</option>
+                      <option value="4">Friday</option>
+                       <option value="5">Saturday</option>
+                        <option value="6">Sunday</option>
                     </select>
 
 
                 <div id="meals">
-                    <div class="checkbox"><label><input type="checkbox" value="">Breakfast</label>
+                    <div class="checkbox"><label><input name="meal_b" type="checkbox" value="breakfast">Breakfast</label>
                     </div>
-                    <div class="checkbox"><label><input type="checkbox" value="">Lunch</label>
+                    <div class="checkbox"><label><input name="meal_l" type="checkbox" value="lunch">Lunch</label>
                     </div>
-                    <div class="checkbox"><label><input type="checkbox" value="" >Dinner</label>
+                    <div class="checkbox"><label><input name="meal_d" type="checkbox" value="dinner" >Dinner</label>
                     </div> 
                 </div>
               
                <!--  <div id="mess_select"> -->
-                    <select id="mess_select">
+                    <select id="mess_select" name="mess">
                       <option value="yuktahar">Yuktahar Mess</option>
                       <option value="kadamb-veg">Kadamb Veg</option>
                       <option value="kadamba-nonveg">Kadamb Nonveg</option>
@@ -478,23 +478,32 @@ position: absolute;
     <section class="et-slide" id="tab-month">
       <h1>Monthwise Registration</h1>
             <div id="monthwise" style="height: 90%;width: 100%;">
-       <form>
+       <form method="post" action="/registration_change_month">
               
-                 <select id="month_select">
-                      <option value="january">January</option>
-                      <option value="february">February</option>
-                      
+                 <select id="month_select" name="month">
+                      <option value="1">January</option>
+                      <option value="2">February</option>
+                      <option value="3">March</option>
+                      <option value="4">April</option>
+                      <option value="5">May</option>
+                      <option value="6">June</option>
+                      <option value="7">July</option>
+                      <option value="8">August</option>
+                      <option value="9">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>                      
                     </select>
 
 
                 <div id="unregister">
-                    <div class="checkbox"><label><input type="checkbox" value="">Unregister Monthly Mess</label>
+                    <div class="checkbox"><label><input name="unregister" type="checkbox" value="unreg">Unregister Monthly Mess</label>
                     </div>
                     
                 </div>
               
                <!--  <div id="mess_select"> -->
-                    <select id="mess_select">
+                    <select id="mess_select" name="mess">
                       <option value="yuktahar">Yuktahar Mess</option>
                       <option value="kadamb-veg">Kadamb Veg</option>
                       <option value="kadamba-nonveg">Kadamb Nonveg</option>
