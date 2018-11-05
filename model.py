@@ -154,7 +154,7 @@ def register(user):
       else:
          cur.execute("INSERT INTO user_credentials (email,password) VALUES (?,?)",(user['user_email'],user['password']))
          print "insert 1"
-         cur.execute("INSERT INTO user_details (email,full_name,roll_no)  VALUES (?,?,?)",(user['user_email'],user['fullname'],user['roll_no']))            
+         cur.execute("INSERT INTO user_details (email,full_name,roll_no,default_mess,monthly_mess)  VALUES (?,?,?,'north',0)",(user['user_email'],user['fullname'],user['roll_no']))            
          print "insert 2"
          con.commit()
          print "Record successfully added"
