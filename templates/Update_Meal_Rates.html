@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Update Meal Rates</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body{
+      font-family: sans-serif;
+      background-color: white;
+      color: #2d3436; 
+      font-size: 1vw;
+      font-weight: 100;
+      font-size: 1vw;
+    }
+#update_rules{
+  position: absolute;
+  top: 17%;
+}
+
+h2{
+  position: absolute;
+  top: 3%;
+
+}
+#update_rates{
+/*position: absolute;
+top: 15%;
+*/font-size: 1vw;
+
+}
+
+#update_cancel{
+ /* position: absolute;
+  top:65%;*/
+  margin-top: 5%;
+  width: 100%;
+  font-size: 1.2vw;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+ 
+ 
+ <h2>Update Meal Rates</h2>
+
+
+
+  <form class="md-form" ID="update_rules" action="#">
+
+   
+  <div class="container">
+           <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
+      <table class="table" id="update_rates" style="text-align: left; font-size: 1.2vw;">
+        <thead>
+          <tr >
+            <th></th>
+            <th>Breafast Rate</th>
+            <th>Lunch Rate</th>
+            <th>Dinner Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+              <th>North Mess</th>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+           <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+          </tr>
+          <tr>
+              <th>South Mess</th>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+           <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+          </tr>
+          <tr>
+              <th>Yuktahar</th>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+           <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+          </tr>
+
+          <tr>
+              <th>Kadamb Veg</th>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+           <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+          </tr>
+
+          <tr>
+              <th>Kadamb Nonveg</th>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+           <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+<div id="update_cancel"><h3>Update Cancellations Allowed</h3>
+ <table class="table" id="update_cancel_table" style="text-align: left; font-size: 1.2vw;">
+  <tbody>
+          <tr>
+              <th>Breakfast:</th>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+              <th>Lunch:</th>
+            <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+              <th>Dinner:</th>
+           <td> 
+                <div class="col-xs-2">
+                  <input class="form-control" id="ex1" type="text">
+                </div>
+              </td>
+          </tr>
+</tbody>
+</table>
+</div>
+
+<button type="submit" class="btn btn-default" style="position:absolute;height: 10%;width: 20%;margin-top: 2%;">Update</button>
+</form>
+
+
+</div>
+</body>
+</html>
+
+

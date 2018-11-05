@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style type="text/css">
+    #below{
+      height:93%;
+      width: 100%;
+      position: absolute;
+      top: 7%;
+      left: 0%;
+      opacity: 0.9;
+      
+}
+</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/static/Script.js"  type="text/javascript"></script>
+  <script type="text/javascript">
+
+    
+    $(function(){
+    $("#aUMenu").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+        $("#If").attr("src","/Menu");
+        // document.getElementById("If").src="localhost:5000/Menu"
+        $("#li_UMenu").attr('class',"active");
+         $("#li_Home").attr('class',"");
+          $("#li_URules").attr('class',"");    
+          $("#li_uRates").attr('class',"");    
+           $("#li_VFeedback").attr('class',"");
+            $("#li_Logout").attr('class',"");
+             $("#li_UBill").attr('class',"");
+    });
+});
+
+
+$( document ).ready(function() {
+    $("#If").attr('src',"/Home_Content");
+        $("#li_UMenu").attr('class',"");
+         $("#li_Home").attr('class',"active");
+           $("#li_URules").attr('class',"");    
+           $("#li_VFeedback").attr('class',"");
+           $("#li_uRates").attr('class',"");    
+            $("#li_Logout").attr('class',"");
+             $("#li_UBill").attr('class',"");
+});
+
+  
+
+
+
+$(function(){
+    $("#aHome").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"/Home_Content");
+        $("#li_UMenu").attr('class',"");
+         $("#li_Home").attr('class',"active");
+           $("#li_URules").attr('class',"");  
+           $("#li_uRates").attr('class',"");      
+           $("#li_VFeedback").attr('class',"");
+            $("#li_Logout").attr('class',"");
+             $("#li_UBill").attr('class',"");
+    });
+});
+
+$(function(){
+    $("#aURules").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"/Update_Mess_Rules");
+        $("#li_UMenu").attr('class',"");
+         $("#li_Home").attr('class',"");
+         $("#li_URules").attr('class',"active");          
+           $("#li_VFeedback").attr('class',"");
+            $("#li_Logout").attr('class',"");
+            $("#li_uRates").attr('class',"");    
+             $("#li_UBill").attr('class',"");
+    });
+});
+
+$(function(){
+    $("#aUBilling_Rates").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"/Update_Billing_Rules");
+        $("#li_UMenu").attr('class',"");
+         $("#li_Home").attr('class',"");
+         $("#li_URules").attr('class',"");      
+           $("#li_VFeedback").attr('class',"");
+            $("#li_Logout").attr('class',"");
+            $("#li_uRates").attr('class',"");    
+             $("#li_UBill").attr('class',"active");
+    });
+});
+
+
+
+
+
+
+$(function(){
+    $("#aVFeedback").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"/View_Feedback");
+        $("#li_UMenu").attr('class',"");
+         $("#li_Home").attr('class',"");
+          $("#li_URules").attr('class',"");   
+           $("#li_VFeedback").attr('class',"active");    
+            $("#li_Logout").attr('class',"");
+             $("#li_UBill").attr('class',"");
+             $("#li_uRates").attr('class',"");    
+    });
+});
+
+$(function(){
+    $("#aUMeal_Rates").click(function(e){
+        e.preventDefault(); //To prevent the default anchor tag behaviour
+       
+        $("#If").attr('src',"/Update_Meal_Rates");
+        $("#li_UMenu").attr('class',"");
+         $("#li_Home").attr('class',"");
+          $("#li_URules").attr('class',"");   
+           $("#li_VFeedback").attr('class',"");    
+           $("#li_uRates").attr('class',"active");    
+            $("#li_Logout").attr('class',"");
+             $("#li_UBill").attr('class',"");
+    });
+});
+
+
+
+
+  </script>
+<title>Admin Portal</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div id = "Container" >
+	<img id="back" src="/static/food.jpg">
+	<div id="Top_Navigation">
+		<nav class="navbar navbar-default">
+  			<div class="container-fluid">
+    			<div class="navbar-header">
+      			<a class="navbar-brand" href="#">Logged In as {{ username }}</a>
+    		</div>
+    	<ul class="nav navbar-nav">
+    		<li><a href="#"> </a></li>
+      		<li id="li_Home" class="active"><a href="#" id="aHome">Dashboard</a></li>
+      		<li id="li_UMenu"><a href="#" id="aUMenu">Update Menu</a></li>
+          <li id="li_uRates"><a href="#" id="aUMeal_Rates">Update Meal Rates</a></li>
+          <li id="li_VFeedback"><a href="#" id="aVFeedback">View Feedback</a></li>
+          <li id="li_URules"><a href="https://mess.iiit.ac.in/mess/web/uploads/MessRules.pdf" id="aURules">Update Mess Rules</a></li>
+      		<li id="li_UBill"><a href="https://mess.iiit.ac.in/mess/web/uploads/BillingRates.pdf" id="aUBilling_Rates">Update Billing Rules</a></li>
+      		<li id="li_Logout"><a href="/logout" id="aLogout">Logout</a></li>
+    </ul>
+    
+
+  </div>
+</nav>
+
+
+</div>
+
+
+
+
+
+
+<div id="below">
+
+	<iframe id="If" src="" style="width: 100%; height: 100%;"></iframe>
+</div>
+
+</div>
+</body>
+
+</html>

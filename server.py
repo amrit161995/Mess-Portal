@@ -176,6 +176,26 @@ def after_request(response):
     # redirect("index.html")
     return response
 
+@app.route('/Admin_Main')
+def admin_main():
+   return render_template('Admin_Main.html')
+
+@app.route('/View_Feedback')
+def view_feedback():
+   return render_template('View_Feedback.html')
+
+@app.route('/Update_Mess_Rules')
+def update_mess_rules():
+   return render_template('Update_Mess_Rules.html')
+
+@app.route('/Update_Billing_Rules')
+def update_billing_rules():
+   return render_template('Update_Billing_Rules.html')
+
+@app.route('/Update_Meal_Rates')
+def update_meal_rates():
+   return render_template('Update_Meal_Rates.html')
+
 # @app.route('/logout')
 # def logout():
 #    # remove the username from the session if it is there

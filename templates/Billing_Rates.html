@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Home Content</title>
+  <title>Billing Rules</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -9,20 +9,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style type="text/css">
   body{
-    background-color:#535c68;
+    background-color:white;
+    color:#2d3436;
     position: absolute;
     height: 100%;
     width: 100%;
   }
    #container{
     position: absolute;
+
     height: 100%;
     width: 100%;
    }
 
     #rules{
-
-        color: white;
+        position: absolute;
+        color:#2d3436;
+        top: 2%;
+        /*color: white;*/
         font-size: 2vw;
         font-family: sans-serif;
         font-weight: 100;
@@ -35,8 +39,8 @@
 <div id="container" class="container" style="height:100%;width: 100%;">
           
  
-    <div id="rules" >Billing Rates</div>
-    <iframe style="height:100%;width: 100%" src="/static/BillingRates.pdf"></iframe>
+    <div id="rules" >Billing Rules</div>
+    <iframe style="height:90%;width: 100%;position: absolute;top:10%;" src="/static/BillingRates.pdf"></iframe>
     
 
   
