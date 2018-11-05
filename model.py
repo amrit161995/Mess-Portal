@@ -1,5 +1,5 @@
 import sqlite3 as sql
-from datetime import date, timedelta
+from datetime import date, time, timedelta
 
 # A model that supports following interface:
 # create() : creates a users table in database if not already there
@@ -41,21 +41,102 @@ def login(user):
       print msg
       return ({}, msg)
 
-def changeRegistration(user,email):
+def fback(user,email):
+  with sql.connect("mess") as con:
+    cur = con.cursor()
+    cur.execute("INSERT INTO feedback (email,mess,suggestion,description) VALUES (?,?,?,?)",(email,user['optradio'],user['suggestion'],user['description']))
+
+def cancelMeal(user,email):
   with sql.connect("mess") as con:
     cur = con.cursor()
     f = user['from'].split('-')
     t = user['to'].split('-')
     start = date(int(f[0]),int(f[1]),int(f[2]))
     end = date(int(t[0]),int(t[1]),int(t[2]))
+    today = date.today()
     delta = end-start
+    if(delta.days>=0):
+      for i in range(delta.days+1):
+        if not user.get('uncancel'):
+          if user.get('meal_b'):
+            cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
+          if user.get('meal_l'):
+            cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
+          if user.get('meal_d'):
+            cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
+        else:
+          cur.execute("SELECT * FROM user_details WHERE email = ?",(email,))
+          row = cur.fetchone()
+          if user.get('meal_b'):
+            cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
+          if user.get('meal_l'):
+            cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
+          if user.get('meal_d'):
+            cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
+
+def changeRegistrationDate(user,email):
+  with sql.connect("mess") as con:
+    cur = con.cursor()
+    f = user['from'].split('-')
+    t = user['to'].split('-')
+    start = date(int(f[0]),int(f[1]),int(f[2]))
+    end = date(int(t[0]),int(t[1]),int(t[2]))
+    today = date.today()
+    delta = end-start
+    if(delta.days>=0 and (start-today).days>=2):
+      for i in range(delta.days+1):
+        if user.get('meal_b'):
+          cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+        if user.get('meal_l'):
+          cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+        if user.get('meal_d'):
+          cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+
+def changeRegistrationDay(user,email):
+  with sql.connect("mess") as con:
+    cur = con.cursor()    
+    end = date(2019,7,31)
+    start = date.today() + timedelta(days=2)
+    delta = end - start
     for i in range(delta.days+1):
-      if user['meal']=='breakfast':
+      if str((start + timedelta(i)).weekday())==str(user['day']):
+        if user.get('meal_b'):
+          cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+        if user.get('meal_l'):
+          cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+        if user.get('meal_d'):
+          cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+
+def changeRegistrationMonth(user,email):
+  with sql.connect("mess") as con:
+    cur = con.cursor() 
+    y = date.today().year
+    m = int(user['month'])
+    if m!=12:
+      d = (date(y,m+1,1)-date(y,m,1)).days
+    else:
+      d = 31
+    end = date(y,m,d)
+    if date.today().month==m and date.today().year==y:
+      start = date.today() + timedelta(days=2)
+    else:
+      start = date(y,m,1)
+    delta = end - start
+    # print type(user.get('unregister'))
+    for i in range(delta.days+1):
+      if user.get('unregister'):
+        # print "unregister"
+        cur.execute("SELECT * FROM user_details WHERE email = ?",(email,))
+        row = cur.fetchone()
+        cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
+        cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
+        cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
+      else:
+        # print "register"        
         cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
-      if user['meal']=='lunch':
         cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
-      if user['meal']=='dinner':
         cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+
   
 def register(user):
   try:
@@ -116,7 +197,7 @@ def getRegisteredMess(user_email):
       lunch = {}
       dinner = {}
       for i in range(len(row)):
-        print row[i]["date"]
+        # print row[i]["date"]
         breakfast[row[i]["date"]] = row[i]["breakfast"]
         lunch[row[i]["date"]] = row[i]["lunch"]
         dinner[row[i]["date"]] = row[i]["dinner"]
