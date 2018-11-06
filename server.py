@@ -1,5 +1,7 @@
 from flask import Flask, redirect,url_for, render_template, request, session
+from datetime import date, time, timedelta
 import model 
+import model2
 
 app = Flask(__name__)
 app.secret_key ="Demo-CSE505"
@@ -68,10 +70,10 @@ def team():
 def home_content():
    if 'user_email' in session:
       name,roll_no = model.getUserNamePassword(session['user_email'])
-      return render_template('Home_Content.html',username=name,rollno=roll_no)
+      meal = model.getTodayMeal(session['user_email'])
+      return render_template('Home_Content.html',username=name,rollno=roll_no,meal=meal)
    else:
       msg = "please login before you access the webApp"
-      # return render_template('index.html',message=msg)
       return redirect('localhost:5000/')
 
 @app.route('/Change_Registration')
@@ -146,7 +148,12 @@ def view():
 @app.route('/Bill')
 def bill():
    if 'user_email' in session:
-      return render_template('Bill.html')
+      rateCard = model.getRecentMessRate(date.today())
+      cancellations_allowed = model.getCancellationsAllowed()
+      weekBill,countB,countL,countD,wstart,wend = model2.getBill(session['user_email'],"week")
+      monthBill,McountB,McountL,McountD,mstart,mend = model2.getBill(session['user_email'],"month")
+      semBill,ScountB,ScountL,ScountD,sstart,send = model2.getBill(session['user_email'],"semister")
+      return render_template('Bill.html',rateCard=rateCard,cancellations_allowed=cancellations_allowed,weekBill=weekBill,countB=countB,countD=countD,countL=countL,wstart=wstart,wend=wend,monthBill=monthBill,McountB=McountB,McountL=McountL,McountD=McountD,mstart=mstart,mend=mend,semBill=semBill,ScountB=ScountB,ScountL=ScountL,ScountD=ScountD,sstart=sstart,send=send)
    else:
       return redirect('localhost:5000/')
 

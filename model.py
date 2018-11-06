@@ -209,6 +209,100 @@ def getRegisteredMess(user_email):
       # print "got dinner"      
   return (breakfast,lunch,dinner)
 
+def getTodayMeal(user_email):
+  meal = []
+  with sql.connect("mess") as con:
+      con.row_factory = sql.Row
+      cur = con.cursor()
+      print "start"
+      print user_email
+      curD = date.today()
+      print date.today()
+      cur.execute("SELECT * FROM mess_registration  WHERE email = ? and date = ?",(user_email,str(curD)))
+      print "got todays meal"
+      row = cur.fetchone()
+      meal.append(row["breakfast"])
+      meal.append(row["lunch"])
+      meal.append(row["dinner"])     
+  return (meal)
+
+def getRecentMessRate(rateDate):
+  rateCard = []
+  with sql.connect("mess") as con:
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    print "start"
+    print rateDate
+    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"south"))
+    print "got south"
+    row = cur.fetchone()
+    l = []
+    l.append(row["mess"])
+    l.append(row["breakfast_price"])
+    l.append(row["lunch_price"])
+    l.append(row["dinner_price"])
+    rateCard.append(l)
+
+    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"north"))
+    print "got North"
+    row = cur.fetchone()
+    l = []
+    l.append(row["mess"])
+    l.append(row["breakfast_price"])
+    l.append(row["lunch_price"])
+    l.append(row["dinner_price"])
+    rateCard.append(l)
+
+    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"yuktahar"))
+    print "got yuktahar"
+    row = cur.fetchone()
+    l = []
+    l.append(row["mess"])
+    l.append(row["breakfast_price"])
+    l.append(row["lunch_price"])
+    l.append(row["dinner_price"])
+    rateCard.append(l)
+
+    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"kadamb-veg"))
+    print "got kadamb veg"
+    row = cur.fetchone()
+    l = []
+    l.append(row["mess"])
+    l.append(row["breakfast_price"])
+    l.append(row["lunch_price"])
+    l.append(row["dinner_price"])
+    rateCard.append(l)
+
+    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"kadamb non-veg"))
+    print "got kadamb non-veg"
+    row = cur.fetchone()
+    l = []
+    l.append(row["mess"])
+    l.append(row["breakfast_price"])
+    l.append(row["lunch_price"])
+    l.append(row["dinner_price"])
+    rateCard.append(l)
+  return rateCard
+
+def getCancellationsAllowed():
+  curD = date.today()
+  ca = []
+  with sql.connect("mess") as con:
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    print "start"
+    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? ORDER BY date DESC",[str(curD)])
+    print "got ca"
+    row = cur.fetchone()
+    ca.append(row["cancellation_b"])
+    ca.append(row["cancellation_l"])
+    ca.append(row["cancellation_d"])
+    # print ca
+  return ca
+
+
+
+
 def deleteUser(user):
  try:
    print "inside deleteuser"

@@ -204,43 +204,21 @@ h3{
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>Doe</td>
-            <td>Doe</td>
-          </tr>
-          <tr>
-             <td>John</td>
-            <td>Doe</td>
-            <td>Doe</td>
-            <td>Doe</td>
-          </tr>
-          <tr>
-             <td>John</td>
-            <td>Doe</td>
-            <td>Doe</td>
-            <td>Doe</td>
-          </tr>
 
-          <tr>
-             <td>John</td>
-            <td>Doe</td>
-            <td>Doe</td>
-            <td>Doe</td>
-          </tr>
+          {% for list in rateCard %}
+            <tr>
+              <td>{{list[0]}}</td>
+              <td>{{list[1]}}</td>
+              <td>{{list[2]}}</td>
+              <td>{{list[3]}}</td>
+            </tr>
+          {% endfor %}
 
-          <tr>
-             <td>John</td>
-            <td>Doe</td>
-            <td>Doe</td>
-            <td>Doe</td>
-          </tr>
         </tbody>
       </table>
     </div>
 
-    <div id="cancellation_text" style="position: absolute; top:80%; font-size:1.5vw"><b>Cancellations Allowed</b> | Breakfast : 15 | Lunch : 15 | Dinner :15</div>
+    <div id="cancellation_text" style="position: absolute; top:80%; font-size:1.5vw"><b>Cancellations Allowed</b> | Breakfast : {{cancellations_allowed[0]}} | Lunch : {{cancellations_allowed[1]}} | Dinner :{{cancellations_allowed[2]}}</div>
 
     <div class="et-hero-tabs-container">
       <a class="et-hero-tab" href="#tab-pw">Past Week</a>
@@ -258,7 +236,7 @@ h3{
       <h1>Past Week</h1>
 
        <div class="container">
-      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for last week</p>
+      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for last week {{wstart}} to {{wend}}</p>
       <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
       <table class="table" id="past_week" style="text-align: left; font-size: 1.5vw;position: left:2%;top:35%;">
         <thead>
@@ -270,36 +248,39 @@ h3{
             <th>Kadamb-Veg</th>
             <th>Kadamb-Nonveg</th>
             <th>Cancelled</th>
+            <th>Allowed</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th>Breakfast</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{countB["south"]}}</td>
+            <td>{{countB["north"]}}</td>
+            <td>{{countB["yuktahaar"]}}</td>
+            <td>{{countB["kadamb-veg"]}}</td>
+            <td>{{countB["kadamb non-veg"]}}</td>
             <td>0</td>
-            
+            <td>{{cancellations_allowed[0]}}</td>
           </tr>
           <tr>
             <th>Lunch</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{countL["south"]}}</td>
+            <td>{{countL["north"]}}</td>
+            <td>{{countL["yuktahaar"]}}</td>
+            <td>{{countL["kadamb-veg"]}}</td>
+            <td>{{countL["kadamb non-veg"]}}</td>
             <td>0</td>
+            <td>{{cancellations_allowed[1]}}</td>
           </tr>
           <tr>
             <th>Dinner</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{countD["south"]}}</td>
+            <td>{{countD["north"]}}</td>
+            <td>{{countD["yuktahaar"]}}</td>
+            <td>{{countD["kadamb-veg"]}}</td>
+            <td>{{countD["kadamb non-veg"]}}</td>
             <td>0</td>
+            <td>{{cancellations_allowed[1]}}</td>
           </tr>
 
           
@@ -307,13 +288,13 @@ h3{
         </tbody>
       </table>
     </div>
-      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Week</b> | Rs.450</div>
+      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Week</b> | Rs.{{weekBill}}</div>
 
     </section>
     <section class="et-slide" id="tab-pm">
       <h1>Past Month</h1>
           <div class="container">
-      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for last month</p>
+      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for last month {{mstart}} to {{mend}}</p>
       <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
       <table class="table" id="past_week" style="text-align: left; font-size: 1.5vw;position: left:2%;top:35%;">
         <thead>
@@ -325,36 +306,40 @@ h3{
             <th>Kadamb-Veg</th>
             <th>Kadamb-Nonveg</th>
             <th>Cancelled</th>
+            <th>Allowed</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th>Breakfast</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{McountB["south"]}}</td>
+            <td>{{McountB["north"]}}</td>
+            <td>{{McountB["yuktahaar"]}}</td>
+            <td>{{McountB["kadamb-veg"]}}</td>
+            <td>{{McountB["kadamb non-veg"]}}</td>
             <td>0</td>
+            <td>{{cancellations_allowed[0]}}</td>
             
           </tr>
           <tr>
             <th>Lunch</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{McountL["south"]}}</td>
+            <td>{{McountL["north"]}}</td>
+            <td>{{McountL["yuktahaar"]}}</td>
+            <td>{{McountL["kadamb-veg"]}}</td>
+            <td>{{McountL["kadamb non-veg"]}}</td>
             <td>0</td>
+            <td>{{cancellations_allowed[0]}}</td>
           </tr>
           <tr>
             <th>Dinner</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{McountD["south"]}}</td>
+            <td>{{McountD["north"]}}</td>
+            <td>{{McountD["yuktahaar"]}}</td>
+            <td>{{McountD["kadamb-veg"]}}</td>
+            <td>{{McountD["kadamb non-veg"]}}</td>
             <td>0</td>
+            <td>{{cancellations_allowed[0]}}</td>
           </tr>
 
           
@@ -362,13 +347,13 @@ h3{
         </tbody>
       </table>
     </div>
-      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Month</b> | Rs.3600</div>
+      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Month</b> | Rs.{{monthBill}}</div>
 
     </section>
     <section class="et-slide" id="tab-ps">
       <h1>Past Semester</h1>
           <div class="container">
-      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for Past Semester</p>
+      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for current Semester {{sstart}} to {{send}}</p>
       <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
       <table class="table" id="past_week" style="text-align: left; font-size: 1.5vw;position: left:2%;top:35%;">
         <thead>
@@ -380,36 +365,40 @@ h3{
             <th>Kadamb-Veg</th>
             <th>Kadamb-Nonveg</th>
             <th>Cancelled</th>
+            <th>Allowed</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th>Breakfast</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{ScountB["south"]}}</td>
+            <td>{{ScountB["north"]}}</td>
+            <td>{{ScountB["yuktahaar"]}}</td>
+            <td>{{ScountB["kadamb-veg"]}}</td>
+            <td>{{ScountB["kadamb non-veg"]}}</td>
             <td>0</td>
+           
             
           </tr>
           <tr>
             <th>Lunch</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{ScountL["south"]}}</td>
+            <td>{{ScountL["north"]}}</td>
+            <td>{{ScountL["yuktahaar"]}}</td>
+            <td>{{ScountL["kadamb-veg"]}}</td>
+            <td>{{ScountL["kadamb non-veg"]}}</td>
             <td>0</td>
+          
           </tr>
           <tr>
             <th>Dinner</th>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
+            <td>{{ScountD["south"]}}</td>
+            <td>{{ScountD["north"]}}</td>
+            <td>{{ScountD["yuktahaar"]}}</td>
+            <td>{{ScountD["kadamb-veg"]}}</td>
+            <td>{{ScountD["kadamb non-veg"]}}</td>
             <td>0</td>
+           
           </tr>
 
           
@@ -417,7 +406,7 @@ h3{
         </tbody>
       </table>
     </div>
-      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Semester</b> | Rs.14500</div>
+      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Semester</b> | Rs.{{semBill}}</div>
 
     </section>
     
