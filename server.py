@@ -155,7 +155,7 @@ def logout():
    msg=""
    if 'user_email' in session:
       email = session.pop('user_email')
-      msg = "Logout successfull"
+      msg = "Logout successful"
    else:
       msg = "You are already logged out"
    return render_template('index.html',message=msg)
