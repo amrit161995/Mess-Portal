@@ -186,6 +186,9 @@ def after_request(response):
 @app.route('/Admin_Main')
 def admin_main():
    return render_template('Admin_Main.html')
+@app.route('/Dashboard')
+def dashboard():
+   return render_template('Dashboard.html')
 
 @app.route('/View_Feedback')
 def view_feedback():
