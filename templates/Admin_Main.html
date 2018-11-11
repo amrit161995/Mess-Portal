@@ -25,10 +25,10 @@
     $(function(){
     $("#aUMenu").click(function(e){
         e.preventDefault(); //To prevent the default anchor tag behaviour
-        $("#If").attr("src","/Menu");
+        $("#If").attr("src","/Update_Menu");
         // document.getElementById("If").src="localhost:5000/Menu"
         $("#li_UMenu").attr('class',"active");
-         $("#li_Home").attr('class',"");
+         $("#li_Dashboard").attr('class',"");
           $("#li_URules").attr('class',"");    
           $("#li_uRates").attr('class',"");    
            $("#li_VFeedback").attr('class',"");
@@ -41,7 +41,7 @@
 $( document ).ready(function() {
     $("#If").attr('src',"/Home_Content");
         $("#li_UMenu").attr('class',"");
-         $("#li_Home").attr('class',"active");
+         $("#li_Dashboard").attr('class',"active");
            $("#li_URules").attr('class',"");    
            $("#li_VFeedback").attr('class',"");
            $("#li_uRates").attr('class',"");    
@@ -54,12 +54,12 @@ $( document ).ready(function() {
 
 
 $(function(){
-    $("#aHome").click(function(e){
+    $("#aDashboard").click(function(e){
         e.preventDefault(); //To prevent the default anchor tag behaviour
        
-        $("#If").attr('src',"/Home_Content");
+        $("#If").attr('src',"/Dashboard");
         $("#li_UMenu").attr('class',"");
-         $("#li_Home").attr('class',"active");
+         $("#li_Dashboard").attr('class',"active");
            $("#li_URules").attr('class',"");  
            $("#li_uRates").attr('class',"");      
            $("#li_VFeedback").attr('class',"");
@@ -74,7 +74,7 @@ $(function(){
        
         $("#If").attr('src',"/Update_Mess_Rules");
         $("#li_UMenu").attr('class',"");
-         $("#li_Home").attr('class',"");
+         $("#li_Dashboard").attr('class',"");
          $("#li_URules").attr('class',"active");          
            $("#li_VFeedback").attr('class',"");
             $("#li_Logout").attr('class',"");
@@ -89,7 +89,7 @@ $(function(){
        
         $("#If").attr('src',"/Update_Billing_Rules");
         $("#li_UMenu").attr('class',"");
-         $("#li_Home").attr('class',"");
+         $("#li_Dashboard").attr('class',"");
          $("#li_URules").attr('class',"");      
            $("#li_VFeedback").attr('class',"");
             $("#li_Logout").attr('class',"");
@@ -109,7 +109,7 @@ $(function(){
        
         $("#If").attr('src',"/View_Feedback");
         $("#li_UMenu").attr('class',"");
-         $("#li_Home").attr('class',"");
+         $("#li_Dashboard").attr('class',"");
           $("#li_URules").attr('class',"");   
            $("#li_VFeedback").attr('class',"active");    
             $("#li_Logout").attr('class',"");
@@ -124,7 +124,7 @@ $(function(){
        
         $("#If").attr('src',"/Update_Meal_Rates");
         $("#li_UMenu").attr('class',"");
-         $("#li_Home").attr('class',"");
+         $("#li_Dashboard").attr('class',"");
           $("#li_URules").attr('class',"");   
            $("#li_VFeedback").attr('class',"");    
            $("#li_uRates").attr('class',"active");    
@@ -153,7 +153,7 @@ $(function(){
     		</div>
     	<ul class="nav navbar-nav">
     		<li><a href="#"> </a></li>
-      		<li id="li_Home" class="active"><a href="#" id="aHome">Dashboard</a></li>
+      		<li id="li_Dashboard" class="active"><a href="#" id="aDashboard">Dashboard</a></li>
       		<li id="li_UMenu"><a href="#" id="aUMenu">Update Menu</a></li>
           <li id="li_uRates"><a href="#" id="aUMeal_Rates">Update Meal Rates</a></li>
           <li id="li_VFeedback"><a href="#" id="aVFeedback">View Feedback</a></li>

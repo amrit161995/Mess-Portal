@@ -25,6 +25,7 @@
        
         $("#Form_Container").attr('style',"visibility:visible;");
        $("#Form_Container2").attr('style',"visibility:hidden;");
+        $('#return_message').text("");
          
     });
 });
@@ -68,7 +69,15 @@ function validatePassword(){
   		color: white;
 
   	}
+#remember{
+  position: absolute;
+  top:42%;
+  left: 54%;
+  font-size: 1vw;
+  color: white;
+  font-family: sans-serif;
 
+}
 
   </style>
 <title>Mess Portal</title>
@@ -86,6 +95,7 @@ function validatePassword(){
 		
 		<input type="password" name="password"  id="Text_Password" placeholder="Password" class="form-control" required >
 		 <button type="submit" class="btn btn-default" id="Login_Button" >Login</button>
+     <div id="remember"><input type="checkbox" name=""> Remember Me</div>
 		
 		</form>
 		

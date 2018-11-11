@@ -162,7 +162,7 @@ def logout():
    msg=""
    if 'user_email' in session:
       email = session.pop('user_email')
-      msg = "Logout successfull"
+      msg = "Logout successful"
    else:
       msg = "You are already logged out"
    return render_template('index.html',message=msg)
@@ -202,6 +202,10 @@ def update_billing_rules():
 @app.route('/Update_Meal_Rates')
 def update_meal_rates():
    return render_template('Update_Meal_Rates.html')
+
+@app.route('/Update_Menu')
+def update_menu():
+   return render_template('Update_Menu.html')
 
 # @app.route('/logout')
 # def logout():
