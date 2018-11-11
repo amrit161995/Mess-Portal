@@ -93,3 +93,19 @@ def getBill(user_email,duration):
 	# print countL
 	# print countD
 	return (total,countB,countL,countD,start,end)
+
+def getFeedback():
+	msg="Failed to get Records"
+	rows={}
+	with sql.connect("mess") as con:
+	    con.row_factory = sql.Row
+	    cur = con.cursor()
+	    print "start"
+	    cur.execute("SELECT * FROM feedback")
+	    print "got record"
+	    rows = cur.fetchall()
+	    if rows:
+	    	msg=""
+	    else:
+	    	msg="No Records Found"
+	return (rows,msg)

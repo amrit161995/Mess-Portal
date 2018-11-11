@@ -1,5 +1,6 @@
 from flask import Flask, redirect,url_for, render_template, request, session
 from datetime import date, time, timedelta
+from werkzeug import secure_filename
 import model 
 import model2
 
@@ -23,11 +24,15 @@ def login():
       return render_template("home.html",username=name,rollNo=roll_no)
    else:
       if request.method == "POST":
-         res,msg = model.login(request.form)
+         res,msg,mode = model.login(request.form)
          if msg == "1":
-            session['user_email'] = request.form['user_email']
-            name,roll_no = model.getUserNamePassword(session['user_email'])
-            return render_template("home.html",username=name,rollNo=roll_no)
+            if mode:
+               name = 'Admin'
+               return render_template('Admin_Main.html',username=name)
+            else:
+               session['user_email'] = request.form['user_email']
+               name,roll_no = model.getUserNamePassword(session['user_email'])
+               return render_template("home.html",username=name,rollNo=roll_no)
          elif msg == "0":
             msg = "Invalid Credentials! Try Again"
          elif msg == "-1":
@@ -186,17 +191,15 @@ def after_request(response):
 @app.route('/Admin_Main')
 def admin_main():
    return render_template('Admin_Main.html')
-@app.route('/Dashboard')
-def dashboard():
-   return render_template('Dashboard.html')
 
 @app.route('/View_Feedback')
 def view_feedback():
-   return render_template('View_Feedback.html')
+   data,msg = model2.getFeedback()
+   return render_template('View_Feedback.html',data=data,msg=msg)
 
 @app.route('/Update_Mess_Rules')
 def update_mess_rules():
-   return render_template('Update_Mess_Rules.html')
+   return render_template('Update_Mess_Rules.html',msg="")
 
 @app.route('/Update_Billing_Rules')
 def update_billing_rules():
@@ -213,6 +216,37 @@ def update_menu():
 @app.route('/Dashboard')
 def dashboard():
    return render_template('Dashboard.html')
+
+@app.route('/UploadMessRules',methods = ['POST'])
+def uploadMessRules():
+   msg=""
+   if request.method == 'POST':
+         f = request.files['input-file-preview']
+         f.filename="MessRules.pdf"
+         f.save("static/"+f.filename)
+         msg = "Mess Rules Updated Successfully"
+   return render_template('Update_Mess_Rules.html',msg=msg)
+
+@app.route('/UploadBillingRules',methods = ['POST'])
+def uploadBillingRules():
+   msg=""
+   if request.method == 'POST':
+         f = request.files['input-file-preview']
+         f.filename="BillingRates.pdf"
+         f.save("static/"+f.filename)
+         msg = "Billing Rules Updated Successfully"
+   return render_template('Update_Billing_Rules.html',msg=msg)
+
+@app.route('/UploadMenu',methods = ['POST'])
+def uploadMenu():
+   msg=""
+   if request.method == 'POST':
+         f = request.files['input-file-preview']
+         name=request.form['optradio']
+         f.filename=name
+         f.save("static/"+f.filename)
+         msg = "Mess Menu Updated Successfully"
+   return render_template('Update_Menu.html',msg=msg)
 
 # @app.route('/logout')
 # def logout():

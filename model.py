@@ -27,19 +27,24 @@ def login(user):
   try:
    msg = "1"
    with sql.connect("mess") as con:
+      con.row_factory = sql.Row
       cur = con.cursor()
       cur.execute("SELECT * FROM user_credentials  WHERE email = ? and password = ?", (user['user_email'], user['password']))
       print "execute"
       row = cur.fetchone()
       if row:
-        return(user,msg)
+        mode = row["mode"]
+        if mode:
+          return(user,msg,1)
+        else:  
+          return(user,msg,0)
       else:
         msg = "0"
-        return  (user, msg)
+        return  (user, msg,0)
   except:
       msg = "-1"
       print msg
-      return ({}, msg)
+      return ({}, msg,0)
 
 def fback(user,email):
   with sql.connect("mess") as con:

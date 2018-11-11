@@ -21,7 +21,7 @@
 
 <div class="container">
   <h2>Feedback Record</h2>
-           
+           <h3>{{msg}}</h3>
   <table class="table">
     <thead>
       <tr>
@@ -32,7 +32,15 @@
       </tr>
     </thead>
     <tbody>
+      {% for row in data %}
       <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+      </tr>
+      {% endfor %}
+      <!-- <tr>
         <td colspan="1">John Doe</td>
         <td colspan="1">South Mess</td>
         <td colspan="1">Quality</td>
@@ -72,7 +80,7 @@
         <td>Quality</td>
         <td><p>john@example.com john@example.com john@example.com john@example.com john@example.com john@example.com john@example.com john@example.com</p></td>
       </tr>
-    </tbody>
+ -->    </tbody>
   </table>
 </div>
 
