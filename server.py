@@ -210,6 +210,10 @@ def update_meal_rates():
 def update_menu():
    return render_template('Update_Menu.html')
 
+@app.route('/Dashboard')
+def dashboard():
+   return render_template('Dashboard.html')
+
 # @app.route('/logout')
 # def logout():
 #    # remove the username from the session if it is there
