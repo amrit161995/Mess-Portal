@@ -90,11 +90,27 @@ def change_registration():
 
 @app.route('/feedback',methods = ['POST'])
 def fback():
-   if 'user_email' in session:
-      res = model.fback(request.form,session['user_email'])
-      return render_template('Feedback.html')
-   else:
-      return redirect('localhost:5000/')
+
+   image=0
+   try:
+      if 'user_email' in session:
+         
+         if request.method == 'POST':
+
+            if request.files.get('input-file-preview'):
+               image=1
+               res = model.fback(request.form,session['user_email'],image)
+               f=request.files['input-file-preview']
+               print f.filename
+               f.filename=res+"__" + f.filename
+               f.save("feedback_img/"+f.filename) 
+            else:
+               res = model.fback(request.form,session['user_email'],image)          
+         return render_template('Feedback.html')
+      else:
+         return redirect('localhost:5000/')
+   except:
+       return render_template('Feedback.html')
 
 @app.route('/registration_change_date',methods = ['POST'])
 def registration_change_date():

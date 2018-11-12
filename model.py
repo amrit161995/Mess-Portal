@@ -46,10 +46,11 @@ def login(user):
       print msg
       return ({}, msg,0)
 
-def fback(user,email):
+def fback(user,email,image):
   with sql.connect("mess") as con:
     cur = con.cursor()
-    cur.execute("INSERT INTO feedback (email,mess,suggestion,description) VALUES (?,?,?,?)",(email,user['optradio'],user['suggestion'],user['description']))
+    cur.execute("INSERT INTO feedback (email,mess,suggestion,description,image) VALUES (?,?,?,?,?)",(email,user['optradio'],user['suggestion'],user['description'],image))
+    return email
 
 def cancelMeal(user,email):
   with sql.connect("mess") as con:
