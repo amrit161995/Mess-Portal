@@ -159,8 +159,22 @@ def register(user):
       else:
          cur.execute("INSERT INTO user_credentials (email,password) VALUES (?,?)",(user['user_email'],user['password']))
          print "insert 1"
-         cur.execute("INSERT INTO user_details (email,full_name,roll_no,default_mess,monthly_mess)  VALUES (?,?,?,'north',0)",(user['user_email'],user['fullname'],user['roll_no']))            
+         default_mess = 'north'
+         cur.execute("INSERT INTO user_details (email,full_name,roll_no,default_mess,monthly_mess)  VALUES (?,?,?,?,0)",(user['user_email'],user['fullname'],user['roll_no'],default_mess))            
          print "insert 2"
+         end = date(2019,7,31)
+         start = date.today()
+         delta = end - start
+         
+         for i in range(delta.days+1):
+          cur.execute("INSERT INTO mess_registration (email,date,breakfast,lunch,dinner)  VALUES (?,?,?,?,?)",(user['user_email'],str(start + timedelta(i)),default_mess,default_mess,default_mess))            
+
+
+
+
+
+
+
          con.commit()
          print "Record successfully added"
       return  (user, msg)
@@ -278,7 +292,7 @@ def getRecentMessRate(rateDate):
     l.append(row["dinner_price"])
     rateCard.append(l)
 
-    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"kadamb non-veg"))
+    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"kadamb-nonveg"))
     print "got kadamb non-veg"
     row = cur.fetchone()
     l = []
