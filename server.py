@@ -26,11 +26,13 @@ def login():
       if request.method == "POST":
          res,msg,mode = model.login(request.form)
          if msg == "1":
+            session['user_email'] = request.form['user_email']
             if mode:
+               # session['user_email'] = request.form['user_email']
                name = 'Admin'
                return render_template('Admin_Main.html',username=name)
             else:
-               session['user_email'] = request.form['user_email']
+               # session['user_email'] = request.form['user_email']
                name,roll_no = model.getUserNamePassword(session['user_email'])
                return render_template("home.html",username=name,rollNo=roll_no)
          elif msg == "0":
@@ -105,6 +107,7 @@ def fback():
                f.filename=res+"__" + f.filename
                f.save("feedback_img/"+f.filename) 
             else:
+               print "something"
                res = model.fback(request.form,session['user_email'],image)          
          return render_template('Feedback.html')
       else:
@@ -210,7 +213,7 @@ def admin_main():
 
 @app.route('/View_Feedback')
 def view_feedback():
-   data,msg = model2.getFeedback()
+   data,msg = model2.getFeedback(session['user_email'])
    return render_template('View_Feedback.html',data=data,msg=msg)
 
 @app.route('/Update_Mess_Rules')
@@ -231,7 +234,9 @@ def update_menu():
 
 @app.route('/Dashboard')
 def dashboard():
-   return render_template('Dashboard.html')
+   monthlyRegistered = model.dashboard()
+   # print monthlyRegistered
+   return render_template('Dashboard.html',mR = monthlyRegistered)
 
 @app.route('/UploadMessRules',methods = ['POST'])
 def uploadMessRules():
