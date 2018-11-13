@@ -377,12 +377,38 @@ position: absolute;
     top :2%;
 }
 
+#msg {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
+}
 </style>
 <title>Mess Portal</title>
 </head>
 <body>
-  <p>{{msg}}</p>
+  
   <section class="et-hero-tabs">
+  	<p style="position:absolute;top:70%;font-size: 2vw" id="msg">{{msg}}</p>
     <h1>Change Mess Registration</h1>
     <p>All new registrations are effective after 2 days from the day of change</p>
     

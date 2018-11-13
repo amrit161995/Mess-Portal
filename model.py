@@ -60,32 +60,71 @@ def fback(user,email,image):
     return row["image"]
 
 def cancelMeal(user,email):
+  msg="Something is Wrong!"
   with sql.connect("mess") as con:
     cur = con.cursor()
     f = user['from'].split('-')
     t = user['to'].split('-')
+
     start = date(int(f[0]),int(f[1]),int(f[2]))
     end = date(int(t[0]),int(t[1]),int(t[2]))
-    today = date.today()
+
+    today = date.today()    
+    limitDate = start - timedelta(days=1)
+
+    curTime = datetime.datetime.now().time()
+    bTime = datetime.time(17,00,00)
+    lTime = datetime.time(7,00,00)
+    dTime = datetime.time(15,00,00)
+
+    bLimit = datetime.datetime.combine(limitDate,bTime)
+    lLimit = datetime.datetime.combine(start,bTime)
+    dLimit = datetime.datetime.combine(start,bTime)
+    comp = datetime.datetime.combine(today,curTime)
+    print "done with time"
+    # if(comp>bLimit):
+    #   print "aufiwsefiwhbdfib"
+    print curTime,lTime,dTime
     delta = end-start
     if(delta.days>=0):
       for i in range(delta.days+1):
+        m = (start + timedelta(i)).month
+        y = (start + timedelta(i)).year
+        cur.execute("SELECT * FROM user_cancellation WHERE email = ? and month = ? and year = ?",(email,m,y))
+        row = cur.fetchone()
+        b = row[3]
+        l = row[4]
+        d = row[5]
         if not user.get('uncancel'):
-          if user.get('meal_b'):
+          if user.get('meal_b') and comp<=bLimit:
+            msg="Meals cancelled successfully!"
+            cur.execute("UPDATE user_cancellation SET cancelled_b = ? WHERE email = ? and month = ? and year = ?",(b+1,email,m,y))
             cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
-          if user.get('meal_l'):
+          if user.get('meal_l') and comp<=lLimit:
+            msg="Meals cancelled successfully!"
+            cur.execute("UPDATE user_cancellation SET cancelled_l = ? WHERE email = ? and month = ? and year = ?",(l+1,email,m,y))
             cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
-          if user.get('meal_d'):
+          if user.get('meal_d') and comp<=dLimit:
+            msg="Meals cancelled successfully!"
+            cur.execute("UPDATE user_cancellation SET cancelled_d = ? WHERE email = ? and month = ? and year = ?",(d+1,email,m,y))
             cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
         else:
           cur.execute("SELECT * FROM user_details WHERE email = ?",(email,))
-          row = cur.fetchone()
-          if user.get('meal_b'):
-            cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
-          if user.get('meal_l'):
-            cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
-          if user.get('meal_d'):
-            cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
+          row1 = cur.fetchone()
+          print len(row1)
+          if user.get('meal_b') and comp<=bLimit:
+            msg="Meals uncancelled and set to default mess successfully!"
+            cur.execute("UPDATE user_cancellation SET cancelled_b = ? WHERE email = ? and month = ? and year = ?",(b-1,email,m,y))
+            cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(row1[3],email,str(start + timedelta(i))))
+          if user.get('meal_l') and comp<=lLimit:
+            msg="Meals uncancelled and set to default mess successfully!"
+            cur.execute("UPDATE user_cancellation SET cancelled_l = ? WHERE email = ? and month = ? and year = ?",(l-1,email,m,y))
+            cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(row1[3],email,str(start + timedelta(i))))
+          if user.get('meal_d') and comp<=dLimit:
+            msg="Meals uncancelled and set to default mess successfully!"
+            cur.execute("UPDATE user_cancellation SET cancelled_d = ? WHERE email = ? and month = ? and year = ?",(d-1,email,m,y))
+            cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(row1[3],email,str(start + timedelta(i))))
+  return msg
 
 def changeRegistrationDate(user,email):
   msg = "Something is Wrong!"
