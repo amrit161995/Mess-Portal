@@ -109,7 +109,7 @@ def fback():
                f=request.files['input-file-preview']
                print f.filename
                f.filename=res+"__" + f.filename
-               f.save("feedback_img/"+f.filename) 
+               f.save("static/feedback_img/"+f.filename) 
             else:
                print "something"
                res = model.fback(request.form,session['user_email'],image)          

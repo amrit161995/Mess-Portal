@@ -4,7 +4,7 @@
   <title>Feedback</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style type="text/css">
@@ -84,7 +84,7 @@
 	color:#2d3436;
 	opacity: 0.9;
 	font-size: 1.2vw;
-	border-radius: 20px;
+	border-radius: 10px;
 	height: 6%;
 	width: 20%;
 }
@@ -181,15 +181,17 @@ $(function() {
   </script>
 </head>
 <body>
-
-<div class="container">
+<form method="post" action="/feedback" enctype = "multipart/form-data">
+<div class="container" style="position:absolute;height: 100%;width: 100%;">
+  <div id="Title" style="position: absolute;top:2%;left:5%;">Feedback Form</div>
+  
+  <form method="post" action="/feedback" enctype = "multipart/form-data">
   
  
-		<div id="Title">Feedback Form</div>
+			
 		
-		<form method="post" action="/feedback" enctype = "multipart/form-data">
-				<div  class="lab" id="lab_m">Mess:</div>
-				<div id="Mess_select">
+				<div  class="lab" id="lab_m"style="position: absolute;top:10%;left:5%;">Mess:</div>
+				<div id="Mess_select" style="position: absolute;top:15%;left:5%;">
 				 <div class="radio">
 				 	
   					<label><input type="radio" name="optradio" value="kadamb-veg" required>Kadamba-Veg Mess</label>
@@ -208,44 +210,47 @@ $(function() {
 				<div class="radio">
  					 <label><input type="radio" name="optradio" value="south">South Mess</label>
 				</div>
+        <div class="radio">
+           <label><input type="radio" name="optradio" value="kadamb-nonveg">Kadamb-Nonveg Mess</label>
+        </div>
 			</div>
 				<div>
-				<label class="lab" id="lab_is">Issue/Suggestion:</label>
-				<input type="text" name="suggestion" class="form-control" id="issue" required >
+				<label class="lab" id="lab_is" style="position: absolute;top:37%;left:5%;">Issue/Suggestion:</label>
+				<input type="text" name="suggestion" class="form-control" id="issue" style="position: absolute;top:44%;left:5%;" required  >
 				</div>
-				<br>
+				
 
-				 <div id="des" class="form-group">
+				 <div id="des" class="form-group" style="position: absolute;top:53%;left:5%;">
 		  			<label class="lab">Description:</label>
 		  			<textarea class="form-control" rows="5" name="description" id="Description" required></textarea>
 				</div> 
-				<label class="lab" style="position: absolute;top:73%;">Image :</label>
-				<div class="row" id="file_upload">    
-
-			        <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
-			            <!-- image-preview-filename input [CUT FROM HERE]-->
-			            <div class="input-group image-preview">
-			                <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
-			                <span class="input-group-btn">
-			                    <!-- image-preview-clear button -->
-			                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-			                        <span class="glyphicon glyphicon-remove"></span> Clear
-			                    </button>
-			                    <!-- image-preview-input -->
-			                    <div class="btn btn-default image-preview-input">
-			                        <span class="glyphicon glyphicon-folder-open"></span>
-			                        <span class="image-preview-input-title">Browse</span>
-			                        <input type="file" name="input-file-preview"/> <!-- rename it -->
-			                    </div>
-			                </span>
-			            </div><!-- /input-group image-preview [TO HERE]--> 
-			        </div>
-			</div>
-		 <button type="submit" class="btn btn-default" id="submit">Submit</button>
+        <div style="position:absolute;top:86%;left:5%;width: 70%;">
+						<div class="row" id="file_upload" style="position:absolute;width:100%;">    
+              <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
+                  <!-- image-preview-filename input [CUT FROM HERE]-->
+                  <div class="input-group image-preview">
+                      <input type="text" class="form-control image-preview-filename" disabled="disabled"/> <!-- don't give a name === doesn't send on POST/GET -->
+                      <span class="input-group-btn">
+                          <!-- image-preview-clear button -->
+                          <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                              <span class="glyphicon glyphicon-remove"></span> Clear
+                          </button>
+                          <!-- image-preview-input -->
+                          <div class="btn btn-default image-preview-input">
+                              <span class="glyphicon glyphicon-folder-open"></span>
+                              <span class="image-preview-input-title">Browse</span>
+                              <input type="file" name="input-file-preview" required/> <!-- rename it -->
+                          </div>
+                      </span>
+                  </div><!-- /input-group image-preview [TO HERE]--> 
+              </div>
+      </div>
+    </div>
+		 <button type="submit" class="btn btn-default" id="submit" style="position: absolute;left:5%;top:95%;">Submit</button>
 		
 		</form>
 		</div>
-</div>
+
 
 </body>
 </html>
