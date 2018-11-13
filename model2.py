@@ -89,9 +89,9 @@ def getBill(user_email,duration):
 				print row["lunch"]
 				print row["dinner"]
 	# print total
-	# print countB
-	# print countL
-	# print countD
+	print countB
+	print countL
+	print countD
 	return (total,countB,countL,countD,start,end)
 
 def getFeedback():
