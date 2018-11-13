@@ -422,6 +422,46 @@ def getCancellationsAllowed():
     # print ca
   return ca
 
+def getTotalCancelled(email,duration):
+  curD = date.today()
+  month= date.today().month
+  year= date.today().year
+  ms=month
+  me=month
+  ys=year
+  ye=year
+  if duration == "semister":
+    if me >= 7:
+      ms = 7
+    else:
+      ms=1
+  else:
+    ms -= 1
+    if ms == 0:
+      ms = 12
+      ys-=1
+    ye=ys
+    me=ms
+  ca = []
+  c_b=0
+  c_l=0
+  c_d=0
+  with sql.connect("mess") as con:
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    print "start"
+    cur.execute("SELECT * FROM user_cancellation  WHERE email = ? and month <= ? and month >= ? and year <= ? and year >= ?",(email,me,ms,ye,ys))
+    print "got ca"
+    rows = cur.fetchall()
+    for row in rows:
+      c_b+=row["cancelled_b"]
+      c_l+=row["cancelled_l"]
+      c_d+=row["cancelled_d"]
+    ca.append(c_b)
+    ca.append(c_l)
+    ca.append(c_d)
+    # print ca
+  return ca
 
 
 

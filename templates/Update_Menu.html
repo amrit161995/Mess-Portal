@@ -153,10 +153,11 @@ $(function() {
  
 		<h3 style="position: absolute;top: 3%;left: 13.5%;">Update Menu</h3>
 		<!-- <div  class="lab" id="lab_m" style="position: absolute;top:13%;">Current Menu:</div> -->
-		<form method="post" action="/UploadMenu" enctype = "multipart/form-data">
-				
-				<iframe src="/static/Yuktahar.pdf"  style="position:absolute; top:10%;height: 70%; width: 80%;left: 13.5%"></iframe>   
-				<div class="row" id="file_upload" style="position: absolute;top:83%;left:13.5%;">    
+		  
+    <iframe src="/static/{{mess}}"  style="position:absolute; top:10%;height: 70%; width: 80%;left: 13.5%"></iframe>
+
+    <form method="post" action="/UploadMenu" enctype = "multipart/form-data">   
+				<div class="row" id="file_upload" style="position: absolute;top:83%;left:13.5%;width:80%;">    
 			        <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
 			            <!-- image-preview-filename input [CUT FROM HERE]-->
 			            <div class="input-group image-preview">
@@ -170,7 +171,7 @@ $(function() {
 			                    <div class="btn btn-default image-preview-input">
 			                        <span class="glyphicon glyphicon-folder-open"></span>
 			                        <span class="image-preview-input-title">Browse</span>
-			                        <input type="file" name="input-file-preview" required/> <!-- rename it -->
+			                        <input type="file" accept="pdf" name="input-file-preview" required/> <!-- rename it -->
 			                    </div>
 			                </span>
 			            </div><!-- /input-group image-preview [TO HERE]--> 

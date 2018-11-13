@@ -25,7 +25,8 @@ def login():
       if(mode==0):
          name,roll_no = model.getUserNamePassword(session['user_email'])
          return render_template("home.html",username=name,rollNo=roll_no)
-      return render_template("Admin_Main.html")         
+      name = "Admin"
+      return render_template("Admin_Main.html",username=name)         
    else:
       if request.method == "POST":
          res,msg,mode = model.login(request.form)
@@ -98,31 +99,31 @@ def change_registration():
 def fback():
    print "in feedback"
    image=0
-   # try:
-   if 'user_email' in session:  
-      if request.method == 'POST':
-         if request.files.get('input-file-preview'):
-            image=1
-            res = model.fback(request.form,session['user_email'],image)
-            f=request.files['input-file-preview']
-            name = f.filename
-            print name
-            fname = name.split('.')
-            print len(fname)
-            print name
-            print res
-            print fname[len(fname)-1]
-            f.filename=str(res)+'.'+fname[len(fname)-1]
-            print f.filename
-            f.save("static/feedback_img/"+f.filename) 
-         else:
-            print "something"
-            res = model.fback(request.form,session['user_email'],image)          
-      return render_template('Feedback.html')
-   else:
-      return redirect('localhost:5000/')
-   # except:
-   #     return render_template('Feedback.html')
+   try:
+      if 'user_email' in session:  
+         if request.method == 'POST':
+            if request.files.get('input-file-preview'):
+               image=1
+               res = model.fback(request.form,session['user_email'],image)
+               f=request.files['input-file-preview']
+               name = f.filename
+               print name
+               fname = name.split('.')
+               print len(fname)
+               print name
+               print res
+               print fname[len(fname)-1]
+               f.filename=str(res)+'.'+fname[len(fname)-1]
+               print f.filename
+               f.save("static/feedback_img/"+f.filename) 
+            else:
+               print "something"
+               res = model.fback(request.form,session['user_email'],image)          
+         return render_template('Feedback.html')
+      else:
+         return redirect('localhost:5000/')
+   except:
+       return render_template('Feedback.html')
 
 @app.route('/registration_change_date',methods = ['POST'])
 def registration_change_date():
@@ -183,10 +184,11 @@ def bill():
    if 'user_email' in session:
       rateCard = model.getRecentMessRate(date.today())
       cancellations_allowed = model.getCancellationsAllowed()
-      weekBill,countB,countL,countD,wstart,wend = model2.getBill(session['user_email'],"week")
-      monthBill,McountB,McountL,McountD,mstart,mend = model2.getBill(session['user_email'],"month")
-      semBill,ScountB,ScountL,ScountD,sstart,send = model2.getBill(session['user_email'],"semister")
-      return render_template('Bill.html',rateCard=rateCard,cancellations_allowed=cancellations_allowed,weekBill=weekBill,countB=countB,countD=countD,countL=countL,wstart=wstart,wend=wend,monthBill=monthBill,McountB=McountB,McountL=McountL,McountD=McountD,mstart=mstart,mend=mend,semBill=semBill,ScountB=ScountB,ScountL=ScountL,ScountD=ScountD,sstart=sstart,send=send)
+      # cancellations_did = model.getTotalCancelled(session['user_email'])
+      weekBill,countB,countL,countD,wstart,wend,cancellations_did = model2.getBill(session['user_email'],"week")
+      monthBill,McountB,McountL,McountD,mstart,mend,cancellations_did = model2.getBill(session['user_email'],"month")
+      semBill,ScountB,ScountL,ScountD,sstart,send,cancellations_did = model2.getBill(session['user_email'],"semister")
+      return render_template('Bill.html',rateCard=rateCard,cancellations_did=cancellations_did,cancellations_allowed=cancellations_allowed,weekBill=weekBill,countB=countB,countD=countD,countL=countL,wstart=wstart,wend=wend,monthBill=monthBill,McountB=McountB,McountL=McountL,McountD=McountD,mstart=mstart,mend=mend,semBill=semBill,ScountB=ScountB,ScountL=ScountL,ScountD=ScountD,sstart=sstart,send=send)
    else:
       return redirect('localhost:5000/')
 
@@ -239,7 +241,8 @@ def update_meal_rates():
 
 @app.route('/Update_Menu')
 def update_menu():
-   return render_template('Update_Menu.html')
+   mess=getMess(session['user_email'])
+   return render_template('Update_Menu.html',mess=mess)
 
 @app.route('/Dashboard')
 def dashboard():
@@ -270,14 +273,30 @@ def uploadBillingRules():
 @app.route('/UploadMenu',methods = ['POST'])
 def uploadMenu():
    msg=""
+   name=""
    if request.method == 'POST':
          f = request.files['input-file-preview']
-         
+         name=getMess(session['user_email'])
          f.filename=name
          f.save("static/"+f.filename)
          msg = "Mess Menu Updated Successfully"
-   return render_template('Update_Menu.html',msg=msg)
+         mess=getMess(session['user_email'])
+   return render_template('Update_Menu.html',msg=msg,mess=mess)
 
+def getMess(email):
+   name=""
+   mode =model.getMode(session["user_email"])
+   if mode == "north":
+      name="North.pdf"
+   elif mode == "south":
+      name="South.pdf"
+   elif mode == "yukthar":
+      name="Yuktahar.pdf"
+   elif mode == "kadamb-veg":
+      name="VegNBH.pdf"
+   elif mode == "kadamb-nonveg":
+      name="NonVegNBH.pdf"
+   return name
 # @app.route('/logout')
 # def logout():
 #    # remove the username from the session if it is there

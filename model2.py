@@ -7,6 +7,8 @@ def getBill(user_email,duration):
 	m = date.today().month
 	m -= 1
 	y = date.today().year
+	ca=[]
+	cd=[]
 	if m == 0:
 		m = 12
 		y-=1
@@ -14,6 +16,7 @@ def getBill(user_email,duration):
 		end = date.today()
 		start = end - timedelta(days=7)
 		end = end - timedelta(days=1)
+		cd = model.getTotalCancelled(user_email,"")
 	elif duration == "month":
 	    if m != 12:
 	    	d = (date(y,m+1,1)-date(y,m,1)).days
@@ -21,6 +24,7 @@ def getBill(user_email,duration):
 	    	d = 31
 	    end = date(y,m,d)
 	    start = date(y,m,1)
+	    cd = model.getTotalCancelled(user_email,"")
 	elif duration == "semister":
 		if m >= 7:
 			start = date(y,8,1)
@@ -28,6 +32,8 @@ def getBill(user_email,duration):
 		else:
 			start = date(y,1,1)
 			end = date.today()- timedelta(days=1)
+		cd = model.getTotalCancelled(user_email,"semister")
+	ca = model.getCancellationsAllowed()
 	# print start
 	# print end
 	rateB = {}
@@ -89,10 +95,28 @@ def getBill(user_email,duration):
 				print row["lunch"]
 				print row["dinner"]
 	# print total
+	dmess=getDefaultMess(user_email)
+	if cd[0]>ca[0]:
+		total = total + (cd[0]-ca[0])*rateB[dmess]
+	if cd[1]>ca[1]:
+		total = total + (cd[1]-ca[1])*rateB[dmess]
+	if cd[2]>ca[2]:
+		total = total + (cd[2]-ca[2])*rateB[dmess]
 	print countB
 	print countL
 	print countD
-	return (total,countB,countL,countD,start,end)
+	return (total,countB,countL,countD,start,end,cd)
+
+def getDefaultMess(email):
+	mess=""
+	with sql.connect("mess") as con:
+	    con.row_factory = sql.Row
+	    cur = con.cursor()
+	    print "start"
+	    cur.execute("SELECT * FROM user_details where email = ?",(email,))
+	    row =cur.fetchone()
+	    mess = row["default_mess"]
+	return mess
 
 def getFeedback(email):
 	msg="Failed to get Records"
