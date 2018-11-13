@@ -13,29 +13,94 @@
     window.onload = function () {
 
     var chart = new CanvasJS.Chart("chartContainer", {
-      animationEnabled: true,
-      theme: "light2",
-      title:{
-        text: "Weekly Student Count North Mess"
-      },
-      axisY:{
-        includeZero: false
-      },
-      data: [{        
-        type: "line",       
-        dataPoints: [
-          { label: "Monday" , y: 44 },     
-          { label:"Tuesday", y: 37 },     
-          { label: "Wednesday", y: 36 },     
-          { label: "Thursday", y: 36 },     
-          { label: "Friday", y: 46 },
-          { label: "Saturday", y: 46 },
-          { label: "Sunday", y: 46 }
-              
-        ]
-      }]
-    });
-    chart.render();
+  animationEnabled: true,
+  title:{
+    text: "Weekly North Mess data"
+  },  
+  axisY: {
+    title: "Number of Students",
+    titleFontColor: "#4F81BC",
+    lineColor: "#4F81BC",
+    labelFontColor: "#4F81BC",
+    tickColor: "#4F81BC"
+  },
+  axisY2: {
+    title: "Number of Students",
+    titleFontColor: "#C0504E",
+    lineColor: "#C0504E",
+    labelFontColor: "#C0504E",
+    tickColor: "#C0504E"
+  },  
+  toolTip: {
+    shared: true
+  },
+  legend: {
+    cursor:"pointer",
+    itemclick: toggleDataSeries
+  },
+  data: [{
+    type: "column",
+    name: "Breakfast",
+    legendText: "Breakfast",
+    showInLegend: true, 
+    dataPoints:[
+      { label: "Monday", y: 266.21 },
+      { label: "Tuesday", y: 302.25 },
+      { label: "Wednesday", y: 157.20 },
+      { label: "Thursday", y: 148.77 },
+      { label: "Friday", y: 101.50 },
+      { label: "Saturday", y: 97.8 },
+      { label: "Sunday", y: 97.8 }
+    ]
+  },
+  {
+    type: "column", 
+    name: "Lunch",
+    legendText: "Lunch",
+    axisYType: "secondary",
+    showInLegend: true,
+    dataPoints:[
+      { label: "Monday", y: 266.21 },
+      { label: "Tuesday", y: 302.25 },
+      { label: "Wednesday", y: 157.20 },
+      { label: "Thursday", y: 148.77 },
+      { label: "Friday", y: 101.50 },
+      { label: "Saturday", y: 97.8 },
+      { label: "Sunday", y: 97.8 }
+    ]
+  },
+  {
+    type: "column", 
+    name: "Dinner",
+    legendText: "Dinner",
+    axisYType: "secondary",
+    showInLegend: true,
+    dataPoints:[
+       { label: "Monday", y: 266.21 },
+      { label: "Tuesday", y: 302.25 },
+      { label: "Wednesday", y: 157.20 },
+      { label: "Thursday", y: 148.77 },
+      { label: "Friday", y: 101.50 },
+      { label: "Saturday", y: 97.8 },
+      { label: "Sunday", y: 97.8 }
+    ]
+  }
+  
+
+  ]
+});
+chart.render();
+
+function toggleDataSeries(e) {
+  if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+    e.dataSeries.visible = false;
+  }
+  else {
+    e.dataSeries.visible = true;
+  }
+  chart.render();
+}
+
 
     function myFunc(vars) {
           return vars
@@ -104,6 +169,11 @@
       font-size: 1.5vw;
     }
     
+    #chartContainer a{
+      visibility: hidden;
+    }
+
+
   </style>
 </head>
 <body> 
@@ -159,7 +229,7 @@
   </div>
 
 
-  <div id="piechart" style="position: absolute;top:45%;left:0%;"></div>
+  <div id="piechart" style="position: absolute;top:40%;height:40%;left:0%; padding: 0%;"></div>
 
     <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 
@@ -188,7 +258,7 @@
     // }
     </script>
 
-<div id="chartContainer" style="height:40%; width: 60%;position: absolute;top:45%;left: 45%;"></div>
+<div id="chartContainer" style="height:40%; width: 60%;position: absolute;top:45%;left: 45%;padding: 0%;margin: 0%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
 
