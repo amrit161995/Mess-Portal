@@ -94,14 +94,17 @@ def getBill(user_email,duration):
 	# print countD
 	return (total,countB,countL,countD,start,end)
 
-def getFeedback():
+def getFeedback(email):
 	msg="Failed to get Records"
 	rows={}
 	with sql.connect("mess") as con:
 	    con.row_factory = sql.Row
 	    cur = con.cursor()
 	    print "start"
-	    cur.execute("SELECT * FROM feedback")
+	    cur.execute("SELECT * FROM user_credentials where email = ?",(email,))
+	    row =cur.fetchone()
+	    mess = row["mode"]
+	    cur.execute("SELECT * FROM feedback where mess = ? ORDER BY date desc",(mess,))
 	    print "got record"
 	    rows = cur.fetchall()
 	    if rows:

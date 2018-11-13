@@ -36,7 +36,22 @@
     });
     chart.render();
 
-    }
+    function myFunc(vars) {
+          return vars
+      }
+
+    moR = myFunc({{mR|tojson}})
+
+    console.log(moR)
+
+    document.getElementById("north_monthly").innerHTML = moR["north"].toString();
+    document.getElementById("south_monthly").innerHTML = moR["south"].toString();
+    document.getElementById("yuktahar_monthly").innerHTML = moR["yuktahar"].toString();
+    document.getElementById("kadamb_monthly").innerHTML = moR["kadamb-veg"].toString();
+    document.getElementById("kadamb_nonveg_monthly").innerHTML = moR["kadamb-nonveg"].toString();
+
+    }   
+
     </script>
   <style type="text/css">
     .card {
@@ -79,7 +94,7 @@
         <br>
         <br>
         <p class="card-text" style="font-size:0.8vw;">Monthly Registered Students</p>
-        <p class="card-text" id="north_monthly">350</p>
+        <p class="card-text" id="north_monthly"></p>
       </div>
     </div>
     <div class="card">
@@ -88,7 +103,7 @@
         <br>
         <br>
         <p class="card-text" style="font-size:0.8vw;">Monthly Registered Students</p>
-        <p class="card-text" id="north_monthly">350</p>
+        <p class="card-text" id="south_monthly"></p>
       </div>
     </div>
     <div class="card">
@@ -97,7 +112,7 @@
         <br>
         <br>
         <p class="card-text" style="font-size:0.8vw;">Monthly Registered Students</p>
-        <p class="card-text" id="north_monthly">350</p>
+        <p class="card-text" id="yuktahar_monthly"></p>
       </div>
     </div>
     <div class="card">
@@ -106,7 +121,7 @@
         <br>
         <br>
         <p class="card-text" style="font-size:0.8vw;">Monthly Registered Students</p>
-        <p class="card-text" id="north_monthly">350</p>
+        <p class="card-text" id="kadamb_monthly"></p>
       </div>
     </div>  
     <div class="card">
@@ -115,7 +130,7 @@
         <br>
         
         <p class="card-text" style="font-size:0.8vw;">Monthly Registered Students</p>
-        <p class="card-text" id="north_monthly">350</p>
+        <p class="card-text" id="kadamb_nonveg_monthly"></p>
       </div>
     </div>  
   </div>
@@ -134,11 +149,11 @@
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
       ['Task', 'Hours per Day'],
-      ['North', 350],
-      ['South', 350],
-      ['Yuktahar', 350],
-      ['Kadamb Veg', 350],
-      ['Kadamb Nonveg', 350]
+      ['North', moR["north"]],
+      ['South', moR["south"]],
+      ['Yuktahar', moR["yuktahar"]],
+      ['Kadamb Veg', moR["kadamb-veg"]],
+      ['Kadamb Nonveg', moR["kadamb-nonveg"]]
     ]);
 
       // Optional; add a title and set the width and height of the chart

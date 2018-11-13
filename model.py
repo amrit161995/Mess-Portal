@@ -1,5 +1,6 @@
 import sqlite3 as sql
 from datetime import date, time, timedelta
+import datetime
 
 # A model that supports following interface:
 # create() : creates a users table in database if not already there
@@ -49,7 +50,10 @@ def login(user):
 def fback(user,email,image):
   with sql.connect("mess") as con:
     cur = con.cursor()
-    cur.execute("INSERT INTO feedback (email,mess,suggestion,description,image) VALUES (?,?,?,?,?)",(email,user['optradio'],user['suggestion'],user['description'],image))
+    print "nkjnknj"
+    print str(datetime.datetime.now())
+    cur.execute("INSERT INTO feedback (email,mess,suggestion,description,image,date) VALUES (?,?,?,?,?,?)",(email,user['optradio'],user['suggestion'],user['description'],image,str(datetime.datetime.now())))
+
     return email
 
 def cancelMeal(user,email):
@@ -142,6 +146,34 @@ def changeRegistrationMonth(user,email):
         cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+        cur.execute("UPDATE user_details SET monthly_mess = ? WHERE email = ?",(user['mess'],email))
+
+
+def dashboard():
+  monthlyRegistered = {}
+  with sql.connect("mess") as con:
+    cur = con.cursor()
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("north",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["north"] = row[0]
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("south",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["south"] = row[0]
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("kadamb-veg",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["kadamb-veg"] = row[0]
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("kadamb-nonveg",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["kadamb-nonveg"] = row[0]
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("yuktahar",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["yuktahar"] = row[0]
+  return monthlyRegistered
 
   
 def register(user):
