@@ -147,7 +147,7 @@ def registration_change_month():
 def cancel_meal():
    if 'user_email' in session:
       msg = model.cancelMeal(request.form,session['user_email'])
-      return render_template('Change_Registration.html',msg = "")
+      return render_template('Change_Registration.html',msg = msg)
    else:
       return redirect('localhost:5000/')
 
