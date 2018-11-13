@@ -24,10 +24,10 @@ def getBill(user_email,duration):
 	elif duration == "semister":
 		if m >= 7:
 			start = date(y,8,1)
-			end = date.today()
+			end = date.today()- timedelta(days=1)
 		else:
 			start = date(y,1,1)
-			end = date.today()
+			end = date.today()- timedelta(days=1)
 	# print start
 	# print end
 	rateB = {}
@@ -43,19 +43,19 @@ def getBill(user_email,duration):
 	countB["north"] = 0
 	countB["yuktahar"] = 0
 	countB["kadamb-veg"] = 0
-	countB["kadamb non-veg"] = 0
+	countB["kadamb-nonveg"] = 0
 	countB["cancelled"] = 0
 	countL["south"] = 0
 	countL["north"] = 0
 	countL["yuktahar"] = 0
 	countL["kadamb-veg"] = 0
-	countL["kadamb non-veg"] = 0
+	countL["kadamb-nonveg"] = 0
 	countL["cancelled"] = 0
 	countD["south"] = 0
 	countD["north"] = 0
 	countD["yuktahar"] = 0
 	countD["kadamb-veg"] = 0
-	countD["kadamb non-veg"] = 0
+	countD["kadamb-nonveg"] = 0
 	countD["cancelled"] = 0
 	total = 0.0
 	rC = model.getRecentMessRate(end)
@@ -94,14 +94,17 @@ def getBill(user_email,duration):
 	print countD
 	return (total,countB,countL,countD,start,end)
 
-def getFeedback():
+def getFeedback(email):
 	msg="Failed to get Records"
 	rows={}
 	with sql.connect("mess") as con:
 	    con.row_factory = sql.Row
 	    cur = con.cursor()
 	    print "start"
-	    cur.execute("SELECT * FROM feedback")
+	    cur.execute("SELECT * FROM user_credentials where email = ?",(email,))
+	    row =cur.fetchone()
+	    mess = row["mode"]
+	    cur.execute("SELECT * FROM feedback where mess = ? ORDER BY date desc",(mess,))
 	    print "got record"
 	    rows = cur.fetchall()
 	    if rows:

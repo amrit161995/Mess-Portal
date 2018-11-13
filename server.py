@@ -20,17 +20,23 @@ def index():
 @app.route('/login',methods = ['POST','GET'])
 def login():
    if 'user_email' in session:
-      name,roll_no = model.getUserNamePassword(session['user_email'])
-      return render_template("home.html",username=name,rollNo=roll_no)
+      mode = model.getMode(session['user_email'])
+      print type(mode)
+      if(mode==0):
+         name,roll_no = model.getUserNamePassword(session['user_email'])
+         return render_template("home.html",username=name,rollNo=roll_no)
+      return render_template("Admin_Main.html")         
    else:
       if request.method == "POST":
          res,msg,mode = model.login(request.form)
          if msg == "1":
-            if mode:
+            session['user_email'] = request.form['user_email']
+            if mode!=0:
+               # session['user_email'] = request.form['user_email']
                name = 'Admin'
                return render_template('Admin_Main.html',username=name)
             else:
-               session['user_email'] = request.form['user_email']
+               # session['user_email'] = request.form['user_email']
                name,roll_no = model.getUserNamePassword(session['user_email'])
                return render_template("home.html",username=name,rollNo=roll_no)
          elif msg == "0":
@@ -84,47 +90,69 @@ def home_content():
 @app.route('/Change_Registration')
 def change_registration():
    if 'user_email' in session:
-      return render_template('Change_Registration.html')
+      return render_template('Change_Registration.html',msg="")
    else:
       return redirect('localhost:5000/')
 
 @app.route('/feedback',methods = ['POST'])
 def fback():
-   if 'user_email' in session:
-      res = model.fback(request.form,session['user_email'])
+   print "in feedback"
+   image=0
+   # try:
+   if 'user_email' in session:  
+      if request.method == 'POST':
+         if request.files.get('input-file-preview'):
+            image=1
+            res = model.fback(request.form,session['user_email'],image)
+            f=request.files['input-file-preview']
+            name = f.filename
+            print name
+            fname = name.split('.')
+            print len(fname)
+            print name
+            print res
+            print fname[len(fname)-1]
+            f.filename=str(res)+'.'+fname[len(fname)-1]
+            print f.filename
+            f.save("static/feedback_img/"+f.filename) 
+         else:
+            print "something"
+            res = model.fback(request.form,session['user_email'],image)          
       return render_template('Feedback.html')
    else:
       return redirect('localhost:5000/')
+   # except:
+   #     return render_template('Feedback.html')
 
 @app.route('/registration_change_date',methods = ['POST'])
 def registration_change_date():
    if 'user_email' in session:
-      res = model.changeRegistrationDate(request.form,session['user_email'])
-      return render_template('Change_Registration.html')
+      msg = model.changeRegistrationDate(request.form,session['user_email'])
+      return render_template('Change_Registration.html',msg = msg)
    else:
       return redirect('localhost:5000/')
 
 @app.route('/registration_change_day',methods = ['POST'])
 def registration_change_day():
    if 'user_email' in session:
-      res = model.changeRegistrationDay(request.form,session['user_email'])
-      return render_template('Change_Registration.html')
+      msg = model.changeRegistrationDay(request.form,session['user_email'])
+      return render_template('Change_Registration.html',msg = msg)
    else:
       return redirect('localhost:5000/')
 
 @app.route('/registration_change_month',methods = ['POST'])
 def registration_change_month():
    if 'user_email' in session:
-      res = model.changeRegistrationMonth(request.form,session['user_email'])
-      return render_template('Change_Registration.html')
+      msg = model.changeRegistrationMonth(request.form,session['user_email'])
+      return render_template('Change_Registration.html',msg = msg)
    else:
       return redirect('localhost:5000/')
 
 @app.route('/cancel_meal',methods = ['POST'])
 def cancel_meal():
    if 'user_email' in session:
-      res = model.cancelMeal(request.form,session['user_email'])
-      return render_template('Change_Registration.html')
+      msg = model.cancelMeal(request.form,session['user_email'])
+      return render_template('Change_Registration.html',msg = "")
    else:
       return redirect('localhost:5000/')
 
@@ -194,7 +222,7 @@ def admin_main():
 
 @app.route('/View_Feedback')
 def view_feedback():
-   data,msg = model2.getFeedback()
+   data,msg = model2.getFeedback(session['user_email'])
    return render_template('View_Feedback.html',data=data,msg=msg)
 
 @app.route('/Update_Mess_Rules')
@@ -215,7 +243,9 @@ def update_menu():
 
 @app.route('/Dashboard')
 def dashboard():
-   return render_template('Dashboard.html')
+   monthlyRegistered = model.dashboard()
+   # print monthlyRegistered
+   return render_template('Dashboard.html',mR = monthlyRegistered)
 
 @app.route('/UploadMessRules',methods = ['POST'])
 def uploadMessRules():
@@ -242,7 +272,7 @@ def uploadMenu():
    msg=""
    if request.method == 'POST':
          f = request.files['input-file-preview']
-         name=request.form['optradio']
+         
          f.filename=name
          f.save("static/"+f.filename)
          msg = "Mess Menu Updated Successfully"

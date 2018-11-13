@@ -70,7 +70,7 @@ top: 15%;
         </thead>
         <tbody>
           <tr>
-              <th>North Mess</th>
+              <th id="mess_name">North Mess</th>
             <td> 
                 <div class="col-xs-2">
                   <input class="form-control" id="ex1" type="text">
@@ -87,86 +87,21 @@ top: 15%;
                 </div>
               </td>
           </tr>
-          <tr>
-              <th>South Mess</th>
-            <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-            <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-           <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-          </tr>
-          <tr>
-              <th>Yuktahar</th>
-            <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-            <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-           <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-          </tr>
+          
+          
 
-          <tr>
-              <th>Kadamb Veg</th>
-            <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-            <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-           <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-          </tr>
-
-          <tr>
-              <th>Kadamb Nonveg</th>
-            <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-            <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-           <td> 
-                <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
-                </div>
-              </td>
-          </tr>
+          
         </tbody>
       </table>
     </div>
 
-<div id="update_cancel"><h3>Update Cancellations Allowed</h3>
- <table class="table" id="update_cancel_table" style="text-align: left; font-size: 1.2vw;">
+<div id="update_cancel" ><h4 style="position: absolute;margin-top:0%;">Update Cancellations Allowed</h4>
+    <select id="month_select" name="month" style="position: absolute;top:85%; margin-top:7%;">
+                      <option value="0">January</option>
+                      <option value="1">February</option>
+                     
+    </select>
+ <table class="table" id="update_cancel_table" style="text-align: left; font-size: 1.2vw;position: absolute;margin-top: 10%;">
   <tbody>
           <tr>
               <th>Breakfast:</th>
@@ -192,7 +127,7 @@ top: 15%;
 </table>
 </div>
 
-<button type="submit" class="btn btn-default" style="position:absolute;height: 10%;width: 20%;margin-top: 2%;">Update</button>
+<button type="submit" class="btn btn-default" style="position:absolute;height:25%;width: 20%; margin-top: 20%;">Update</button>
 </form>
 
 

@@ -1,5 +1,6 @@
 import sqlite3 as sql
 from datetime import date, time, timedelta
+import datetime
 
 # A model that supports following interface:
 # create() : creates a users table in database if not already there
@@ -46,10 +47,17 @@ def login(user):
       print msg
       return ({}, msg,0)
 
-def fback(user,email):
+def fback(user,email,image):
   with sql.connect("mess") as con:
+    con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("INSERT INTO feedback (email,mess,suggestion,description) VALUES (?,?,?,?)",(email,user['optradio'],user['suggestion'],user['description']))
+    print str(datetime.datetime.now())
+    cur.execute("INSERT INTO feedback (email,mess,suggestion,description,date) VALUES (?,?,?,?,?)",(email,user['optradio'],user['suggestion'],user['description'],str(datetime.datetime.now())))
+    cur.execute("SELECT * from feedback ORDER BY image desc")
+    row = cur.fetchone()
+    print "get row count"
+    print row["image"]
+    return row["image"]
 
 def cancelMeal(user,email):
   with sql.connect("mess") as con:
@@ -80,6 +88,7 @@ def cancelMeal(user,email):
             cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
 
 def changeRegistrationDate(user,email):
+  msg = "Something is Wrong!"
   with sql.connect("mess") as con:
     cur = con.cursor()
     f = user['from'].split('-')
@@ -89,6 +98,7 @@ def changeRegistrationDate(user,email):
     today = date.today()
     delta = end-start
     if(delta.days>=0 and (start-today).days>=2):
+      msg = "Registration change successfully!"
       for i in range(delta.days+1):
         if user.get('meal_b'):
           cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
@@ -96,8 +106,10 @@ def changeRegistrationDate(user,email):
           cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         if user.get('meal_d'):
           cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+  return msg
 
 def changeRegistrationDay(user,email):
+  msg = "Registration change successfully!"
   with sql.connect("mess") as con:
     cur = con.cursor()    
     end = date(2019,7,31)
@@ -111,8 +123,10 @@ def changeRegistrationDay(user,email):
           cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         if user.get('meal_d'):
           cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+  return msg
 
 def changeRegistrationMonth(user,email):
+  msg = "Something is Wrong!"
   with sql.connect("mess") as con:
     cur = con.cursor() 
     y = date.today().year
@@ -122,8 +136,8 @@ def changeRegistrationMonth(user,email):
     else:
       d = 31
     end = date(y,m,d)
-    if date.today().month==m and date.today().year==y:
-      start = date.today() + timedelta(days=2)
+    if date.today().month>=m:
+      return msg
     else:
       start = date(y,m,1)
     delta = end - start
@@ -141,6 +155,36 @@ def changeRegistrationMonth(user,email):
         cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+        cur.execute("UPDATE user_details SET monthly_mess = ? WHERE email = ?",(user['mess'],email))
+  msg = "Registration change successfully!"
+  return msg
+
+
+def dashboard():
+  monthlyRegistered = {}
+  with sql.connect("mess") as con:
+    cur = con.cursor()
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("north",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["north"] = row[0]
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("south",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["south"] = row[0]
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("kadamb-veg",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["kadamb-veg"] = row[0]
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("kadamb-nonveg",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["kadamb-nonveg"] = row[0]
+    cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("yuktahar",))
+    row = cur.fetchone()
+    if(row):
+      monthlyRegistered["yuktahar"] = row[0]
+  return monthlyRegistered
 
   
 def register(user):
@@ -159,8 +203,22 @@ def register(user):
       else:
          cur.execute("INSERT INTO user_credentials (email,password) VALUES (?,?)",(user['user_email'],user['password']))
          print "insert 1"
-         cur.execute("INSERT INTO user_details (email,full_name,roll_no,default_mess,monthly_mess)  VALUES (?,?,?,'north',0)",(user['user_email'],user['fullname'],user['roll_no']))            
+         default_mess = 'north'
+         cur.execute("INSERT INTO user_details (email,full_name,roll_no,default_mess,monthly_mess)  VALUES (?,?,?,?,0)",(user['user_email'],user['fullname'],user['roll_no'],default_mess))            
          print "insert 2"
+         end = date(2019,7,31)
+         start = date.today()
+         delta = end - start
+         
+         for i in range(delta.days+1):
+          cur.execute("INSERT INTO mess_registration (email,date,breakfast,lunch,dinner)  VALUES (?,?,?,?,?)",(user['user_email'],str(start + timedelta(i)),default_mess,default_mess,default_mess))            
+
+
+
+
+
+
+
          con.commit()
          print "Record successfully added"
       return  (user, msg)
@@ -180,11 +238,31 @@ def getUserNamePassword(user_email):
       cur.execute("SELECT * FROM user_details  WHERE email = ?",[user_email])
       print "got it"
       row = cur.fetchone()
-      name=row["full_name"]
-      print "got name"
-      rollno=row["roll_no"]
-      print "got roll no"
+      if(row):
+        name=row["full_name"]
+        print "got name"
+        rollno=row["roll_no"]
+        print "got roll no"
   return (name,rollno)
+
+def getMode(user_email):
+  mode=""
+  # rollno=0
+  with sql.connect("mess") as con:
+      con.row_factory = sql.Row
+      cur = con.cursor()
+      print "start"
+      print user_email
+      cur.execute("SELECT * FROM user_credentials  WHERE email = ?",[user_email])
+      print "got it"
+      row = cur.fetchone()
+      print row["email"]
+      if(row):
+        mode=row["mode"]
+        print "got mode"
+        # rollno=row["roll_no"]
+        # print "got roll no"
+  return mode
 
 def getRegisteredMess(user_email):
   breakfast=""
@@ -278,7 +356,7 @@ def getRecentMessRate(rateDate):
     l.append(row["dinner_price"])
     rateCard.append(l)
 
-    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"kadamb non-veg"))
+    cur.execute("SELECT * FROM mess_properties  WHERE  date <= ? and mess = ? ORDER BY date DESC",(str(rateDate),"kadamb-nonveg"))
     print "got kadamb non-veg"
     row = cur.fetchone()
     l = []

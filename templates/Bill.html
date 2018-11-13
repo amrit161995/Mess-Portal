@@ -224,7 +224,7 @@ h3{
     <div class="et-hero-tabs-container">
       <a class="et-hero-tab" href="#tab-pw">Past Week</a>
       <a class="et-hero-tab" href="#tab-pm">Past Month</a>
-      <a class="et-hero-tab" href="#tab-ps">Past Semester</a>
+      <a class="et-hero-tab" href="#tab-ps">Current Semester</a>
       
       <span class="et-hero-tab-slider"></span>
     </div>
@@ -249,7 +249,7 @@ h3{
             <th>Kadamb-Veg</th>
             <th>Kadamb-Nonveg</th>
             <th>Cancelled</th>
-            <th>Allowed</th>
+            <th>Cancellations Allowed</th>
           </tr>
         </thead>
         <tbody>
@@ -259,7 +259,7 @@ h3{
             <td>{{countB["north"]}}</td>
             <td>{{countB["yuktahar"]}}</td>
             <td>{{countB["kadamb-veg"]}}</td>
-            <td>{{countB["kadamb non-veg"]}}</td>
+            <td>{{countB["kadamb-nonveg"]}}</td>
             <td>0</td>
             <td>{{cancellations_allowed[0]}}</td>
           </tr>
@@ -269,7 +269,7 @@ h3{
             <td>{{countL["north"]}}</td>
             <td>{{countL["yuktahar"]}}</td>
             <td>{{countL["kadamb-veg"]}}</td>
-            <td>{{countL["kadamb non-veg"]}}</td>
+            <td>{{countL["kadamb-nonveg"]}}</td>
             <td>0</td>
             <td>{{cancellations_allowed[1]}}</td>
           </tr>
@@ -279,7 +279,7 @@ h3{
             <td>{{countD["north"]}}</td>
             <td>{{countD["yuktahar"]}}</td>
             <td>{{countD["kadamb-veg"]}}</td>
-            <td>{{countD["kadamb non-veg"]}}</td>
+            <td>{{countD["kadamb-nonveg"]}}</td>
             <td>0</td>
             <td>{{cancellations_allowed[1]}}</td>
           </tr>
@@ -307,7 +307,7 @@ h3{
             <th>Kadamb-Veg</th>
             <th>Kadamb-Nonveg</th>
             <th>Cancelled</th>
-            <th>Allowed</th>
+            <th>Cancellations Allowed</th>
           </tr>
         </thead>
         <tbody>
@@ -317,7 +317,7 @@ h3{
             <td>{{McountB["north"]}}</td>
             <td>{{McountB["yuktahar"]}}</td>
             <td>{{McountB["kadamb-veg"]}}</td>
-            <td>{{McountB["kadamb non-veg"]}}</td>
+            <td>{{McountB["kadamb-nonveg"]}}</td>
             <td>0</td>
             <td>{{cancellations_allowed[0]}}</td>
             
@@ -328,7 +328,7 @@ h3{
             <td>{{McountL["north"]}}</td>
             <td>{{McountL["yuktahar"]}}</td>
             <td>{{McountL["kadamb-veg"]}}</td>
-            <td>{{McountL["kadamb non-veg"]}}</td>
+            <td>{{McountL["kadamb-nonveg"]}}</td>
             <td>0</td>
             <td>{{cancellations_allowed[0]}}</td>
           </tr>
@@ -338,7 +338,7 @@ h3{
             <td>{{McountD["north"]}}</td>
             <td>{{McountD["yuktahar"]}}</td>
             <td>{{McountD["kadamb-veg"]}}</td>
-            <td>{{McountD["kadamb non-veg"]}}</td>
+            <td>{{McountD["kadamb-nonveg"]}}</td>
             <td>0</td>
             <td>{{cancellations_allowed[0]}}</td>
           </tr>
@@ -352,9 +352,9 @@ h3{
 
     </section>
     <section class="et-slide" id="tab-ps">
-      <h1>Past Semester</h1>
+      <h1>Current Semester</h1>
           <div class="container">
-      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for current Semester {{sstart}} to {{send}}</p>
+      <p style="position: absolute;top: 20%;left:8%;font-size: 2vw;">Following are the details for Current Semester {{sstart}} to {{send}}</p>
       <!-- <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             -->
       <table class="table" id="past_week" style="text-align: left; font-size: 1.5vw;position: left:2%;top:35%;">
         <thead>
@@ -366,7 +366,7 @@ h3{
             <th>Kadamb-Veg</th>
             <th>Kadamb-Nonveg</th>
             <th>Cancelled</th>
-            <th>Allowed</th>
+            <th>Cancellations Allowed</th>
           </tr>
         </thead>
         <tbody>
@@ -376,7 +376,7 @@ h3{
             <td>{{ScountB["north"]}}</td>
             <td>{{ScountB["yuktahar"]}}</td>
             <td>{{ScountB["kadamb-veg"]}}</td>
-            <td>{{ScountB["kadamb non-veg"]}}</td>
+            <td>{{ScountB["kadamb-nonveg"]}}</td>
             <td>0</td>
            
             
@@ -387,7 +387,7 @@ h3{
             <td>{{ScountL["north"]}}</td>
             <td>{{ScountL["yuktahar"]}}</td>
             <td>{{ScountL["kadamb-veg"]}}</td>
-            <td>{{ScountL["kadamb non-veg"]}}</td>
+            <td>{{ScountL["kadamb-nonveg"]}}</td>
             <td>0</td>
           
           </tr>
@@ -397,7 +397,7 @@ h3{
             <td>{{ScountD["north"]}}</td>
             <td>{{ScountD["yuktahar"]}}</td>
             <td>{{ScountD["kadamb-veg"]}}</td>
-            <td>{{ScountD["kadamb non-veg"]}}</td>
+            <td>{{ScountD["kadamb-nonveg"]}}</td>
             <td>0</td>
            
           </tr>
@@ -407,7 +407,7 @@ h3{
         </tbody>
       </table>
     </div>
-      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Past Semester</b> | Rs.{{semBill}}</div>
+      <div id="total_text" style="position: absolute; left:33%;top:70%; font-size:1.5vw"><b>Total Bill for Current Semester</b> | Rs.{{semBill}}</div>
 
     </section>
     

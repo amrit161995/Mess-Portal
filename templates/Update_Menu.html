@@ -43,20 +43,21 @@
 
 #file_upload{
 	position: absolute;
-	top:41%;
+	top:91%;
 	width: 60%;
 }
 
 #message{
 position: absolute;
-top: 55%;
+top: 91%;
+left:50%;
 font-size: 1.5vw;
 visibility: visible;
 }
 
 #upload_button{
   position: absolute;
-  top:50%;
+  top:100%;
   /*left:10%;*/
 }
 
@@ -150,30 +151,10 @@ $(function() {
   
  
 		<div id="Title">Update Menu</div>
-		
+		<!-- <div  class="lab" id="lab_m" style="position: absolute;top:13%;">Current Menu:</div> -->
 		<form method="post" action="/UploadMenu" enctype = "multipart/form-data">
-				<div  class="lab" id="lab_m" style="position: absolute;top:13%;">Mess:</div>
-				<div id="Mess_select">
-				 <div class="radio">
-				 	
-  					<label><input type="radio" name="optradio" value="VegNBH.pdf" required>Kadamba-Veg Mess</label>
-				</div>
-				<div class="radio">
-				 	
-  					<label><input type="radio" name="optradio" value="NonVegNBH.pdf">Kadamba Non-Veg Mess</label>
-				</div>
-				<div class="radio">
- 					 <label><input type="radio" name="optradio" value="Yuktahar.pdf">Yuktahar Mess</label>
-				</div>
-				<div class="radio">
- 					 <label><input type="radio" name="optradio" value="North.pdf">North Mess</label>
-				</div> 
-
-				<div class="radio">
- 					 <label><input type="radio" name="optradio" value="South.pdf">South Mess</label>
-				</div>
-
-			</div>
+				
+				<iframe src="/static/Yuktahar.pdf"  style="position:absolute; top:15%;height: 70%; width: 80%;"></iframe>   
 				<div class="row" id="file_upload">    
 			        <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
 			            <!-- image-preview-filename input [CUT FROM HERE]-->
@@ -188,7 +169,7 @@ $(function() {
 			                    <div class="btn btn-default image-preview-input">
 			                        <span class="glyphicon glyphicon-folder-open"></span>
 			                        <span class="image-preview-input-title">Browse</span>
-			                        <input type="file" accept="pdf" name="input-file-preview" required/> <!-- rename it -->
+			                        <input type="file" name="input-file-preview" required/> <!-- rename it -->
 			                    </div>
 			                </span>
 			            </div><!-- /input-group image-preview [TO HERE]--> 
