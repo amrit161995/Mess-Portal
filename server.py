@@ -20,14 +20,18 @@ def index():
 @app.route('/login',methods = ['POST','GET'])
 def login():
    if 'user_email' in session:
-      name,roll_no = model.getUserNamePassword(session['user_email'])
-      return render_template("home.html",username=name,rollNo=roll_no)
+      mode = model.getMode(session['user_email'])
+      print type(mode)
+      if(mode==0):
+         name,roll_no = model.getUserNamePassword(session['user_email'])
+         return render_template("home.html",username=name,rollNo=roll_no)
+      return render_template("Admin_Main.html")         
    else:
       if request.method == "POST":
          res,msg,mode = model.login(request.form)
          if msg == "1":
             session['user_email'] = request.form['user_email']
-            if mode:
+            if mode!=0:
                # session['user_email'] = request.form['user_email']
                name = 'Admin'
                return render_template('Admin_Main.html',username=name)
@@ -86,7 +90,7 @@ def home_content():
 @app.route('/Change_Registration')
 def change_registration():
    if 'user_email' in session:
-      return render_template('Change_Registration.html')
+      return render_template('Change_Registration.html',msg="")
    else:
       return redirect('localhost:5000/')
 
@@ -118,32 +122,32 @@ def fback():
 @app.route('/registration_change_date',methods = ['POST'])
 def registration_change_date():
    if 'user_email' in session:
-      res = model.changeRegistrationDate(request.form,session['user_email'])
-      return render_template('Change_Registration.html')
+      msg = model.changeRegistrationDate(request.form,session['user_email'])
+      return render_template('Change_Registration.html',msg = msg)
    else:
       return redirect('localhost:5000/')
 
 @app.route('/registration_change_day',methods = ['POST'])
 def registration_change_day():
    if 'user_email' in session:
-      res = model.changeRegistrationDay(request.form,session['user_email'])
-      return render_template('Change_Registration.html')
+      msg = model.changeRegistrationDay(request.form,session['user_email'])
+      return render_template('Change_Registration.html',msg = msg)
    else:
       return redirect('localhost:5000/')
 
 @app.route('/registration_change_month',methods = ['POST'])
 def registration_change_month():
    if 'user_email' in session:
-      res = model.changeRegistrationMonth(request.form,session['user_email'])
-      return render_template('Change_Registration.html')
+      msg = model.changeRegistrationMonth(request.form,session['user_email'])
+      return render_template('Change_Registration.html',msg = msg)
    else:
       return redirect('localhost:5000/')
 
 @app.route('/cancel_meal',methods = ['POST'])
 def cancel_meal():
    if 'user_email' in session:
-      res = model.cancelMeal(request.form,session['user_email'])
-      return render_template('Change_Registration.html')
+      msg = model.cancelMeal(request.form,session['user_email'])
+      return render_template('Change_Registration.html',msg = "")
    else:
       return redirect('localhost:5000/')
 

@@ -85,6 +85,7 @@ def cancelMeal(user,email):
             cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(row[6],email,str(start + timedelta(i))))
 
 def changeRegistrationDate(user,email):
+  msg = "Something is Wrong!"
   with sql.connect("mess") as con:
     cur = con.cursor()
     f = user['from'].split('-')
@@ -94,6 +95,7 @@ def changeRegistrationDate(user,email):
     today = date.today()
     delta = end-start
     if(delta.days>=0 and (start-today).days>=2):
+      msg = "Registration change successfully!"
       for i in range(delta.days+1):
         if user.get('meal_b'):
           cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
@@ -101,8 +103,10 @@ def changeRegistrationDate(user,email):
           cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         if user.get('meal_d'):
           cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+  return msg
 
 def changeRegistrationDay(user,email):
+  msg = "Registration change successfully!"
   with sql.connect("mess") as con:
     cur = con.cursor()    
     end = date(2019,7,31)
@@ -116,8 +120,10 @@ def changeRegistrationDay(user,email):
           cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         if user.get('meal_d'):
           cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
+  return msg
 
 def changeRegistrationMonth(user,email):
+  msg = "Something is Wrong!"
   with sql.connect("mess") as con:
     cur = con.cursor() 
     y = date.today().year
@@ -127,8 +133,8 @@ def changeRegistrationMonth(user,email):
     else:
       d = 31
     end = date(y,m,d)
-    if date.today().month==m and date.today().year==y:
-      start = date.today() + timedelta(days=2)
+    if date.today().month>=m:
+      return msg
     else:
       start = date(y,m,1)
     delta = end - start
@@ -147,6 +153,8 @@ def changeRegistrationMonth(user,email):
         cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['mess'],email,str(start + timedelta(i))))
         cur.execute("UPDATE user_details SET monthly_mess = ? WHERE email = ?",(user['mess'],email))
+  msg = "Registration change successfully!"
+  return msg
 
 
 def dashboard():
@@ -227,11 +235,31 @@ def getUserNamePassword(user_email):
       cur.execute("SELECT * FROM user_details  WHERE email = ?",[user_email])
       print "got it"
       row = cur.fetchone()
-      name=row["full_name"]
-      print "got name"
-      rollno=row["roll_no"]
-      print "got roll no"
+      if(row):
+        name=row["full_name"]
+        print "got name"
+        rollno=row["roll_no"]
+        print "got roll no"
   return (name,rollno)
+
+def getMode(user_email):
+  mode=""
+  # rollno=0
+  with sql.connect("mess") as con:
+      con.row_factory = sql.Row
+      cur = con.cursor()
+      print "start"
+      print user_email
+      cur.execute("SELECT * FROM user_credentials  WHERE email = ?",[user_email])
+      print "got it"
+      row = cur.fetchone()
+      print row["email"]
+      if(row):
+        mode=row["mode"]
+        print "got mode"
+        # rollno=row["roll_no"]
+        # print "got roll no"
+  return mode
 
 def getRegisteredMess(user_email):
   breakfast=""
