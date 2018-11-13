@@ -32,7 +32,7 @@ h2{
 #message{
 position: absolute;
 top: 91%;
-left: 20%;
+left: 30%;
 font-size: 1.5vw;
 visibility: visible;
 }
@@ -133,9 +133,9 @@ $(function() {
 
 <body>
 
-<div class="container">
-  <h3>Update Billing Rules</h3>
-<iframe src="/static/BillingRates.pdf"  style="position:absolute; top:10%;height: 70%; width: 80%;"></iframe>
+<div class="container" style="position: absolute;height: 100%;width: 100%;">
+  <h3 style="position: absolute;left:13.5%;top:2%;">Update Billing Rules</h3>
+<iframe src="/static/BillingRates.pdf"  style="position:absolute; top:10%;height: 70%; width: 80%;left:13.5%;"></iframe>
 
 <form method="post" action="/UploadBillingRules" enctype = "multipart/form-data">
 <div class="row" id="update_rules"  style="position: absolute;top:83%;left:13.5%; ">    

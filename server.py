@@ -270,20 +270,9 @@ def uploadBillingRules():
 @app.route('/UploadMenu',methods = ['POST'])
 def uploadMenu():
    msg=""
-   name=""
    if request.method == 'POST':
          f = request.files['input-file-preview']
-         mode =getMode(session["user_email"])
-         if mode == "north":
-            name="North.pdf"
-         elif mode == "south":
-            name="South.pdf"
-         elif mode == "yukthar":
-            name="Yuktahar.pdf"
-         elif mode == "kadambd-veg":
-            name="VegNBH.pdf"
-         elif mode == "kadambd-nonveg":
-            name="NonVegNBH.pdf"
+         
          f.filename=name
          f.save("static/"+f.filename)
          msg = "Mess Menu Updated Successfully"
