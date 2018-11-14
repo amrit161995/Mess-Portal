@@ -251,9 +251,20 @@ def update_menu():
 
 @app.route('/Dashboard')
 def dashboard():
-   monthlyRegistered = model.dashboard()
-   # print monthlyRegistered
-   return render_template('Dashboard.html',mR = monthlyRegistered)
+   monthlyRegistered,registered = model.dashboard()
+   print registered
+   return render_template('Dashboard.html',mR = monthlyRegistered, r=registered)
+
+@app.route('/dashboard2', methods=['POST'])
+def dashboard2():
+   mess = request.form['mess']
+   registered = model.barChart(mess)
+   print "inside dashboard2"
+   print registered
+   d = json.dumps(registered)
+   print "JSON"
+   # print d[]
+   return d
 
 @app.route('/UploadMessRules',methods = ['POST'])
 def uploadMessRules():

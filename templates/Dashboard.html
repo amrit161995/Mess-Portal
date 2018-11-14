@@ -12,84 +12,94 @@
   <script>
     window.onload = function () {
 
-    var chart = new CanvasJS.Chart("chartContainer", {
-  animationEnabled: true,
-  title:{
-    text: "Weekly North Mess data"
-  },  
-  axisY: {
-    title: "Number of Students",
-    titleFontColor: "#4F81BC",
-    lineColor: "#4F81BC",
-    labelFontColor: "#4F81BC",
-    tickColor: "#4F81BC"
-  },
-  axisY2: {
-    title: "Number of Students",
-    titleFontColor: "#C0504E",
-    lineColor: "#C0504E",
-    labelFontColor: "#C0504E",
-    tickColor: "#C0504E"
-  },  
-  toolTip: {
-    shared: true
-  },
-  legend: {
-    cursor:"pointer",
-    itemclick: toggleDataSeries
-  },
-  data: [{
-    type: "column",
-    name: "Breakfast",
-    legendText: "Breakfast",
-    showInLegend: true, 
-    dataPoints:[
-      { label: "Monday", y: 266.21 },
-      { label: "Tuesday", y: 302.25 },
-      { label: "Wednesday", y: 157.20 },
-      { label: "Thursday", y: 148.77 },
-      { label: "Friday", y: 101.50 },
-      { label: "Saturday", y: 97.8 },
-      { label: "Sunday", y: 97.8 }
-    ]
-  },
-  {
-    type: "column", 
-    name: "Lunch",
-    legendText: "Lunch",
-    axisYType: "secondary",
-    showInLegend: true,
-    dataPoints:[
-      { label: "Monday", y: 266.21 },
-      { label: "Tuesday", y: 302.25 },
-      { label: "Wednesday", y: 157.20 },
-      { label: "Thursday", y: 148.77 },
-      { label: "Friday", y: 101.50 },
-      { label: "Saturday", y: 97.8 },
-      { label: "Sunday", y: 97.8 }
-    ]
-  },
-  {
-    type: "column", 
-    name: "Dinner",
-    legendText: "Dinner",
-    axisYType: "secondary",
-    showInLegend: true,
-    dataPoints:[
-       { label: "Monday", y: 266.21 },
-      { label: "Tuesday", y: 302.25 },
-      { label: "Wednesday", y: 157.20 },
-      { label: "Thursday", y: 148.77 },
-      { label: "Friday", y: 101.50 },
-      { label: "Saturday", y: 97.8 },
-      { label: "Sunday", y: 97.8 }
-    ]
-  }
-  
+      // console.log("asijoriehfriwefowjefofnowenf");
 
-  ]
-});
-chart.render();
+      var R = myFunc({{r|tojson}})
+
+
+function chart(R) {
+  console.log(R);
+  var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    title:{
+      text: "Weekly Mess data"
+    },  
+    axisY: {
+      title: "Number of Students",
+      titleFontColor: "#4F81BC",
+      lineColor: "#4F81BC",
+      labelFontColor: "#4F81BC",
+      tickColor: "#4F81BC"
+    },
+    axisY2: {
+      title: "Number of Students",
+      titleFontColor: "#C0504E",
+      lineColor: "#C0504E",
+      labelFontColor: "#C0504E",
+      tickColor: "#C0504E"
+    },  
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor:"pointer",
+      itemclick: toggleDataSeries
+    },
+    data: [{
+      type: "column",
+      name: "Breakfast",
+      legendText: "Breakfast",
+      showInLegend: true, 
+      dataPoints:[
+        { label: "Monday", y: R[0][0] },
+        { label: "Tuesday", y: R[1][0] },
+        { label: "Wednesday", y: R[2][0] },
+        { label: "Thursday", y: R[3][0] },
+        { label: "Friday", y: R[4][0] },
+        { label: "Saturday", y: R[5][0] },
+        { label: "Sunday", y: R[6][0] }
+      ]
+    },
+    {
+      type: "column", 
+      name: "Lunch",
+      legendText: "Lunch",
+      axisYType: "secondary",
+      showInLegend: true,
+      dataPoints:[
+        { label: "Monday", y: R[0][1] },
+        { label: "Tuesday", y: R[1][1] },
+        { label: "Wednesday", y: R[2][1] },
+        { label: "Thursday", y: R[3][1] },
+        { label: "Friday", y: R[4][1] },
+        { label: "Saturday", y: R[5][1] },
+        { label: "Sunday", y: R[6][1] }
+      ]
+    },
+    {
+      type: "column", 
+      name: "Dinner",
+      legendText: "Dinner",
+      axisYType: "secondary",
+      showInLegend: true,
+      dataPoints:[
+         { label: "Monday", y: R[0][2] },
+        { label: "Tuesday", y: R[1][2] },
+        { label: "Wednesday", y: R[2][2] },
+        { label: "Thursday", y: R[3][2] },
+        { label: "Friday", y: R[4][2] },
+        { label: "Saturday", y: R[5][2] },
+        { label: "Sunday", y: R[6][2] }
+      ]
+    }
+    
+
+    ]
+  });
+  chart.render();
+}
+
+chart(R);
 
 function toggleDataSeries(e) {
   if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -101,6 +111,48 @@ function toggleDataSeries(e) {
   chart.render();
 }
 
+$(function(){
+      $("#sou_card").click(function(e){        
+          $.post("/dashboard2",{mess: "south"},
+            function(data,status){
+              R = JSON.parse(data);
+              chart(R);
+            });
+      });
+
+      $("#yuktahar_card").click(function(e){
+          $.post("/dashboard2",{mess: "yuktahar"},
+            function(data,status){
+              R = JSON.parse(data);
+              chart(R);
+            });        
+      });
+
+      $("#north_card").click(function(e){
+          $.post("/dashboard2",{mess: "north"},
+            function(data,status){
+              R = JSON.parse(data);
+              chart(R);
+            });          
+      });
+
+      $("#kadamb_veg_card").click(function(e){
+          $.post("/dashboard2",{mess: "kadamb-veg"},
+            function(data,status){
+              R = JSON.parse(data);
+              chart(R);
+            });          
+      });
+
+      $("#kadamb_nonveg_card").click(function(e){
+          $.post("/dashboard2",{mess: "kadamb-nonveg"},
+            function(data,status){
+              R = JSON.parse(data);
+              chart(R);
+            });          
+      });
+  });
+
 
     function myFunc(vars) {
           return vars
@@ -108,7 +160,7 @@ function toggleDataSeries(e) {
 
     moR = myFunc({{mR|tojson}})
 
-    console.log(moR)
+    // console.log(moR)
 
     document.getElementById("north_monthly").innerHTML = moR["north"].toString();
     document.getElementById("south_monthly").innerHTML = moR["south"].toString();
@@ -141,6 +193,44 @@ function toggleDataSeries(e) {
     }
 
     </script>
+
+    <script type="text/javascript">
+    // $(function(){
+    //   $("#north_card").click(function(e){
+    //       alert("fjgejfn")
+    //       // $.post("/dashboard2",{mess: "north"});
+    //       // $("html").load("/dashboard2",{mess: "north"});
+    //       toggleDataSeries(e);
+    //   });
+    // });
+
+    $(function(){
+      $("#south_card").click(function(e){
+        // alert("fjgejfn")
+          // $.post("/dashboard2",{mess: "south"});
+          $("html").load("/dashboard2",{mess: "south"});
+      });
+    });
+
+    $(function(){
+      $("#yuktahar_card").click(function(e){
+          $.post("/dashboard2",{mess: "yuktahar"});
+      });
+    });
+
+    $(function(){
+      $("#kadamb_veg_card").click(function(e){
+          $.post("/dashboard2",{mess: "kadamb_veg"});
+      });
+    });
+
+    $(function(){
+      $("#kadamb_nonveg_card").click(function(e){
+          $.post("/dashboard2",{mess: "kadamb_nonveg"});
+      });
+    });
+    </script>
+
   <style type="text/css">
     .card {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -181,7 +271,7 @@ function toggleDataSeries(e) {
 <div class="container" style="position: absolute;height: 100%;width: 100%;left: 10%;top:2%;">
   <h2>Dashboard</h2>
   <div class="card-deck">
-    <div class="card">
+    <div class="card" id="north_card">
       <div class="card-body text-center">
         <p class="card-text">North Mess</p>
         <br>
@@ -190,7 +280,7 @@ function toggleDataSeries(e) {
         <p class="card-text" id="north_monthly"></p>
       </div>
     </div>
-    <div class="card">
+    <div class="card" id="sou_card">
       <div class="card-body text-center">
         <p class="card-text">South Mess</p>
         <br>
@@ -199,7 +289,7 @@ function toggleDataSeries(e) {
         <p class="card-text" id="south_monthly"></p>
       </div>
     </div>
-    <div class="card">
+    <div class="card" id="yuktahar_card">
       <div class="card-body text-center">
         <p class="card-text">Yuktahar</p>
         <br>
@@ -208,7 +298,7 @@ function toggleDataSeries(e) {
         <p class="card-text" id="yuktahar_monthly"></p>
       </div>
     </div>
-    <div class="card">
+    <div class="card" id="kadamb_veg_card">
       <div class="card-body text-center">
         <p class="card-text">Kadamb Veg</p>
         <br>
@@ -217,7 +307,7 @@ function toggleDataSeries(e) {
         <p class="card-text" id="kadamb_monthly"></p>
       </div>
     </div>  
-    <div class="card">
+    <div class="card" id="kadamb_nonveg_card">
       <div class="card-body text-center">
         <p class="card-text">Kadamb Nonveg</p>
         <br>
