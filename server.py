@@ -95,7 +95,7 @@ def change_registration():
    else:
       return redirect('localhost:5000/')
 
-@app.route('/feedback',methods = ['POST'])
+@app.route('/feedback',methods = ['POST','GET'])
 def fback():
    print "in feedback"
    image=0
@@ -118,7 +118,9 @@ def fback():
                f.save("static/feedback_img/"+f.filename) 
             else:
                print "something"
-               res = model.fback(request.form,session['user_email'],image)          
+               res = model.fback(request.form,session['user_email'],image)  
+         else:
+            return render_template('Feedback.html')        
          return render_template('Feedback.html')
       else:
          return redirect('localhost:5000/')
