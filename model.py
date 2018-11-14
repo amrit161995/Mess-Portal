@@ -208,6 +208,88 @@ def changeRegistrationMonth(user,email):
   msg = "Registration change successfully!"
   return msg
 
+def changeRegistrationParticularDay(user,email):
+  msg = "Something is Wrong!"
+  msg = "Registered successfully!"
+  with sql.connect("mess") as con:
+    print "3"
+    cur = con.cursor()
+    today = date.today()
+    day = today.weekday()    
+    start = today - timedelta(days=day)
+    if user.get('breakfast_monday'):
+      print "inside if"
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['breakfast_monday'],email,str(start + timedelta(0))))
+    print "fwejfn"
+    if user.get('lunch_monday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['lunch_monday'],email,str(start + timedelta(0))))
+    if user.get('dinner_monday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['dinner_monday'],email,str(start + timedelta(0))))
+    print "4"
+    if user.get('breakfast_tuesday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['breakfast_tuesday'],email,str(start + timedelta(1))))
+    if user.get('lunch_tuesday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['lunch_tuesday'],email,str(start + timedelta(1))))
+    if user.get('dinner_tuesday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['dinner_tuesday'],email,str(start + timedelta(1))))
+    print "5"
+    if user.get('breakfast_wednesday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['breakfast_wednesday'],email,str(start + timedelta(2))))
+    if user.get('lunch_wednesday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['lunch_wednesday'],email,str(start + timedelta(2))))
+    if user.get('dinner_wednesday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['dinner_wednesday'],email,str(start + timedelta(2))))
+    print "6"
+    if user.get('breakfast_thursday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['breakfast_thursday'],email,str(start + timedelta(3))))
+    if user.get('lunch_thursday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['lunch_thursday'],email,str(start + timedelta(3))))
+    if user.get('dinner_thursday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['dinner_thursday'],email,str(start + timedelta(3))))
+    print "7"
+    if user.get('breakfast_friday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['breakfast_friday'],email,str(start + timedelta(4))))
+    if user.get('lunch_friday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['lunch_friday'],email,str(start + timedelta(4))))
+    if user.get('dinner_friday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['dinner_friday'],email,str(start + timedelta(4))))
+    print "8"
+    if user.get('breakfast_saturday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['breakfast_saturday'],email,str(start + timedelta(5))))
+    if user.get('lunch_saturday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['lunch_saturday'],email,str(start + timedelta(5))))
+    if user.get('dinner_saturday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['dinner_saturday'],email,str(start + timedelta(5))))
+    print "9"
+    if user.get('breakfast_sunday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(user['breakfast_sunday'],email,str(start + timedelta(6))))
+    if user.get('lunch_sunday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(user['lunch_sunday'],email,str(start + timedelta(6))))
+    if user.get('dinner_sunday'):
+      msg = "Registered successfully!"
+      cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(user['dinner_sunday'],email,str(start + timedelta(6))))
+  return msg
+
 
 def barChart(mess):
   # monthlyRegistered = {}

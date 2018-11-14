@@ -154,6 +154,16 @@ def registration_change_month():
    else:
       return  render_template('index.html')
 
+@app.route('/registration_change_particular_day',methods = ['POST'])
+def registration_change_particular_day():
+   if 'user_email' in session:
+      print "1"
+      msg = model.changeRegistrationParticularDay(request.form,session['user_email'])
+      print "2"
+      return render_template('Change_Registration.html',msg = msg)
+   else:
+      return  render_template('index.html')
+
 @app.route('/cancel_meal',methods = ['POST'])
 def cancel_meal():
    if 'user_email' in session:

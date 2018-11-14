@@ -562,7 +562,7 @@ position: absolute;
     </section>
     <section class="et-slide" id="tab-part" >
       <h1>Particular Day Registration</h1>
-      <form>
+      <form method="post" action="/registration_change_particular_day">
        <table class="table"  style="text-align: left; font-size: 1vw;position:absolute; left:2%;top:15%;  height:60%;padding: 0px;" >
         <thead>
           <tr >
@@ -579,50 +579,50 @@ position: absolute;
             <th>Monday</th>
             <td>
                <div id="monday_meals_south">
-                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="">Breakfast</label>
+                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="south"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_monday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_monday" type="radio" value="south"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_monday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_monday" type="radio" value="south" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="monday_meals_north">
-                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="">Breakfast</label>
+                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="north">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_monday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_monday" type="radio" value="north">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_monday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_monday" type="radio" value="north" >Dinner</label>
                     </div> 
                 </div>
             </td>
             <td><div id="monday_meals_yuktahar">
-                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="">Breakfast</label>
+                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="yuktahar">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_monday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_monday" type="radio" value="yuktahar">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_monday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_monday" type="radio" value="yuktahar" >Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="monday_meals_kadambv">
-                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="">Breakfast</label>
+                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="kadamb-veg">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_monday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_monday" type="radio" value="kadamb-veg">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_monday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_monday" type="radio" value="kadamb-veg" >Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="monday_meals_kadambnv">
-                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="">Breakfast</label>
+                    <div  class="radio"><label><input name="breakfast_monday" type="radio" value="kadamb-nonveg">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_monday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_monday" type="radio" value="kadamb-nonveg">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_monday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_monday" type="radio" value="kadamb-nonveg" >Dinner</label>
                     </div> 
                 </div>
             </td>
@@ -633,50 +633,50 @@ position: absolute;
             <th>Tuesday</th>
             <td>
                <div id="tuesday_meals_south">
-                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="south"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="south"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="south" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="tuesday_meals_north">
-                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="north">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="north">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="north" >Dinner</label>
                     </div> 
                 </div>
             </td>
             <td><div id="tuesday_meals_yuktahar">
-                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="yuktahar">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="yuktahar">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="yuktahar" >Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="tuesday_meals_kadambv">
-                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="kadamb-veg">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="kadamb-veg">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="kadamb-veg" >Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="tuesday_meals_kadambnv">
-                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_tuesday" type="radio" value="kadamb-nonveg">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_tuesday" type="radio" value="kadamb-nonveg">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_tuesday" type="radio" value="kadamb-nonveg" >Dinner</label>
                     </div> 
                 </div>
             </td>
@@ -685,50 +685,50 @@ position: absolute;
             <th>Wednesday</th>
             <td>
                <div id="wednesday_meals_south">
-                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="south"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_wednesday"  type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_wednesday"  type="radio" value="south"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="south" />Dinner</label>
                     </div>
                 </div>
             </td>
             <td>
               <div id="wednesday_meals_north">
-                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="north"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_wednesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_wednesday" type="radio" value="north"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="north" />Dinner</label>
                     </div>
               </div>
             </td>
             <td><div id="wednesday_meals_yuktahar">
-                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="yuktahar"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_wednesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_wednesday" type="radio" value="yuktahar"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="yuktahar" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="wenesday_meals_kadambv">
-                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="kadamb-veg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_wednesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_wednesday" type="radio" value="kadamb-veg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="kadamb-veg" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="wednesday_meals_kadambnv">
-                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_wednesday" type="radio" value="kadamb-nonveg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_wednesday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_wednesday" type="radio" value="kadamb-nonveg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_wednesday" type="radio" value="kadamb-nonveg" />Dinner</label>
                     </div> 
                 </div>
             </td>
@@ -738,50 +738,50 @@ position: absolute;
             <th>Thursday</th>
             <td>
                <div id="thursday_meals_south">
-                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="south"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="south"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="south" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="thursday_meals_north">
-                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="north"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="north"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="north" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td><div id="thursday_meals_yuktahar">
-                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="yuktahar"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="yuktahar"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="yuktahar" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="thursday_meals_kadambv">
-                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="kadamb-veg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="kadamb-veg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="kadamb-veg" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="thursday_meals_kadambnv">
-                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_thursday" type="radio" value="kadamb-nonveg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_thursday" type="radio" value="kadamb-nonveg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_thursday" type="radio" value="kadamb-nonveg" />Dinner</label>
                     </div> 
                 </div>
             </td>
@@ -791,50 +791,50 @@ position: absolute;
             <th>Friday</th>
             <td>
                <div id="friday_meals_south">
-                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="south"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_friday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_friday" type="radio" value="south"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_friday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_friday" type="radio" value="south" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="friday_meals_north">
-                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="north"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_friday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_friday" type="radio" value="north"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_friday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_friday" type="radio" value="north" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td><div id="friday_meals_yuktahar">
-                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="yuktahar"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_friday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_friday" type="radio" value="yuktahar"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_friday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_friday" type="radio" value="yuktahar" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="friday_meals_kadambv">
-                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="kadamb-veg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_friday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_friday" type="radio" value="kadamb-veg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_friday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_friday" type="radio" value="kadamb-veg" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="friday_meals_kadambnv">
-                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_friday" type="radio" value="kadamb-nonveg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_friday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_friday" type="radio" value="kadamb-nonveg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_friday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_friday" type="radio" value="kadamb-nonveg" />Dinner</label>
                     </div> 
                 </div>
             </td>
@@ -844,50 +844,50 @@ position: absolute;
             <th>Saturday</th>
             <td>
                <div id="saturday_meals_south">
-                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="south"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="south"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="south" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="saturday_meals_north">
-                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="north"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="north"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="north" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td><div id="saturday_meals_yuktahar">
-                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="yuktahar"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="yuktahar"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="yuktahar" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="saturday_meals_kadambv">
-                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="kadamb-veg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="kadamb-veg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="kadamb-veg" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="saturday_meals_kadambnv">
-                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_saturday" type="radio" value="kadamb-nonveg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_saturday" type="radio" value="kadamb-nonveg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_saturday" type="radio" value="kadamb-nonveg" />Dinner</label>
                     </div> 
                 </div>
             </td>
@@ -897,50 +897,50 @@ position: absolute;
             <th>Sunday</th>
             <td>
                <div id="sunday_meals_south">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="south"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="south"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="south" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="sunday_meals_north">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="north"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="north"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="north" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td><div id="sunday_meals_yuktahar">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="yuktahar"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="yuktahar"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="yuktahar" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="sunday_meals_kadambv">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="kadamb-veg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="kadamb-veg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="kadamb-veg" />Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="sunday_meals_kadambnv">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="kadamb-nonveg"/>Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="kadamb-nonveg"/>Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="kadamb-nonveg" />Dinner</label>
                     </div> 
                 </div>
             </td>
@@ -949,49 +949,49 @@ position: absolute;
           <tr style="visibility: hidden;">
             <th>Sunday</th>
             <td>
-               <div id="sunday_meals_south">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+               <div id="sunday_meals_south1">
+                    <div class="radio"><label><input name="breakfast_sunday1" type="radio" value="">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday1" type="radio" value="">Lunch</label>
                     </div>
                   <!--    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
                     </div> --> 
                 </div>
             </td>
             <td>
-              <div id="sunday_meals_north">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+              <div id="sunday_meals_north1">
+                    <div class="radio"><label><input name="breakfast_sunday1" type="radio" value="">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
-                    </div>
-                   <!--  <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
-                    </div>  -->
-                </div>
-            </td>
-            <td><div id="sunday_meals_yuktahar">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
-                    </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday11" type="radio" value="">Lunch</label>
                     </div>
                    <!--  <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
                     </div>  -->
                 </div>
             </td>
-            <td>
-              <div id="sunday_meals_kadambv">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+            <td><div id="sunday_meals_yuktahar1">
+                    <div class="radio"><label><input name="breakfast_sunday1" type="radio" value="">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday1" type="radio" value="">Lunch</label>
                     </div>
                    <!--  <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
                     </div>  -->
                 </div>
             </td>
             <td>
-              <div id="sunday_meals_kadambnv">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+              <div id="sunday_meals_kadambv1">
+                    <div class="radio"><label><input name="breakfast_sunday1" type="radio" value="kadamb-veg">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday1" type="radio" value="kadamb-veg">Lunch</label>
+                    </div>
+                   <!--  <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    </div>  -->
+                </div>
+            </td>
+            <td>
+              <div id="sunday_meals_kadambnv1">
+                    <div class="radio"><label><input name="breakfast_sunday1" type="radio" value="">Breakfast</label>
+                    </div>
+                    <div class="radio"><label><input name="lunch_sunday1" type="radio" value="">Lunch</label>
                     </div>
                   <!--   <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
                     </div>  -->
@@ -1004,11 +1004,11 @@ position: absolute;
             <th>Sunday</th>
             <td>
                <div id="sunday_meals_south">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_sunday2" type="radio" value="">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday2" type="radio" value="">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_sunday2" type="radio" value="" >Dinner</label>
                     </div> 
                 </div>
             </td>
@@ -1027,21 +1027,21 @@ position: absolute;
           </td>
             <td>
               <div id="sunday_meals_kadambv">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_sunday2" type="radio" value="">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday2" type="radio" value="">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_sunday2" type="radio" value="" >Dinner</label>
                     </div> 
                 </div>
             </td>
             <td>
               <div id="sunday_meals_kadambnv">
-                    <div class="radio"><label><input name="breakfast_sunday" type="radio" value="">Breakfast</label>
+                    <div class="radio"><label><input name="breakfast_sunday2" type="radio" value="">Breakfast</label>
                     </div>
-                    <div class="radio"><label><input name="lunch_sunday" type="radio" value="">Lunch</label>
+                    <div class="radio"><label><input name="lunch_sunday2" type="radio" value="">Lunch</label>
                     </div>
-                    <div class="radio"><label><input name="dinner_sunday" type="radio" value="" >Dinner</label>
+                    <div class="radio"><label><input name="dinner_sunday2" type="radio" value="" >Dinner</label>
                     </div> 
                 </div>
             </td>
