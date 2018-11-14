@@ -216,7 +216,7 @@ def changeRegistrationParticularDay(user,email):
     cur = con.cursor()
     today = date.today()
     day = today.weekday()    
-    start = today - timedelta(days=day)
+    start = today + timedelta(days=6-day+1)
     if user.get('breakfast_monday'):
       print "inside if"
       msg = "Registered successfully!"
