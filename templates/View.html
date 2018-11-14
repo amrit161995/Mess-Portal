@@ -442,7 +442,14 @@
 			   if(dt<10) dt = '0' + dt;
 			   var key = mn+'-'+dt+'-'+loop.getFullYear();
 			   var key2 = loop.getFullYear()+'-'+mn+'-'+dt;
-			   codropsEvents[key] = '<a style="font-size:0.9vw; font-weight:500;position:absolute;top:30%;"> Breakfast : '+br_mess[key2]+' <br> Lunch : '+lu_mess[key2]+' <br> Dinner : '+di_mess[key2]+' </a>';
+			   if(br_mess[key2]) {
+			   	console.log("sjdfksdbvksjbv");
+				   codropsEvents[key] = '<a style="font-size:0.9vw; font-weight:500;position:absolute;top:30%;"> Breakfast : '+br_mess[key2]+' <br> Lunch : '+lu_mess[key2]+' <br> Dinner : '+di_mess[key2]+' </a>';
+				}
+				else {
+					console.log("jfiwhfokwndflcknfsdo");
+				   codropsEvents[key] = '<a style="font-size:0.9vw; font-weight:500;position:absolute;top:30%;"> Breakfast : Not registered <br> Lunch : Not registered <br> Dinner : Not registered </a>';
+				}
 			   var newDate = loop.setDate(loop.getDate() + 1);
 			   loop = new Date(newDate);
 			}

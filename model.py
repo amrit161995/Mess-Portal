@@ -96,16 +96,21 @@ def cancelMeal(user,email):
         b = row[3]
         l = row[4]
         d = row[5]
+        cur.execute("SELECT * FROM mess_registration WHERE email = ? and date = ?",(email,str(start + timedelta(i))))
+        row = cur.fetchone()
+        br = row[2]
+        lu = row[3]
+        di = row[4]
         if not user.get('uncancel'):
-          if user.get('meal_b') and comp<=bLimit:
+          if user.get('meal_b') and br!="cancelled" and comp<=bLimit:
             msg="Meals cancelled successfully!"
             cur.execute("UPDATE user_cancellation SET cancelled_b = ? WHERE email = ? and month = ? and year = ?",(b+1,email,m,y))
             cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
-          if user.get('meal_l') and comp<=lLimit:
+          if user.get('meal_l') and lu!="cancelled" and comp<=lLimit:
             msg="Meals cancelled successfully!"
             cur.execute("UPDATE user_cancellation SET cancelled_l = ? WHERE email = ? and month = ? and year = ?",(l+1,email,m,y))
             cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
-          if user.get('meal_d') and comp<=dLimit:
+          if user.get('meal_d') and di!="cancelled" and comp<=dLimit:
             msg="Meals cancelled successfully!"
             cur.execute("UPDATE user_cancellation SET cancelled_d = ? WHERE email = ? and month = ? and year = ?",(d+1,email,m,y))
             cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",("cancelled",email,str(start + timedelta(i))))
@@ -113,15 +118,15 @@ def cancelMeal(user,email):
           cur.execute("SELECT * FROM user_details WHERE email = ?",(email,))
           row1 = cur.fetchone()
           print len(row1)
-          if user.get('meal_b') and comp<=bLimit:
+          if user.get('meal_b') and br=="cancelled" and comp<=bLimit:
             msg="Meals uncancelled and set to default mess successfully!"
             cur.execute("UPDATE user_cancellation SET cancelled_b = ? WHERE email = ? and month = ? and year = ?",(b-1,email,m,y))
             cur.execute("UPDATE mess_registration SET breakfast = ? WHERE email = ? and date = ?",(row1[3],email,str(start + timedelta(i))))
-          if user.get('meal_l') and comp<=lLimit:
+          if user.get('meal_l') and lu=="cancelled" and comp<=lLimit:
             msg="Meals uncancelled and set to default mess successfully!"
             cur.execute("UPDATE user_cancellation SET cancelled_l = ? WHERE email = ? and month = ? and year = ?",(l-1,email,m,y))
             cur.execute("UPDATE mess_registration SET lunch = ? WHERE email = ? and date = ?",(row1[3],email,str(start + timedelta(i))))
-          if user.get('meal_d') and comp<=dLimit:
+          if user.get('meal_d') and di=="cancelled" and comp<=dLimit:
             msg="Meals uncancelled and set to default mess successfully!"
             cur.execute("UPDATE user_cancellation SET cancelled_d = ? WHERE email = ? and month = ? and year = ?",(d-1,email,m,y))
             cur.execute("UPDATE mess_registration SET dinner = ? WHERE email = ? and date = ?",(row1[3],email,str(start + timedelta(i))))
@@ -169,14 +174,18 @@ def changeRegistrationMonth(user,email):
   msg = "Something is Wrong!"
   with sql.connect("mess") as con:
     cur = con.cursor() 
-    y = date.today().year
     m = int(user['month'])
+    y = date.today().year 
+    if m>=8:
+      y = 2018
+    else:
+      y = 2019
     if m!=12:
       d = (date(y,m+1,1)-date(y,m,1)).days
     else:
       d = 31
     end = date(y,m,d)
-    if date.today().month>=m:
+    if y==2018 and date.today().month>=m:
       return msg
     else:
       start = date(y,m,1)
@@ -200,8 +209,51 @@ def changeRegistrationMonth(user,email):
   return msg
 
 
+def barChart(mess):
+  # monthlyRegistered = {}
+  registered = dict()
+  today = date.today().weekday()
+  if today==0:
+    start = date.today();
+    end = date.today() + timedelta(days=6)
+  else:
+    start = date.today() - timedelta(days=today)
+    end = start + timedelta(days=6)
+  delta = end - start
+  with sql.connect("mess") as con:
+    cur = con.cursor()
+    for i in range(delta.days+1):
+      l = []
+      cur.execute("SELECT COUNT(*) FROM mess_registration WHERE date = ? and breakfast = ?",(str(start + timedelta(i)),mess))
+      row = cur.fetchone()
+      if(row):
+        l.append(row[0])
+      cur.execute("SELECT COUNT(*) FROM mess_registration WHERE date = ? and lunch = ?",(str(start + timedelta(i)),mess))
+      row = cur.fetchone()
+      if(row):
+        l.append(row[0])
+      cur.execute("SELECT COUNT(*) FROM mess_registration WHERE date = ? and dinner = ?",(str(start + timedelta(i)),mess))
+      row = cur.fetchone()
+      if(row):
+        l.append(row[0])
+      registered[i] = l
+  # print "aalkjowiejfoiwefjweofknwvdnow ifowivoksnovk"
+  # print registered
+  return registered
+
+
+
 def dashboard():
   monthlyRegistered = {}
+  registered = {}
+  today = date.today().weekday()
+  if today==0:
+    start = date.today();
+    end = date.today() + timedelta(days=6)
+  else:
+    start = date.today() - timedelta(days=today)
+    end = start + timedelta(days=6)
+  delta = end - start
   with sql.connect("mess") as con:
     cur = con.cursor()
     cur.execute("SELECT COUNT(*) FROM user_details WHERE monthly_mess = ?",("north",))
@@ -224,7 +276,22 @@ def dashboard():
     row = cur.fetchone()
     if(row):
       monthlyRegistered["yuktahar"] = row[0]
-  return monthlyRegistered
+    for i in range(delta.days+1):
+      l = []
+      cur.execute("SELECT COUNT(*) FROM mess_registration WHERE date = ? and breakfast = ?",(str(start + timedelta(i)),"north"))
+      row = cur.fetchone()
+      if(row):
+        l.append(row[0])
+      cur.execute("SELECT COUNT(*) FROM mess_registration WHERE date = ? and lunch = ?",(str(start + timedelta(i)),"north"))
+      row = cur.fetchone()
+      if(row):
+        l.append(row[0])
+      cur.execute("SELECT COUNT(*) FROM mess_registration WHERE date = ? and dinner = ?",(str(start + timedelta(i)),"north"))
+      row = cur.fetchone()
+      if(row):
+        l.append(row[0])
+      registered[i] = l
+  return (monthlyRegistered,registered)
 
   
 def register(user):
