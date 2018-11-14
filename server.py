@@ -49,11 +49,13 @@ def login():
          msg=""
          return render_template("index.html",message=msg)      
 
-@app.route('/register',methods = ['POST'])
+@app.route('/register',methods = ['POST','GET'])
 def register():
    if request.method == "POST":
       res,msg = model.register(request.form)
       return render_template("index.html",message=msg)
+   else:
+      return render_template("index.html")
 
 @app.route('/Home')
 def home():
@@ -69,14 +71,15 @@ def menu():
    if 'user_email' in session:
       return render_template('Menu.html')
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/Team')
 def team():
    if 'user_email' in session:
       return render_template('Team.html')
    else:
-      return redirect('localhost:5000/')
+      # return redirect('localhost:5000/')
+      return render_template("index.html")
 
 @app.route('/Home_Content')
 def home_content():
@@ -86,14 +89,14 @@ def home_content():
       return render_template('Home_Content.html',username=name,rollno=roll_no,meal=meal)
    else:
       msg = "please login before you access the webApp"
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/Change_Registration')
 def change_registration():
    if 'user_email' in session:
       return render_template('Change_Registration.html',msg="")
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/feedback',methods = ['POST','GET'])
 def fback():
@@ -123,7 +126,7 @@ def fback():
             return render_template('Feedback.html')        
          return render_template('Feedback.html')
       else:
-         return redirect('localhost:5000/')
+         return  render_template('index.html')
    except:
        return render_template('Feedback.html')
 
@@ -133,7 +136,7 @@ def registration_change_date():
       msg = model.changeRegistrationDate(request.form,session['user_email'])
       return render_template('Change_Registration.html',msg = msg)
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/registration_change_day',methods = ['POST'])
 def registration_change_day():
@@ -141,7 +144,7 @@ def registration_change_day():
       msg = model.changeRegistrationDay(request.form,session['user_email'])
       return render_template('Change_Registration.html',msg = msg)
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/registration_change_month',methods = ['POST'])
 def registration_change_month():
@@ -149,7 +152,7 @@ def registration_change_month():
       msg = model.changeRegistrationMonth(request.form,session['user_email'])
       return render_template('Change_Registration.html',msg = msg)
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/cancel_meal',methods = ['POST'])
 def cancel_meal():
@@ -157,21 +160,21 @@ def cancel_meal():
       msg = model.cancelMeal(request.form,session['user_email'])
       return render_template('Change_Registration.html',msg = msg)
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/Feedback')
 def feedback():
    if 'user_email' in session:
       return render_template('Feedback.html')
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/Cancel')
 def cancel():
    if 'user_email' in session:
       return render_template('Cancel.html')
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/View')
 def view():
@@ -179,7 +182,7 @@ def view():
       breakfast,lunch,dinner = model.getRegisteredMess(session['user_email'])
       return render_template('View.html',b_mess=breakfast,l_mess=lunch,d_mess=dinner)
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/Bill')
 def bill():
@@ -192,7 +195,7 @@ def bill():
       semBill,ScountB,ScountL,ScountD,sstart,send,cancellations_did = model2.getBill(session['user_email'],"semister")
       return render_template('Bill.html',rateCard=rateCard,cancellations_did=cancellations_did,cancellations_allowed=cancellations_allowed,weekBill=weekBill,countB=countB,countD=countD,countL=countL,wstart=wstart,wend=wend,monthBill=monthBill,McountB=McountB,McountL=McountL,McountD=McountD,mstart=mstart,mend=mend,semBill=semBill,ScountB=ScountB,ScountL=ScountL,ScountD=ScountD,sstart=sstart,send=send)
    else:
-      return redirect('localhost:5000/')
+      return  render_template('index.html')
 
 @app.route('/logout')
 def logout():
@@ -206,11 +209,17 @@ def logout():
 
 @app.route('/Billing_Rates')
 def billing_rates():
-   return render_template('Billing_Rates.html')
+   if 'user_email' in session:
+      return render_template('Billing_Rates.html')
+   else:
+      return render_template('index.html')
 
 @app.route('/Mess_Rules')
 def mess_rules():
-   return render_template('Mess_Rules.html')
+   if 'user_email' in session:
+      return render_template('Mess_Rules.html')
+   else:
+      return render_template('index.html')
 
 @app.after_request
 def after_request(response):
@@ -222,98 +231,133 @@ def after_request(response):
 
 @app.route('/Admin_Main')
 def admin_main():
-   return render_template('Admin_Main.html')
+   if 'user_email' in session:
+      return render_template('Admin_Main.html')
+   else:
+      return render_template('index.html')
 
 @app.route('/View_Feedback')
 def view_feedback():
-   data,msg = model2.getFeedback(session['user_email'])
-   return render_template('View_Feedback.html',data=data,msg=msg)
+   if 'user_email' in session:
+      data,msg = model2.getFeedback(session['user_email'])
+      return render_template('View_Feedback.html',data=data,msg=msg)
+   else:
+      return render_template('index.html')
 
 @app.route('/Update_Mess_Rules')
 def update_mess_rules():
-   return render_template('Update_Mess_Rules.html',msg="")
+   if 'user_email' in session:
+      return render_template('Update_Mess_Rules.html',msg="")
+   else:
+      return render_template('index.html')
 
 @app.route('/Update_Billing_Rules')
 def update_billing_rules():
-   return render_template('Update_Billing_Rules.html')
+   if 'user_email' in session:
+      return render_template('Update_Billing_Rules.html')
+   else:
+      return render_template('index.html')
 
 @app.route('/Update_Meal_Rates')
 def update_meal_rates():
-   mess=getMess(session['user_email'])
-   mode=model.getMode(session['user_email'])
-   rate=model2.getRate(mode)
-   bca,lca,dca=model2.getAllCA(mode)
-   return render_template('Update_Meal_Rates.html',mess=mess,rate=rate,bca=json.dumps(bca),lca=json.dumps(lca),dca=json.dumps(dca))
+   if 'user_email' in session:
+      mess=getMess(session['user_email'])
+      mode=model.getMode(session['user_email'])
+      rate=model2.getRate(mode)
+      bca,lca,dca=model2.getAllCA(mode)
+      return render_template('Update_Meal_Rates.html',mess=mess,rate=rate,bca=json.dumps(bca),lca=json.dumps(lca),dca=json.dumps(dca))
+   else:
+      return render_template('index.html')
 
 @app.route('/Update_Menu')
 def update_menu():
-   mess=getMess(session['user_email'])
-   mess=mess+".pdf"
-   return render_template('Update_Menu.html',mess=mess)
+   if 'user_email' in session:
+      mess=getMess(session['user_email'])
+      mess=mess+".pdf"
+      return render_template('Update_Menu.html',mess=mess)
+   else:
+      return render_template('index.html')
 
 @app.route('/Dashboard')
 def dashboard():
-   monthlyRegistered,registered = model.dashboard()
-   print registered
-   return render_template('Dashboard.html',mR = monthlyRegistered, r=registered)
+   if 'user_email' in session:
+      monthlyRegistered,registered = model.dashboard()
+      print registered
+      return render_template('Dashboard.html',mR = monthlyRegistered, r=registered)
+   else:
+      return render_template('index.html')
 
 @app.route('/dashboard2', methods=['POST'])
 def dashboard2():
-   mess = request.form['mess']
-   registered = model.barChart(mess)
-   print "inside dashboard2"
-   print registered
-   d = json.dumps(registered)
-   print "JSON"
-   # print d[]
-   return d
+   if 'user_email' in session:
+      mess = request.form['mess']
+      registered = model.barChart(mess)
+      print "inside dashboard2"
+      print registered
+      d = json.dumps(registered)
+      print "JSON"
+      # print d[]
+      return d
+   else:
+      return render_template('index.html')
 
 @app.route('/UploadMessRules',methods = ['POST'])
 def uploadMessRules():
-   msg=""
-   if request.method == 'POST':
-         f = request.files['input-file-preview']
-         f.filename="MessRules.pdf"
-         f.save("static/"+f.filename)
-         msg = "Mess Rules Updated Successfully"
-   return render_template('Update_Mess_Rules.html',msg=msg)
+   if 'user_email' in session:
+      msg=""
+      if request.method == 'POST':
+            f = request.files['input-file-preview']
+            f.filename="MessRules.pdf"
+            f.save("static/"+f.filename)
+            msg = "Mess Rules Updated Successfully"
+      return render_template('Update_Mess_Rules.html',msg=msg)
+   else:
+      return render_template('index.html')
 
 @app.route('/UploadBillingRules',methods = ['POST'])
 def uploadBillingRules():
-   msg=""
-   if request.method == 'POST':
-         f = request.files['input-file-preview']
-         f.filename="BillingRates.pdf"
-         f.save("static/"+f.filename)
-         msg = "Billing Rules Updated Successfully"
-   return render_template('Update_Billing_Rules.html',msg=msg)
+   if 'user_email' in session:
+      msg=""
+      if request.method == 'POST':
+            f = request.files['input-file-preview']
+            f.filename="BillingRates.pdf"
+            f.save("static/"+f.filename)
+            msg = "Billing Rules Updated Successfully"
+      return render_template('Update_Billing_Rules.html',msg=msg)
+   else:
+      return render_template('index.html')
 
 @app.route('/UploadMenu',methods = ['POST'])
 def uploadMenu():
-   msg=""
-   name=""
-   if request.method == 'POST':
-         f = request.files['input-file-preview']
-         name=getMess(session['user_email'])
-         f.filename=name+".pdf"
-         f.save("static/"+f.filename)
-         msg = "Mess Menu Updated Successfully"
-         mess=getMess(session['user_email'])
-         mess=mess+".pdf"
-   return render_template('Update_Menu.html',msg=msg,mess=mess)
+   if 'user_email' in session:
+      msg=""
+      name=""
+      if request.method == 'POST':
+            f = request.files['input-file-preview']
+            name=getMess(session['user_email'])
+            f.filename=name+".pdf"
+            f.save("static/"+f.filename)
+            msg = "Mess Menu Updated Successfully"
+            mess=getMess(session['user_email'])
+            mess=mess+".pdf"
+      return render_template('Update_Menu.html',msg=msg,mess=mess)
+   else:
+      return render_template('index.html')
 
 
 @app.route('/UpdateRateAndCA',methods=['POST'])
 def updateRateAndCA():
-   mess=model.getMode(session['user_email'])
-   print mess
-   msg= model2.changeRate(request.form,mess)
-   mess=getMess(session['user_email'])
-   mode=model.getMode(session['user_email'])
-   rate=model2.getRate(mode)
-   bca,lca,dca=model2.getAllCA(mode)
-   return render_template('Update_Meal_Rates.html',mess=mess,rate=rate,msg=msg,bca=json.dumps(bca),lca=json.dumps(lca),dca=json.dumps(dca))
-   return 
+   if 'user_email' in session:
+      mess=model.getMode(session['user_email'])
+      print mess
+      msg= model2.changeRate(request.form,mess)
+      mess=getMess(session['user_email'])
+      mode=model.getMode(session['user_email'])
+      rate=model2.getRate(mode)
+      bca,lca,dca=model2.getAllCA(mode)
+      return render_template('Update_Meal_Rates.html',mess=mess,rate=rate,msg=msg,bca=json.dumps(bca),lca=json.dumps(lca),dca=json.dumps(dca))
+   else:
+      return  render_template('index.html')
 
 def getMess(email):
    name=""
