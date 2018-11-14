@@ -136,3 +136,62 @@ def getFeedback(email):
 	    else:
 	    	msg="No Records Found"
 	return (rows,msg)
+
+def getRate(mess):
+	rate=[]
+	rows={}
+	with sql.connect("mess") as con:
+	    con.row_factory = sql.Row
+	    cur = con.cursor()
+	    print "start"
+	    cur.execute("SELECT * FROM mess_properties where mess = ? ORDER BY date desc",(mess,))
+	    rows =cur.fetchall()
+	    for row in rows:
+	    	if mess == row['mess']:
+	    		rate.append(row['breakfast_price'])
+	    		rate.append(row['lunch_price'])
+	    		rate.append(row['dinner_price'])
+	return rate
+
+def changeRate(form,mess):
+	month=form['month']
+	year=date.today().year
+	if int(month) < 8:
+		year+=1
+	dt=date(int(year),int(month),1)
+	print str(dt.month).zfill(2)
+	msg="update failed"
+	with sql.connect("mess") as con:
+	    con.row_factory = sql.Row
+	    cur = con.cursor()
+	    print "start"
+	    cur.execute("insert into mess_properties (date,mess,breakfast_price,lunch_price,dinner_price,cancellation_b,cancellation_l,cancellation_d) values (?,?,?,?,?,?,?,?)",(str(dt),mess,form['b_rate'],form['l_rate'],form['d_rate'],form['breakfast_cancel'],form['lunch_cancel'],form['dinner_cancel']))
+	    cur.execute("UPDATE mess_cancellation SET cancellation_b = ? WHERE month = ? and year = ? and mess = ?",(form['breakfast_cancel'],str(dt.month).zfill(2),year,mess))
+	    cur.execute("UPDATE mess_cancellation SET cancellation_l = ? WHERE month = ? and year = ? and mess = ?",(form['lunch_cancel'],str(dt.month).zfill(2),year,mess))
+	    cur.execute("UPDATE mess_cancellation SET cancellation_d = ? WHERE month = ? and year = ? and mess = ?",(form['dinner_cancel'],str(dt.month).zfill(2),year,mess))
+	    msg="Updated Successfully!"
+	return msg
+
+def getAllCA(mess):
+	listBCA=[]
+	listLCA=[]
+	listDCA=[]
+	year=2018
+	with sql.connect("mess") as con:
+	    con.row_factory = sql.Row
+	    cur = con.cursor()
+	    print "start"
+	    for mo in range(1,13):
+	    	print mo
+	    	if mo < 8:
+	    		year=date.today().year+1
+	    	else:
+	    		year=date.today().year
+	    	print year
+    		cur.execute("SELECT * from mess_cancellation where month = ? and year = ? and mess = ?",(str(mo).zfill(2),year,mess))
+    		row=cur.fetchone()
+    		if row:
+				listBCA.append(row["cancellation_b"])
+				listLCA.append(row["cancellation_l"])
+				listDCA.append(row["cancellation_d"])
+	return (listBCA,listLCA,listDCA)

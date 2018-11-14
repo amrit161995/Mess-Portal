@@ -1,6 +1,7 @@
 import sqlite3 as sql
 from datetime import date, time, timedelta
 import datetime
+import random
 
 # A model that supports following interface:
 # create() : creates a users table in database if not already there
@@ -242,7 +243,8 @@ def register(user):
       else:
          cur.execute("INSERT INTO user_credentials (email,password) VALUES (?,?)",(user['user_email'],user['password']))
          print "insert 1"
-         default_mess = 'north'
+         dm=["north","south","yuktahar","kadamb-nonveg","kadamb-veg"]
+         default_mess = random.choice(dm)
          cur.execute("INSERT INTO user_details (email,full_name,roll_no,default_mess,monthly_mess)  VALUES (?,?,?,?,0)",(user['user_email'],user['fullname'],user['roll_no'],default_mess))            
          print "insert 2"
          end = date(2019,7,31)
@@ -251,14 +253,12 @@ def register(user):
          
          for i in range(delta.days+1):
           cur.execute("INSERT INTO mess_registration (email,date,breakfast,lunch,dinner)  VALUES (?,?,?,?,?)",(user['user_email'],str(start + timedelta(i)),default_mess,default_mess,default_mess))            
-
-
-
-
-
-
-
          con.commit()
+
+         for i in range (1,8):
+          cur.execute("INSERT INTO user_cancellation (email,month,year,cancelled_b,cancelled_l,cancelled_d) VALUES (?,?,?,?,?,?)",(user['user_email'],i,2019,0,0,0))
+         for i in range (8,13):
+          cur.execute("INSERT INTO user_cancellation (email,month,year,cancelled_b,cancelled_l,cancelled_d) VALUES (?,?,?,?,?,?)",(user['user_email'],i,2018,0,0,0))
          print "Record successfully added"
       return  (user, msg)
   except:

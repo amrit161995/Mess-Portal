@@ -43,6 +43,27 @@ top: 15%;
 
 
 </style>
+<script type="text/javascript">
+  function updateValue(){
+   var month=document.getElementById('month_select').value;
+   var breakfast =  document.getElementById('breakfast_cancel');
+    var lunch =  document.getElementById('lunch_cancel');
+     var dinner =  document.getElementById('dinner_cancel');
+     // var breakfast_values = ["1", "2", "3","4"];
+     // var lunch_values = ["1", "2", "3","4"];
+     // var dinner_values = ["1", "2", "3","4"];
+
+     var breakfast_values = {{ bca }};
+     var lunch_values = {{ lca }};
+     var dinner_values = {{ dca }};
+
+
+   breakfast.value =breakfast_values[month-1];
+    lunch.value = lunch_values[month-1];
+     dinner.value = dinner_values[month-1];
+}
+window.onload=updateValue;
+</script>
 </head>
 
 <body>
@@ -53,8 +74,7 @@ top: 15%;
  <h2 id="head">Update Meal Rates</h2>
 
 
-
-  <form class="md-form" ID="update_rules" action="#">
+  <form class="md-form" ID="update_rules" action="/UpdateRateAndCA" method="post">
 
    
   <div class="container">
@@ -70,20 +90,20 @@ top: 15%;
         </thead>
         <tbody>
           <tr>
-              <th id="mess_name">North Mess</th>
+              <th id="mess_name">{{mess}} Mess</th>
             <td> 
                 <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
+                  <input class="form-control" id="ex1" type="text" name="b_rate" value="{{rate[0]}}">
                 </div>
               </td>
             <td> 
                 <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
+                  <input class="form-control" id="ex1" type="text" name="l_rate" value="{{rate[1]}}">
                 </div>
               </td>
            <td> 
                 <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
+                  <input class="form-control" id="ex1" type="text" name="d_rate" value="{{rate[2]}}">
                 </div>
               </td>
           </tr>
@@ -96,9 +116,20 @@ top: 15%;
     </div>
 
 <div id="update_cancel" ><h5 style="position: absolute;margin-top:0%; margin-bottom: 10%;">Update Cancellations Allowed :</h5>
-    <select id="month_select" name="month" style="position: absolute;top:85%; margin-top:7%;">
-                      <option value="0">January</option>
-                      <option value="1">February</option>
+    <select id="month_select" name="month" style="position: absolute;top:85%; margin-top:7%;" onchange="updateValue();">
+                      <option value="1">January 2019</option>
+                      <option value="2">February 2019</option>
+                      <option value="3">March 2019</option>
+                      <option value="4">April 2019</option>
+                      <option value="5">May 2019</option>
+                      <option value="6">Jun 2019</option>
+                      <option value="7">July 2019</option>
+                      <option value="8">August 2018</option>
+                      <option value="9">September 2018</option>
+                      <option value="10">Octomber 2018</option>
+                      <option value="11">November 2018</option>
+                      <option value="12">December 2018</option>
+
                      
     </select>
  <table class="table" id="update_cancel_table" style="text-align: left; font-size: 1.2vw;position: absolute;margin-top: 10%;">
@@ -107,19 +138,19 @@ top: 15%;
               <th>Breakfast:</th>
             <td> 
                 <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
+                  <input id="breakfast_cancel" name="breakfast_cancel" class="form-control" id="ex1" type="text">
                 </div>
               </td>
               <th>Lunch:</th>
             <td> 
                 <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
+                  <input id="lunch_cancel" name="lunch_cancel" class="form-control" id="ex1" type="text">
                 </div>
               </td>
               <th>Dinner:</th>
            <td> 
                 <div class="col-xs-2">
-                  <input class="form-control" id="ex1" type="text">
+                  <input id="dinner_cancel" name="dinner_cancel" class="form-control" id="ex1" type="text">
                 </div>
               </td>
           </tr>
@@ -130,6 +161,7 @@ top: 15%;
 <button type="submit" class="btn btn-default" style="position:absolute;height:25%;width: 20%; margin-top: 20%;">Update</button>
 </form>
 
+<p style="position: absolute;top:65%;left:20%;font-size: 1.5vw">{{msg}}</p>
 
 </div>
 </body>

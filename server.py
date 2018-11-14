@@ -1,4 +1,4 @@
-from flask import Flask, redirect,url_for, render_template, request, session
+from flask import Flask, redirect,url_for, render_template, request, session, json
 from datetime import date, time, timedelta
 from werkzeug import secure_filename
 import model 
@@ -25,7 +25,7 @@ def login():
       if(mode==0):
          name,roll_no = model.getUserNamePassword(session['user_email'])
          return render_template("home.html",username=name,rollNo=roll_no)
-      name = "Admin"
+      name = getMess(session['user_email'])
       return render_template("Admin_Main.html",username=name)         
    else:
       if request.method == "POST":
@@ -34,7 +34,7 @@ def login():
             session['user_email'] = request.form['user_email']
             if mode!=0:
                # session['user_email'] = request.form['user_email']
-               name = 'Admin'
+               name = getMess(session['user_email'])
                return render_template('Admin_Main.html',username=name)
             else:
                # session['user_email'] = request.form['user_email']
@@ -199,7 +199,7 @@ def logout():
       email = session.pop('user_email')
       msg = "Logout successful"
    else:
-      msg = "You are already logged out"
+      msg = ""
    return render_template('index.html',message=msg)
 
 @app.route('/Billing_Rates')
@@ -237,11 +237,16 @@ def update_billing_rules():
 
 @app.route('/Update_Meal_Rates')
 def update_meal_rates():
-   return render_template('Update_Meal_Rates.html')
+   mess=getMess(session['user_email'])
+   mode=model.getMode(session['user_email'])
+   rate=model2.getRate(mode)
+   bca,lca,dca=model2.getAllCA(mode)
+   return render_template('Update_Meal_Rates.html',mess=mess,rate=rate,bca=json.dumps(bca),lca=json.dumps(lca),dca=json.dumps(dca))
 
 @app.route('/Update_Menu')
 def update_menu():
    mess=getMess(session['user_email'])
+   mess=mess+".pdf"
    return render_template('Update_Menu.html',mess=mess)
 
 @app.route('/Dashboard')
@@ -277,25 +282,39 @@ def uploadMenu():
    if request.method == 'POST':
          f = request.files['input-file-preview']
          name=getMess(session['user_email'])
-         f.filename=name
+         f.filename=name+".pdf"
          f.save("static/"+f.filename)
          msg = "Mess Menu Updated Successfully"
          mess=getMess(session['user_email'])
+         mess=mess+".pdf"
    return render_template('Update_Menu.html',msg=msg,mess=mess)
+
+
+@app.route('/UpdateRateAndCA',methods=['POST'])
+def updateRateAndCA():
+   mess=model.getMode(session['user_email'])
+   print mess
+   msg= model2.changeRate(request.form,mess)
+   mess=getMess(session['user_email'])
+   mode=model.getMode(session['user_email'])
+   rate=model2.getRate(mode)
+   bca,lca,dca=model2.getAllCA(mode)
+   return render_template('Update_Meal_Rates.html',mess=mess,rate=rate,msg=msg,bca=json.dumps(bca),lca=json.dumps(lca),dca=json.dumps(dca))
+   return 
 
 def getMess(email):
    name=""
    mode =model.getMode(session["user_email"])
    if mode == "north":
-      name="North.pdf"
+      name="North"
    elif mode == "south":
-      name="South.pdf"
+      name="South"
    elif mode == "yukthar":
-      name="Yuktahar.pdf"
+      name="Yuktahar"
    elif mode == "kadamb-veg":
-      name="VegNBH.pdf"
+      name="VegNBH"
    elif mode == "kadamb-nonveg":
-      name="NonVegNBH.pdf"
+      name="NonVegNBH"
    return name
 # @app.route('/logout')
 # def logout():
